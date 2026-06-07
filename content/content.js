@@ -125,7 +125,7 @@ const SITE_CONTENT = {
     ],
     thesis: {
       label: "🎓 Bachelor-Thesis",
-      title: "„Evaluierung der Erfolgsfaktoren einer Webpräsenz zur nachhaltigen Umsatzsteigerung"",
+      title: "Evaluierung der Erfolgsfaktoren einer Webpräsenz zur nachhaltigen Umsatzsteigerung",
       sub: "FOM Hochschule · BWL & Wirtschaftspsychologie"
     },
     skills: ["HTML/CSS", "JavaScript", "PHP", "MySQL", "SEO", "UI/UX", "Analytics", "SQL", "KPI"],
