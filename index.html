@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dennis Mehlich – Professionelle Websites mit HTML & KI</title>
+<meta name="description" content="Webdesigner aus Chemnitz. KI-gestützte Websites mit HTML, CSS & JS. Keine CMS-Overhead, maximale Performance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="content/content.js"></script>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <img src="images/logo.png" alt="Dennis Mehlich" style="height:72px;width:auto;display:block;mix-blend-mode:multiply;">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#leistungen">Leistungen</a></li>
+    <li><a href="#ueber-mich">Über uns</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+  <a href="javascript:void(0)" onclick="openTermin()" class="nav-cta">Termin buchen</a>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Webdesigner · KI-gestützt · Chemnitz</div>
+    <h1>Professionelle Websites, die <em>wirklich</em> überzeugen</h1>
+    <p class="hero-sub">Ihre Mitbewerber haben eine Website. Sie bekommen eine, die verkauft. Mit klarer Botschaft, starkem Design und einer Struktur, die Nutzer gezielt führt – und aus Besuchern Anfragen macht.</p>
+    <div class="hero-actions">
+      <a href="javascript:void(0)" onclick="openTermin()" class="btn-primary">Termin buchen</a>
+      <a href="#leistungen" class="btn-ghost">Leistungen ansehen</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">HTML · KI-gebaut</div></div>
+      <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Jahre Erfahrung</div></div>
+      <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Skalierbar</div></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="float-badge badge-1"><span>🚀</span> Live in 2 Wochen</div>
+      <div class="float-badge badge-2"><span>✅</span> SEO-optimiert</div>
+      <div class="browser-frame">
+        <div class="browser-chrome">
+          <div class="browser-dots">
+            <span class="bdot bdot-r"></span>
+            <span class="bdot bdot-y"></span>
+            <span class="bdot bdot-g"></span>
+          </div>
+          <div class="browser-url-bar">www.ihre-website.de</div>
+          <span style="color:#94a3b8;font-size:0.7rem;">↻</span>
+        </div>
+        <div class="browser-content">
+          <svg viewBox="0 0 420 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+            <defs>
+              <linearGradient id="gNav" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0f1631"/><stop offset="100%" stop-color="#1e3a8a"/></linearGradient>
+              <linearGradient id="gHero" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1e3a8a"/><stop offset="100%" stop-color="#2563eb"/></linearGradient>
+              <linearGradient id="gBtn" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#60a5fa"/></linearGradient>
+              <linearGradient id="gLight" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f0f4ff"/><stop offset="100%" stop-color="#e8f0fe"/></linearGradient>
+            </defs>
+            <rect width="420" height="380" rx="20" fill="white"/>
+            <rect x="0" y="0" width="420" height="36" rx="20" fill="url(#gNav)"/>
+            <rect x="0" y="20" width="420" height="16" fill="url(#gNav)"/>
+            <text x="22" y="23" font-family="sans-serif" font-size="9" font-weight="800" fill="white">Dennis.</text>
+            <text x="130" y="22" font-family="sans-serif" font-size="6" fill="rgba(255,255,255,0.55)">Home</text>
+            <text x="158" y="22" font-family="sans-serif" font-size="6" fill="rgba(255,255,255,0.55)">Leistungen</text>
+            <text x="210" y="22" font-family="sans-serif" font-size="6" fill="rgba(255,255,255,0.55)">Über uns</text>
+            <text x="245" y="22" font-family="sans-serif" font-size="6" fill="rgba(255,255,255,0.55)">Kontakt</text>
+            <rect x="334" y="13" width="72" height="14" rx="7" fill="#3b82f6"/>
+            <text x="370" y="23" text-anchor="middle" font-family="sans-serif" font-size="6" font-weight="700" fill="white">Termin buchen</text>
+            <rect x="0" y="36" width="420" height="110" fill="url(#gHero)"/>
+            <circle cx="340" cy="70" r="60" fill="rgba(96,165,250,0.12)"/>
+            <rect x="22" y="48" width="110" height="13" rx="6.5" fill="rgba(255,255,255,0.12)"/>
+            <rect x="22" y="67" width="170" height="10" rx="4" fill="rgba(255,255,255,0.9)"/>
+            <rect x="22" y="81" width="140" height="10" rx="4" fill="rgba(255,255,255,0.9)"/>
+            <rect x="22" y="97" width="150" height="5" rx="2.5" fill="rgba(255,255,255,0.35)"/>
+            <rect x="22" y="106" width="130" height="5" rx="2.5" fill="rgba(255,255,255,0.25)"/>
+            <rect x="22" y="118" width="80" height="18" rx="9" fill="white"/>
+            <text x="62" y="130" text-anchor="middle" font-family="sans-serif" font-size="6.5" font-weight="700" fill="#1e3a8a">Termin buchen →</text>
+            <line x1="20" y1="158" x2="400" y2="158" stroke="#e2e8f0" stroke-width="1"/>
+            <rect x="20" y="168" width="116" height="58" rx="8" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+            <rect x="20" y="168" width="116" height="18" rx="8" fill="url(#gLight)"/>
+            <rect x="30" y="174" width="36" height="6" rx="3" fill="#94a3b8"/>
+            <rect x="30" y="193" width="96" height="5" rx="2.5" fill="#e2e8f0"/>
+            <rect x="152" y="168" width="116" height="58" rx="8" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+            <rect x="152" y="168" width="116" height="18" rx="8" fill="#eff6ff"/>
+            <rect x="162" y="174" width="36" height="6" rx="3" fill="#3b82f6"/>
+            <rect x="162" y="193" width="96" height="5" rx="2.5" fill="#e2e8f0"/>
+            <rect x="284" y="168" width="116" height="58" rx="8" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+            <rect x="284" y="168" width="116" height="18" rx="8" fill="url(#gLight)"/>
+            <rect x="294" y="174" width="36" height="6" rx="3" fill="#94a3b8"/>
+            <rect x="294" y="193" width="96" height="5" rx="2.5" fill="#e2e8f0"/>
+            <rect x="0" y="242" width="420" height="32" fill="#0f1631"/>
+            <rect x="20" y="252" width="48" height="5" rx="2.5" fill="rgba(255,255,255,0.25)"/>
+            <rect x="0" y="274" width="420" height="106" fill="url(#gLight)"/>
+            <text x="210" y="302" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="800" fill="#0f1631">Bereit für Ihre neue Website?</text>
+            <rect x="145" y="330" width="130" height="22" rx="11" fill="url(#gBtn)"/>
+            <text x="210" y="344" text-anchor="middle" font-family="sans-serif" font-size="7.5" font-weight="700" fill="white">Jetzt Termin buchen →</text>
+          </svg>
+          <div class="chatbot-wrap">
+            <div class="curtain curtain-left"></div>
+            <div class="curtain curtain-right"></div>
+            <div class="chatbot-window">
+              <div class="chatbot-header">
+                <div class="chatbot-avatar">🤖</div>
+                <div>
+                  <div class="chatbot-name">KI-Assistent</div>
+                  <div class="chatbot-status"><span class="chatbot-dot"></span> Online</div>
+                </div>
+              </div>
+              <div class="chatbot-messages">
+                <div class="chatbot-msg bot">Hallo! Womit kann ich Ihnen helfen? 🔧</div>
+                <div class="chatbot-msg user">Haben Sie noch Termine frei?</div>
+                <div class="chatbot-msg bot typing">Ja! Wählen Sie jetzt Ihren <strong>Wunschtermin</strong> 📅</div>
+              </div>
+              <div class="chatbot-input-bar">
+                <div class="chatbot-input-mock">Nachricht schreiben…</div>
+                <div class="chatbot-send">→</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── INKLUSIVE ─── -->
+<section id="inklusive">
+  <div class="inkl-label reveal">Alles inklusive – kein verstecktes Kleingedrucktes</div>
+  <div class="inkl-grid reveal">
+    <div class="inkl-item"><span class="inkl-icon">📸</span><div><div class="inkl-title">Professionelle Fotos</div><div class="inkl-desc">Passende Stockfotos oder Bildrecherche für jede Section – inklusive</div></div></div>
+    <div class="inkl-item"><span class="inkl-icon">✍️</span><div><div class="inkl-title">Texte & Copywriting</div><div class="inkl-desc">Überzeugender Seitentext, der Ihre Zielgruppe anspricht</div></div></div>
+    <div class="inkl-item"><span class="inkl-icon">🎨</span><div><div class="inkl-title">Individuelles Design</div><div class="inkl-desc">Bewährte Struktur, konsequent auf Ihre Marke, Zielgruppe und Ziele zugeschnitten</div></div></div>
+    <div class="inkl-item"><span class="inkl-icon">📱</span><div><div class="inkl-title">Responsive & Mobil</div><div class="inkl-desc">Perfekte Darstellung auf Smartphone, Tablet und Desktop</div></div></div>
+    <div class="inkl-item"><span class="inkl-icon">🔒</span><div><div class="inkl-title">SSL & DSGVO</div><div class="inkl-desc">Sicheres Hosting-Setup und rechtskonforme Grundkonfiguration</div></div></div>
+    <div class="inkl-item"><span class="inkl-icon">🚀</span><div><div class="inkl-title">Launch & Einweisung</div><div class="inkl-desc">Persönliche Übergabe + 30 Tage Support nach dem Go-live</div></div></div>
+  </div>
+</section>
+
+<!-- ─── LEISTUNGEN ─── -->
+<section id="leistungen">
+  <div class="services-header reveal">
+    <div class="section-label">Leistungen</div>
+    <h2>Was ich für Sie tue –<br>von der Idee bis zum Launch</h2>
+    <p class="section-lead">Ich begleite Sie durch den gesamten Prozess. Gutes Webdesign beginnt mit den richtigen Fragen – verstehen, bevor man gestaltet.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal"><div class="service-icon">🎨</div><h3>Modernes Webdesign</h3><p>Sauberer Programmiercode, KI-gestützt entwickelt. Schnelle Ladezeiten, keine unnötigen Extras – was zählt ist wie Ihre Website wirkt und performt.</p></div>
+    <div class="service-card reveal"><div class="service-icon">📱</div><h3>Responsive Development</h3><p>Ihre Website sieht auf jedem Gerät perfekt aus – vom Smartphone bis zum Desktop-Monitor. Mobile-First von Anfang an.</p></div>
+    <div class="service-card reveal"><div class="service-icon">🔍</div><h3>SEO-Optimierung</h3><p>Technische SEO, Keyword-Recherche und saubere Seitenstruktur. Damit Sie von potenziellen Kunden gefunden werden.</p></div>
+    <div class="service-card reveal"><div class="service-icon">⚡</div><h3>Performance & Speed</h3><p>Schnelle Ladezeiten sind kein Luxus – sie sind Pflicht. Optimierte Bilder, sauberer Code und effiziente Hosting-Setups.</p></div>
+    <div class="service-card reveal"><div class="service-icon">🔒</div><h3>Sicherheit & Wartung</h3><p>Regelmäßige Updates, Backups und Sicherheitsmonitoring. Damit Sie sich um Ihr Kerngeschäft kümmern können.</p></div>
+    <div class="service-card dark reveal"><div class="service-icon">🎁</div><h3>Mystery Box</h3><p>KI-gestützte Features, die Ihre Website von anderen abheben – was genau? Das erfahren Sie im Erstgespräch. Spoiler: Es lohnt sich.</p><div style="margin-top:1rem;"><a href="javascript:void(0)" onclick="openTermin()" style="font-size:0.8rem;font-weight:700;color:#60a5fa;text-decoration:none;">Neugierig? Termin buchen →</a></div></div>
+    <div class="service-card reveal"><div class="service-icon">🔗</div><h3>Digitale Kundenverwaltung</h3><p>Jede Anfrage über Ihre Website landet automatisch in Ihrem Kundenmanagement-System – mit allen relevanten Daten. Kein manuelles Nachpflegen, keine verlorenen Anfragen.</p></div>
+  </div>
+</section>
+
+<!-- ─── MEIN ANSATZ (kein CMS) ─── -->
+<section id="warum-wordpress">
+  <div class="wp-header reveal">
+    <div class="section-label">Mein Ansatz</div>
+    <h2>Kein CMS-Overhead –<br>sauberer Code, maximale Performance</h2>
+    <p class="section-lead">Ich baue Websites mit HTML, CSS und JavaScript – KI-gestützt entwickelt. Kein Content-Management-System, keine unnötigen Abhängigkeiten, kein Ballast. Nur das, was Ihre Website wirklich braucht.</p>
+  </div>
+  <div class="wp-layout">
+    <div class="wp-reasons">
+      <div class="wp-reason reveal"><div class="wp-reason-icon">⚡</div><div><div class="wp-reason-title">Maximale Performance</div><div class="wp-reason-text">Reiner HTML/CSS/JS Code lädt blitzschnell – keine Datenbankanfragen, keine Plugin-Konflikte, keine unnötige Last. Google liebt das, Ihre Besucher auch.</div></div></div>
+      <div class="wp-reason reveal"><div class="wp-reason-icon">🤖</div><div><div class="wp-reason-title">KI-gestützt entwickelt</div><div class="wp-reason-text">Mit KI entstehen Websites schneller, präziser und kosteneffizienter als je zuvor. Änderungen lassen sich jederzeit punktgenau einpflegen – ohne Umwege über ein Backend.</div></div></div>
+      <div class="wp-reason reveal"><div class="wp-reason-icon">🔒</div><div><div class="wp-reason-title">Sicherer by Default</div><div class="wp-reason-text">Statische HTML-Seiten bieten keine Angriffsfläche. Keine Login-Seite, keine Datenbank, keine bekannten Schwachstellen. Sicherheit ist hier kein Plugin – sie ist Architektur.</div></div></div>
+      <div class="wp-reason reveal"><div class="wp-reason-icon">🔗</div><div><div class="wp-reason-title">Schnittstellen trotzdem möglich</div><div class="wp-reason-text">HubSpot, Kalender, Formulare, Analytics – all das lässt sich sauber per Embed oder API einbinden. Ihre Website als schlanker, leistungsstarker Knotenpunkt.</div></div></div>
+      <div class="wp-reason reveal"><div class="wp-reason-icon">💶</div><div><div class="wp-reason-title">Keine laufenden Lizenzkosten</div><div class="wp-reason-text">Kein Hosting-Abo, keine Plugin-Lizenzen, keine Update-Pflicht. Sie zahlen einmal für eine Website, die läuft – und läuft – und läuft.</div></div></div>
+      <div class="wp-reason reveal"><div class="wp-reason-icon">📈</div><div><div class="wp-reason-title">SEO-technisch sauber</div><div class="wp-reason-text">Semantisch korrekter Code, schnelle Ladezeiten und klare Struktur sind die beste SEO-Grundlage, die es gibt – ohne ein einziges Plugin.</div></div></div>
+    </div>
+    <div class="wp-vs reveal">
+      <div class="wp-vs-title">Warum kein CMS? Das ist der Unterschied.</div>
+      <div class="wp-vs-table">
+        <div class="wp-vs-row wp-vs-head"><div></div><div class="wp-col-wp">Mein Ansatz</div><div class="wp-col-other">CMS-Lösungen</div></div>
+        <div class="wp-vs-row"><div class="wp-vs-feature">Ladegeschwindigkeit</div><div class="wp-col-wp">✅ Blitzschnell</div><div class="wp-col-other">⚠️ Oft eingeschränkt</div></div>
+        <div class="wp-vs-row"><div class="wp-vs-feature">Sicherheit</div><div class="wp-col-wp">✅ Keine Angriffsfläche</div><div class="wp-col-other">⚠️ Regelmäßige Updates nötig</div></div>
+        <div class="wp-vs-row"><div class="wp-vs-feature">Laufende Kosten</div><div class="wp-col-wp">✅ Keine</div><div class="wp-col-other">❌ Abo- &amp; Lizenzpflicht</div></div>
+        <div class="wp-vs-row"><div class="wp-vs-feature">Integrationen</div><div class="wp-col-wp">✅ Per Embed &amp; API</div><div class="wp-col-other">⚠️ Plugin-abhängig</div></div>
+        <div class="wp-vs-row"><div class="wp-vs-feature">Anpassbarkeit</div><div class="wp-col-wp">✅ Vollständig</div><div class="wp-col-other">⚠️ Template-Grenzen</div></div>
+        <div class="wp-vs-row"><div class="wp-vs-feature">SEO-Basis</div><div class="wp-col-wp">✅ Sauber by Default</div><div class="wp-col-other">⚠️ Plugin erforderlich</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROZESS ─── -->
+<section id="prozess">
+  <div class="process-layout">
+    <div>
+      <div class="section-label reveal">Mein Prozess</div>
+      <h2 class="reveal">Gutes Webdesign beginnt mit den richtigen Fragen</h2>
+      <p class="section-lead reveal">Webdesign bedeutet für mich: verstehen, bevor man gestaltet. Ich arbeite eng mit meinen Kunden zusammen – vom ersten Gespräch bis zur fertigen Website treffen wir jede Entscheidung auf fundierten Erkenntnissen, nicht auf Annahmen.</p>
+      <div class="process-steps" style="margin-top:3rem;">
+        <div class="process-step reveal"><div class="step-num">01</div><div class="step-content"><h3>Erstgespräch & Analyse</h3><p>Wir sprechen über Ihre Ziele, Ihre Zielgruppe und was Ihre aktuelle Website vielleicht nicht leistet.</p></div></div>
+        <div class="process-step reveal"><div class="step-num">02</div><div class="step-content"><h3>Konzept & Wireframes</h3><p>Auf Basis unseres Gesprächs erstelle ich ein strukturiertes Konzept mit klarer Nutzerführung.</p></div></div>
+        <div class="process-step reveal"><div class="step-num">03</div><div class="step-content"><h3>Design & Entwicklung</h3><p>Die Website nimmt Gestalt an – sauberer HTML/CSS/JS Code, KI-gestützt entwickelt, responsiv und schnell.</p></div></div>
+        <div class="process-step reveal"><div class="step-num">04</div><div class="step-content"><h3>Review & Launch</h3><p>Gemeinsame Abnahme, letzte Feinabstimmungen – dann geht Ihre neue Website live.</p></div></div>
+      </div>
+    </div>
+    <div class="process-visual reveal">
+      <div class="pv-label">Was Sie bekommen</div>
+      <div class="pv-title">Eine Website, die für Sie arbeitet</div>
+      <ul class="pv-list">
+        <li>Saubere HTML/CSS/JS Website ohne CMS-Overhead</li>
+        <li>Responsive Design für alle Geräte</li>
+        <li>SEO-Grundoptimierung inklusive</li>
+        <li>DSGVO-konformes Setup</li>
+        <li>Kontaktformular & Google Maps</li>
+        <li>SSL-Zertifikat & Sicherheits-Setup</li>
+        <li>Einweisung & Übergabe</li>
+        <li>30 Tage Support nach Launch</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ÜBER MICH ─── -->
+<section id="ueber-mich">
+  <div class="about-layout">
+    <div class="about-portrait">
+      <div class="portrait-box">
+        <div class="portrait-avatar">DM</div>
+        <div class="portrait-name">Dennis Mehlich</div>
+        <div class="portrait-role">Webdesigner · KI & HTML · Prozessdesigner</div>
+        <ul class="contact-list">
+          <li><span class="icon">✉️</span><a href="mailto:dennis.mehlich@icloud.com">dennis.mehlich@icloud.com</a></li>
+          <li><span class="icon">📱</span><a href="tel:+4917684888105">+49 176 84888105</a></li>
+          <li><span class="icon">📍</span>Wolkensteiner Str. 21, 09120 Chemnitz</li>
+        </ul>
+        <div class="skills-grid">
+          <span class="skill-tag">HTML/CSS</span><span class="skill-tag">JavaScript</span><span class="skill-tag">PHP</span>
+          <span class="skill-tag">MySQL</span><span class="skill-tag">SEO</span><span class="skill-tag">UI/UX</span>
+          <span class="skill-tag">Analytics</span><span class="skill-tag">SQL</span><span class="skill-tag">KPI</span>
+        </div>
+      </div>
+    </div>
+    <div class="about-timeline">
+      <div class="timeline-intro reveal">
+        <div class="section-label">Über uns</div>
+        <h2>Daten verstehen.<br>Websites, die wirken.</h2>
+        <p>Ich bin Dennis Mehlich – Webdesigner mit einem Fundament, das über Design weit hinausgeht. Als Prozessdesigner bei publicplan habe ich im Rahmen des Online-Zugangsgesetzes (OZG) gelernt, Formulare und digitale Prozesse so zu gestalten, dass sie Nutzer gezielt führen, die richtigen Daten erheben und Entscheidungen auf fundierten Kriterien basieren – nicht auf Bauchgefühl.</p>
+        <p style="margin-top:0.9rem;">Dieses Wissen fließt direkt in jede Website ein, die ich baue: Eine gute Website ist nicht nur Visitenkarte – sie ist ein <strong>aktives Werkzeug zur Leadgenerierung</strong>. Das Kontaktformular qualifiziert Interessenten bereits beim Ausfüllen.</p>
+        <div class="thesis-box reveal">
+          <div class="thesis-label">🎓 Bachelor-Thesis</div>
+          <div class="thesis-title">„Evaluierung der Erfolgsfaktoren einer Webpräsenz zur nachhaltigen Umsatzsteigerung"</div>
+          <div class="thesis-sub">FOM Hochschule · BWL & Wirtschaftspsychologie</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-group reveal">
+          <div class="timeline-group-label">Berufserfahrung</div>
+          <div class="timeline-item"><div class="timeline-header"><div class="timeline-title">Professional Prozessdesigner</div><div class="timeline-period">2023</div></div><div class="timeline-company">publicplan GmbH · Düsseldorf</div><div class="timeline-desc">Einarbeitung neuer Kollegen im Bereich Formularentwicklung OZG. Weitergabe von Prozesswissen und internen Standards.</div><div class="timeline-tags"><span class="timeline-tag">OZG</span><span class="timeline-tag">Onboarding</span><span class="timeline-tag">Prozessdesign</span></div></div>
+          <div class="timeline-item"><div class="timeline-header"><div class="timeline-title">Junior Prozessdesigner</div><div class="timeline-period">2022–2023</div></div><div class="timeline-company">publicplan GmbH · Düsseldorf</div><div class="timeline-desc">Mitwirkung im Online-Zugangsgesetz-Projekt. Formularentwicklung mit form.io, JavaScript-Komponenten, Präsentationen in Workshops.</div><div class="timeline-tags"><span class="timeline-tag">JavaScript</span><span class="timeline-tag">form.io</span><span class="timeline-tag">Jira</span><span class="timeline-tag">Confluence</span></div></div>
+          <div class="timeline-item"><div class="timeline-header"><div class="timeline-title">Selbstständiger Webdesigner</div><div class="timeline-period">2021–2022</div></div><div class="timeline-company">Freiberuflich · Düsseldorf</div><div class="timeline-desc">Erstellung und Veröffentlichung von Websites für Handwerksunternehmen. Umsetzung mit HTML, CSS, JS und PHP.</div><div class="timeline-tags"><span class="timeline-tag">HTML</span><span class="timeline-tag">CSS</span><span class="timeline-tag">PHP</span><span class="timeline-tag">Webdesign</span></div></div>
+          <div class="timeline-item"><div class="timeline-header"><div class="timeline-title">Fachassistent Statistik</div><div class="timeline-period">2016–2017</div></div><div class="timeline-company">Bundesagentur für Arbeit · Düsseldorf</div><div class="timeline-desc">Statistiken in Excel mit VBA, Qualitätssicherung von Kennzahlen, Kundenkommunikation und PowerPoint-Präsentationen.</div><div class="timeline-tags"><span class="timeline-tag">Excel VBA</span><span class="timeline-tag">KPI</span><span class="timeline-tag">Metriken</span></div></div>
+        </div>
+        <div class="timeline-group reveal">
+          <div class="timeline-group-label">Ausbildung & Weiterbildung</div>
+          <div class="timeline-item"><div class="timeline-header"><div class="timeline-title">Moderne Webanwendungen mit PHP & MySQL</div><div class="timeline-period">2021</div></div><div class="timeline-company">Remote · 4 Monate</div><div class="timeline-desc">PHP 7, MySQL-Datenbanken, OOP-Grundlagen, Laravel (Einsteiger & Fortgeschrittene).</div><div class="timeline-tags"><span class="timeline-tag">PHP</span><span class="timeline-tag">MySQL</span><span class="timeline-tag">Laravel</span></div></div>
+          <div class="timeline-item"><div class="timeline-header"><div class="timeline-title">UI/UX-Design, Webdesign, SEM Manager</div><div class="timeline-period">2020</div></div><div class="timeline-company">Alfatraining · Düsseldorf · 4 Monate</div><div class="timeline-desc">Adobe XD, HTML/CSS/JS, Photoshop, SEO, Keywordrecherche, JSON-LD.</div><div class="timeline-tags"><span class="timeline-tag">UI/UX</span><span class="timeline-tag">Adobe XD</span><span class="timeline-tag">SEO</span></div></div>
+          <div class="timeline-item"><div class="timeline-header"><div class="timeline-title">BWL & Wirtschaftspsychologie B.Sc.</div><div class="timeline-period">bis 2020</div></div><div class="timeline-company">FOM Hochschule · Düsseldorf</div><div class="timeline-desc">BWL, VWL, Markt- & Werbepsychologie, Marketingtrends, Sozialpsychologie.</div><div class="timeline-tags"><span class="timeline-tag">BWL</span><span class="timeline-tag">Psychologie</span><span class="timeline-tag">Marketing</span></div></div>
+          <div class="timeline-item"><div class="timeline-header"><div class="timeline-title">Ausbildung Industriekaufmann</div><div class="timeline-period">bis 2012</div></div><div class="timeline-company">Henkel AG & Co. KGaA · Düsseldorf</div><div class="timeline-desc">Site Logistics, Purchase to Pay, Distribution Logistics, Fairs & Exhibitions.</div><div class="timeline-tags"><span class="timeline-tag">Logistik</span><span class="timeline-tag">Kaufmännisch</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section id="termin">
+  <div class="section-label" style="color:rgba(255,255,255,0.5);">Jetzt starten</div>
+  <h2>Bereit für eine Website,<br>die Kunden gewinnt?</h2>
+  <p class="section-lead">Buchen Sie ein kostenloses Erstgespräch. In 30 Minuten analysieren wir Ihre aktuelle Online-Präsenz und zeigen Ihnen konkret, was möglich ist.</p>
+  <a href="javascript:void(0)" onclick="openTermin()" class="btn-white">Termin buchen →</a>
+  <div class="calendar-placeholder">
+    <div class="cal-icon">📅</div>
+    <p class="cal-text"><strong>Kostenloses Erstgespräch buchen</strong>In 30 Minuten analysieren wir Ihre Online-Präsenz und zeigen, was möglich ist.</p>
+  </div>
+</section>
+
+<!-- ─── KONTAKT ─── -->
+<section id="kontakt">
+  <div class="contact-layout">
+    <div class="contact-info">
+      <div class="section-label reveal">Kontakt & Leadgewinnung</div>
+      <h2 class="reveal">Ihre Website fragt.<br>Sie wissen sofort mehr.</h2>
+      <p class="reveal">Ein gutes Kontaktformular ist kein Pflichtfeld – es ist Ihr erster Vertriebsmitarbeiter. Es führt den Nutzer, qualifiziert ihn und liefert Ihnen alle relevanten Daten, bevor das erste Gespräch stattfindet.</p>
+      <div class="ozg-box reveal">
+        <div class="ozg-label">💡 Aus der Praxis</div>
+        <div class="ozg-text">Im Rahmen des Online-Zugangsgesetzes (OZG) habe ich gelernt, Formulare nach klaren Kriterien zu gestalten: Welche Felder sind wirklich nötig? Unter welchen Bedingungen werden welche Fragen gestellt? Wie führt man einen Nutzer so, dass er die relevanten Daten liefert – ohne Frustration?</div>
+      </div>
+      <div class="contact-items" style="margin-top:1.5rem;">
+        <div class="contact-item reveal"><div class="ci-icon">✉️</div><div><div class="ci-label">E-Mail</div><div class="ci-value"><a href="mailto:dennis.mehlich@icloud.com">dennis.mehlich@icloud.com</a></div></div></div>
+        <div class="contact-item reveal"><div class="ci-icon">📱</div><div><div class="ci-label">Telefon</div><div class="ci-value"><a href="tel:+4917684888105">+49 176 84888105</a></div></div></div>
+        <div class="contact-item reveal"><div class="ci-icon">📍</div><div><div class="ci-label">Adresse</div><div class="ci-value">Wolkensteiner Str. 21, 09120 Chemnitz</div></div></div>
+      </div>
+    </div>
+    <div class="contact-form-box reveal">
+      <h3>Projekt anfragen</h3>
+      <p style="font-size:0.82rem;color:var(--gray);margin-bottom:1.5rem;line-height:1.6;">Füllen Sie das Formular aus – Ihre Daten landen direkt in meinem System.</p>
+      <div class="form-row">
+        <div class="form-group"><label>Vorname *</label><input type="text" placeholder="Max"></div>
+        <div class="form-group"><label>Nachname *</label><input type="text" placeholder="Mustermann"></div>
+      </div>
+      <div class="form-group"><label>E-Mail *</label><input type="email" placeholder="max@beispiel.de"></div>
+      <div class="form-group"><label>Unternehmen / Website (falls vorhanden)</label><input type="text" placeholder="Muster GmbH · www.beispiel.de"></div>
+      <div class="form-group">
+        <label>Welche Leistung interessiert Sie? *</label>
+        <select id="leistung-select">
+          <option value="">Bitte wählen…</option>
+          <option value="neu">Neue Website von Grund auf</option>
+          <option value="redesign">Redesign einer bestehenden Website</option>
+          <option value="landing">Landing Page / Kampagnenseite</option>
+          <option value="hubspot">HubSpot-Integration / CRM-Anbindung</option>
+          <option value="seo">SEO-Optimierung</option>
+          <option value="wartung">Wartung &amp; laufende Betreuung</option>
+          <option value="sonstiges">Sonstiges</option>
+        </select>
+      </div>
+      <div id="field-neu" class="cond-field" style="display:none;">
+        <div class="form-group"><label>Haben Sie bereits Vorstellungen zum Design?</label><select><option value="">Bitte wählen…</option><option>Ja, ich habe konkrete Ideen</option><option>Grob – Referenzseiten vorhanden</option><option>Nein, offen für alles</option></select></div>
+        <div class="form-group"><label>Gewünschter Fertigstellungszeitraum</label><select><option value="">Bitte wählen…</option><option>So schnell wie möglich</option><option>Innerhalb 4 Wochen</option><option>1–3 Monate</option><option>Kein fester Termin</option></select></div>
+      </div>
+      <div id="field-redesign" class="cond-field" style="display:none;">
+        <div class="form-group"><label>URL der bestehenden Website</label><input type="url" placeholder="https://www.ihre-seite.de"></div>
+        <div class="form-group"><label>Was soll verbessert werden?</label><select><option value="">Bitte wählen…</option><option>Design &amp; Optik</option><option>Performance &amp; Ladezeit</option><option>SEO &amp; Auffindbarkeit</option><option>Mobile-Optimierung</option><option>Alles davon</option></select></div>
+      </div>
+      <div id="field-hubspot" class="cond-field" style="display:none;">
+        <div class="form-group"><label>Welches System soll angebunden werden?</label><select><option value="">Bitte wählen…</option><option>HubSpot CRM</option><option>HubSpot Kalender / Meetings</option><option>Newsletter-Tool</option><option>Sonstiges CRM</option></select></div>
+      </div>
+      <div class="form-group"><label>Budget (optional)</label><select><option value="">Lieber nicht angeben</option><option>Unter 500 €</option><option>500 – 1.000 €</option><option>1.000 – 2.500 €</option><option>2.500 – 5.000 €</option><option>Über 5.000 €</option></select></div>
+      <div class="form-group"><label>Ihre Nachricht</label><textarea placeholder="Was soll Ihre Website erreichen? Wer ist Ihre Zielgruppe?"></textarea></div>
+      <div class="form-divider"><div class="form-divider-line"></div><span class="form-divider-text">Dann Termin wählen</span><div class="form-divider-line"></div></div>
+      <script src="https://js-eu1.hsforms.net/forms/embed/148633342.js" defer></script>
+      <div class="hs-form-frame" data-region="eu1" data-form-id="259a0f8b-cba4-4b2a-ae50-fe99b5534861" data-portal-id="148633342"></div>
+      <div class="hs-fallback" style="display:none;">
+        <div style="background:var(--light);border-radius:12px;padding:1.25rem;text-align:center;border:1px dashed rgba(59,130,246,0.3);">
+          <div style="font-size:1.75rem;margin-bottom:0.4rem;">📅</div>
+          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;color:var(--navy);margin-bottom:0.25rem;">HubSpot Kalender</div>
+          <div style="font-size:0.75rem;color:var(--gray);">Auf der Live-Website wählen Sie hier Ihren Wunschtermin.</div>
+        </div>
+      </div>
+      <p style="font-size:0.7rem;color:#94a3b8;text-align:center;margin-top:1rem;">🔒 Ihre Daten werden sicher übermittelt und nicht an Dritte weitergegeben.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-logo">
+    <img src="images/logo.png" alt="Dennis Mehlich">
+  </div>
+  <div>© 2025 Dennis Mehlich · Webdesign · HTML &amp; KI · Chemnitz</div>
+  <div style="display:flex;gap:1.5rem;">
+    <a href="#">Impressum</a>
+    <a href="#">Datenschutz</a>
+  </div>
+</footer>
+
+<!-- ─── TERMIN OVERLAY ─── -->
+<div id="termin-overlay">
+  <div class="overlay-inner">
+    <button class="overlay-close" onclick="closeTermin()">✕</button>
+    <div class="overlay-label">Kostenloses Erstgespräch</div>
+    <div class="overlay-title">Termin buchen</div>
+    <div class="overlay-sub">In 30 Minuten – unverbindlich &amp; kostenlos.</div>
+    <script src="https://js-eu1.hsforms.net/forms/embed/148633342.js" defer></script>
+    <div class="hs-form-frame" data-region="eu1" data-form-id="259a0f8b-cba4-4b2a-ae50-fe99b5534861" data-portal-id="148633342"></div>
+    <div class="hs-fallback" style="display:none;">
+      <div class="form-row">
+        <div class="form-group"><label>Vorname</label><input type="text" placeholder="Max"></div>
+        <div class="form-group"><label>Nachname</label><input type="text" placeholder="Mustermann"></div>
+      </div>
+      <div class="form-group"><label>E-Mail</label><input type="email" placeholder="max@beispiel.de"></div>
+      <div class="form-group"><label>Telefon (optional)</label><input type="tel" placeholder="+49 …"></div>
+      <div class="form-group"><label>Kurze Projektbeschreibung</label><textarea placeholder="Worum geht es bei Ihrem Projekt?"></textarea></div>
+      <button class="btn-submit" onclick="alert('Vielen Dank! Ihre Anfrage wurde gesendet.')">Termin anfragen →</button>
+      <p style="font-size:0.7rem;color:#94a3b8;text-align:center;margin-top:0.75rem;">🔒 Ihre Daten werden nicht weitergegeben.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── n8n CHAT ─── -->
+<div id="n8n-chat"></div>
+
+<script src="js/main.js" type="module"></script>
+
+</body>
+</html>

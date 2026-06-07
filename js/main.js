@@ -1,0 +1,149 @@
+/**
+ * js/main.js – Interaktionen & Dynamik
+ * Liest Inhalte aus content/content.js und baut die Seite auf
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ── Nav scroll effect ── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  /* ── Termin Overlay ── */
+  const overlay = document.getElementById('termin-overlay');
+  window.openTermin = () => {
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+  window.closeTermin = () => {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeTermin(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTermin(); });
+
+  /* ── Reveal on scroll ── */
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => revealObserver.observe(el));
+
+  /* ── Process steps ── */
+  const processSteps = document.querySelectorAll('.process-step');
+  const stepObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('active'), i * 200);
+      }
+    });
+  }, { threshold: 0.5 });
+  processSteps.forEach(el => stepObserver.observe(el));
+
+  /* ── Conditional form fields ── */
+  const leistungSelect = document.getElementById('leistung-select');
+  if (leistungSelect) {
+    leistungSelect.addEventListener('change', () => {
+      document.querySelectorAll('.cond-field').forEach(f => f.style.display = 'none');
+      const map = { neu: 'field-neu', redesign: 'field-redesign', hubspot: 'field-hubspot' };
+      const val = leistungSelect.value;
+      if (map[val]) {
+        const el = document.getElementById(map[val]);
+        if (el) el.style.display = 'block';
+      }
+    });
+  }
+
+  /* ── Form submit ── */
+  const submitBtn = document.querySelector('.btn-submit');
+  if (submitBtn) {
+    submitBtn.addEventListener('click', () => {
+      submitBtn.textContent = '✅ Anfrage gesendet!';
+      submitBtn.style.background = '#059669';
+      submitBtn.disabled = true;
+    });
+  }
+
+  /* ── HubSpot fallback ── */
+  setTimeout(() => {
+    document.querySelectorAll('.hs-form-frame').forEach(frame => {
+      if (frame.children.length === 0) {
+        const fallback = frame.nextElementSibling;
+        if (fallback && fallback.classList.contains('hs-fallback')) {
+          fallback.style.display = 'block';
+        }
+      }
+    });
+  }, 2500);
+
+  /* ── n8n Chat Widget ── */
+  loadN8nChat();
+});
+
+/* ── Load n8n chat dynamically ── */
+function loadN8nChat() {
+  if (typeof SITE_CONTENT === 'undefined') return;
+  const { webhookUrl, welcomeMessages } = SITE_CONTENT.n8n;
+
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css';
+  document.head.appendChild(link);
+
+  import('https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js').then(({ createChat }) => {
+    createChat({
+      webhookUrl,
+      target: '#n8n-chat',
+      mode: 'window',
+      showWelcomeScreen: true,
+      defaultLanguage: 'de',
+      initialMessages: welcomeMessages,
+      i18n: {
+        de: {
+          title: 'KI-Assistent',
+          subtitle: 'Fragen zu Webdesign & KI',
+          footer: '',
+          getStarted: 'Gespräch starten',
+          inputPlaceholder: 'Nachricht schreiben…',
+          closeButtonTooltip: 'Schließen',
+        }
+      },
+      theme: {
+        '--chat--color-primary': '#0f1631',
+        '--chat--color-primary-shade-50': '#1e3a8a',
+        '--chat--color-primary-shade-100': '#1e3a8a',
+        '--chat--color-secondary': '#3b82f6',
+        '--chat--color-secondary-shade-50': '#60a5fa',
+        '--chat--color-white': '#ffffff',
+        '--chat--color-light': '#f0f4ff',
+        '--chat--color-light-shade-50': '#e8f0fe',
+        '--chat--color-light-shade-100': '#dbeafe',
+        '--chat--color-medium': '#64748b',
+        '--chat--color-dark': '#0f1631',
+        '--chat--color-disabled': '#94a3b8',
+        '--chat--color-typing': '#1e3a8a',
+        '--chat--border-radius': '16px',
+        '--chat--window--width': '380px',
+        '--chat--window--height': '520px',
+        '--chat--header--background': '#0f1631',
+        '--chat--header--color': '#ffffff',
+        '--chat--message--bot--background': '#f0f4ff',
+        '--chat--message--bot--color': '#0f1631',
+        '--chat--message--user--background': '#1e3a8a',
+        '--chat--message--user--color': '#ffffff',
+        '--chat--toggle--background': '#0f1631',
+        '--chat--toggle--hover--background': '#1e3a8a',
+        '--chat--toggle--active--background': '#1e3a8a',
+        '--chat--toggle--color': '#ffffff',
+        '--chat--toggle--size': '60px',
+      }
+    });
+  }).catch(err => console.warn('n8n chat failed to load', err));
+}
