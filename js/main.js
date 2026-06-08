@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   reveals.forEach(el => revealObserver.observe(el));
 
   /* ── Typed Text ── */
-  const words = ['verkaufen.', 'überzeugen.', 'gefunden werden.', 'Anfragen bringen.', 'für Sie arbeiten.'];
+  const words = ['verkaufen.', 'überzeugen.', 'Anfragen bringen.', 'gefunden werden.', 'für Sie arbeiten.'];
   let wordIndex = 0;
   let charIndex = 0;
   let isDeleting = false;

@@ -516,13 +516,17 @@ footer a:hover { color: white; }
 }
 
 /* ─── TYPED TEXT ─── */
+h1 { min-height: 4.5em; }
+@media (min-width: 600px) { h1 { min-height: 2.5em; } }
+@media (min-width: 900px) { h1 { min-height: 2.2em; } }
 .typed-text {
   color: var(--accent);
   font-style: normal;
   border-right: 3px solid var(--accent);
   padding-right: 4px;
   animation: blink 0.75s step-end infinite;
-  white-space: nowrap;
+  display: inline;
+  word-break: break-word;
 }
 @keyframes blink {
   0%, 100% { border-color: var(--accent); }
