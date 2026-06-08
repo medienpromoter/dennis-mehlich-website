@@ -35,16 +35,88 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.12 });
   reveals.forEach(el => revealObserver.observe(el));
 
-  /* ── Process steps ── */
-  const processSteps = document.querySelectorAll('.process-step');
-  const stepObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+  /* ── Typed Text ── */
+  const words = ['verkaufen.', 'überzeugen.', 'gefunden werden.', 'Anfragen bringen.', 'für Sie arbeiten.'];
+  let wordIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  const typedEl = document.querySelector('.typed-text');
+
+  function type() {
+    if (!typedEl) return;
+    const current = words[wordIndex];
+    if (isDeleting) {
+      typedEl.textContent = current.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      typedEl.textContent = current.substring(0, charIndex + 1);
+      charIndex++;
+    }
+    let speed = isDeleting ? 60 : 100;
+    if (!isDeleting && charIndex === current.length) {
+      speed = 2000;
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      speed = 400;
+    }
+    setTimeout(type, speed);
+  }
+  setTimeout(type, 800);
+
+  /* ── Counter Animation ── */
+  const counters = document.querySelectorAll('.stat-num[data-count]');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('active'), i * 200);
+        const el = entry.target;
+        const target = parseInt(el.dataset.count);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1500;
+        const steps = 60;
+        const increment = target / steps;
+        let current = 0;
+        el.classList.add('counting');
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+            el.classList.remove('counting');
+          }
+          el.textContent = Math.floor(current) + suffix;
+        }, duration / steps);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(el => counterObserver.observe(el));
+
+  /* ── Process steps – scroll driven ── */
+  const processSteps = document.querySelectorAll('.process-step');
+  const timelineLine = document.querySelector('.process-steps');
+
+  const stepObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
       }
     });
   }, { threshold: 0.5 });
   processSteps.forEach(el => stepObserver.observe(el));
+
+  /* ── Timeline scroll fill ── */
+  if (timelineLine) {
+    window.addEventListener('scroll', () => {
+      const rect = timelineLine.getBoundingClientRect();
+      const windowH = window.innerHeight;
+      const total = timelineLine.offsetHeight;
+      const visible = Math.min(windowH - rect.top, total);
+      const percent = Math.max(0, Math.min(100, (visible / total) * 100));
+      timelineLine.style.setProperty('--fill', percent + '%');
+    });
+  }
 
   /* ── HubSpot fallback ── */
   setTimeout(() => {

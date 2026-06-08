@@ -228,10 +228,26 @@ h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem,3vw,2.6rem); font-
 /* ─── PROCESS ─── */
 #prozess { background: white; }
 .process-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-.process-steps { display: flex; flex-direction: column; }
+.process-steps { display: flex; flex-direction: column; position: relative; }
+.process-steps::before {
+  content: '';
+  position: absolute; left: 0; top: 0;
+  width: 2px;
+  height: var(--fill, 0%);
+  background: var(--accent);
+  transition: height 0.1s linear;
+  z-index: 1;
+}
+.process-steps::after {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--border);
+  z-index: 0;
+}
 .process-step { display: flex; gap: 1.5rem; align-items: flex-start; padding: 1.5rem 0 1.5rem 2rem; border-left: 2px solid var(--border); position: relative; transition: border-color 0.4s; }
 .process-step.active { border-color: var(--accent); }
-.step-num { position: absolute; left: -14px; top: 1.5rem; width: 26px; height: 26px; border-radius: 50%; background: var(--white); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 800; color: var(--gray); transition: all 0.4s; flex-shrink: 0; }
+.step-num { position: absolute; left: -14px; top: 1.5rem; width: 26px; height: 26px; border-radius: 50%; background: var(--white); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 800; color: var(--gray); transition: all 0.4s; flex-shrink: 0; z-index: 2; }
 .process-step.active .step-num { background: var(--accent); border-color: var(--accent); color: white; }
 .step-content h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.3rem; }
 .step-content p { font-size: 0.875rem; color: var(--gray); line-height: 1.6; }
@@ -483,4 +499,46 @@ footer a:hover { color: white; }
   #cookie-banner { flex-direction: column; align-items: flex-start; padding: 1.25rem 4%; }
   .cookie-buttons { width: 100%; align-items: flex-start; }
   .cookie-btn-accept { width: 100%; text-align: center; }
+}
+
+/* ─── ANIMATED HERO GRADIENT ─── */
+#hero::before {
+  background: radial-gradient(ellipse 70% 60% at 80% 50%, #dbeafe 0%, transparent 70%),
+              radial-gradient(ellipse 40% 40% at 10% 80%, #eff6ff 0%, transparent 60%),
+              radial-gradient(ellipse 50% 50% at 50% 20%, #e0f2fe 0%, transparent 60%);
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+}
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ─── TYPED TEXT ─── */
+.typed-text {
+  color: var(--accent);
+  font-style: normal;
+  border-right: 3px solid var(--accent);
+  padding-right: 4px;
+  animation: blink 0.75s step-end infinite;
+  white-space: nowrap;
+}
+@keyframes blink {
+  0%, 100% { border-color: var(--accent); }
+  50%       { border-color: transparent; }
+}
+
+/* ─── COUNTER ANIMATION ─── */
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1;
+  transition: transform 0.3s;
+}
+.stat-num.counting {
+  transform: scale(1.15);
+  color: var(--accent);
 }
