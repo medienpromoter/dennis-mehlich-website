@@ -398,3 +398,85 @@ footer a:hover { color: white; }
   .stat-label { font-size: 0.7rem; }
   section { padding: 3rem 4%; }
 }
+
+/* ─── COOKIE BANNER ─── */
+#cookie-banner {
+  position: fixed;
+  bottom: -200px;
+  left: 0; right: 0;
+  z-index: 998;
+  background: var(--navy);
+  color: white;
+  padding: 1.25rem 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  box-shadow: 0 -4px 32px rgba(15,22,49,0.25);
+  transition: bottom 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+#cookie-banner.visible {
+  bottom: 0;
+}
+.cookie-text {
+  flex: 1;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.6;
+  min-width: 200px;
+}
+.cookie-text strong {
+  color: white;
+  display: block;
+  margin-bottom: 0.2rem;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.9rem;
+}
+.cookie-text a {
+  color: var(--electric);
+  text-decoration: underline;
+}
+.cookie-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+.cookie-btn-accept {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.cookie-btn-accept:hover {
+  background: var(--electric);
+  transform: translateY(-1px);
+}
+.cookie-btn-decline {
+  background: transparent;
+  color: rgba(255,255,255,0.55);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 0.6rem 1.2rem;
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.cookie-btn-decline:hover {
+  color: white;
+  border-color: rgba(255,255,255,0.5);
+}
+@media (max-width: 600px) {
+  #cookie-banner { flex-direction: column; align-items: flex-start; padding: 1.25rem 4%; }
+  .cookie-buttons { width: 100%; }
+  .cookie-btn-accept, .cookie-btn-decline { flex: 1; text-align: center; }
+}

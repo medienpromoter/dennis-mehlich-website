@@ -1,6 +1,5 @@
 /**
  * js/main.js – Interaktionen & Dynamik
- * Liest Inhalte aus content/content.js und baut die Seite auf
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -47,30 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.5 });
   processSteps.forEach(el => stepObserver.observe(el));
 
-  /* ── Conditional form fields ── */
-  const leistungSelect = document.getElementById('leistung-select');
-  if (leistungSelect) {
-    leistungSelect.addEventListener('change', () => {
-      document.querySelectorAll('.cond-field').forEach(f => f.style.display = 'none');
-      const map = { neu: 'field-neu', redesign: 'field-redesign', hubspot: 'field-hubspot' };
-      const val = leistungSelect.value;
-      if (map[val]) {
-        const el = document.getElementById(map[val]);
-        if (el) el.style.display = 'block';
-      }
-    });
-  }
-
-  /* ── Form submit ── */
-  const submitBtn = document.querySelector('.btn-submit');
-  if (submitBtn) {
-    submitBtn.addEventListener('click', () => {
-      submitBtn.textContent = '✅ Anfrage gesendet!';
-      submitBtn.style.background = '#059669';
-      submitBtn.disabled = true;
-    });
-  }
-
   /* ── HubSpot fallback ── */
   setTimeout(() => {
     document.querySelectorAll('.hs-form-frame').forEach(frame => {
@@ -83,11 +58,60 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, 2500);
 
-  /* ── n8n Chat Widget ── */
-  loadN8nChat();
+  /* ── Cookie Banner ── */
+  initCookieBanner();
 });
 
-/* ── Load n8n chat dynamically ── */
+/* ══════════════════════════════════════
+   COOKIE BANNER
+══════════════════════════════════════ */
+function initCookieBanner() {
+  const consent = localStorage.getItem('cookie-consent');
+
+  if (consent === 'accepted') {
+    // Bereits akzeptiert → Chat sofort laden
+    loadN8nChat();
+    return;
+  }
+
+  if (consent === 'declined') {
+    // Bereits abgelehnt → Banner nicht mehr zeigen
+    return;
+  }
+
+  // Noch keine Entscheidung → Banner anzeigen
+  showCookieBanner();
+}
+
+function showCookieBanner() {
+  const banner = document.getElementById('cookie-banner');
+  if (banner) {
+    setTimeout(() => banner.classList.add('visible'), 800);
+  }
+}
+
+window.acceptCookies = () => {
+  localStorage.setItem('cookie-consent', 'accepted');
+  hideCookieBanner();
+  loadN8nChat();
+};
+
+window.declineCookies = () => {
+  localStorage.setItem('cookie-consent', 'declined');
+  hideCookieBanner();
+};
+
+function hideCookieBanner() {
+  const banner = document.getElementById('cookie-banner');
+  if (banner) {
+    banner.classList.remove('visible');
+    setTimeout(() => banner.remove(), 400);
+  }
+}
+
+/* ══════════════════════════════════════
+   N8N CHAT – nur nach Cookie-Zustimmung
+══════════════════════════════════════ */
 function loadN8nChat() {
   if (typeof SITE_CONTENT === 'undefined') return;
   const { webhookUrl, welcomeMessages } = SITE_CONTENT.n8n;
