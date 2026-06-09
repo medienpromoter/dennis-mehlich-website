@@ -7,6 +7,11 @@
 <meta name="description" content="Webdesigner aus Chemnitz. KI-gestützte Websites mit HTML, CSS & JS. Keine CMS-Overhead, maximale Performance.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<script>
+  if (localStorage.getItem('cookie-consent')) {
+    document.documentElement.style.setProperty('--cookie-display', 'none');
+  }
+</script>
 <link rel="stylesheet" href="css/style.css">
 <script src="content/content.js"></script>
 </head>
@@ -30,7 +35,7 @@
 <section id="hero">
   <div class="hero-content">
     <div class="hero-badge">Webdesigner · KI-gestützt · Chemnitz</div>
-    <h1>Professionelle Websites,<br><span class="typed-text-line">die <em class="typed-text"></em></span></h1>
+    <h1 id="hero-heading">Professionelle Websites,<br><span class="typed-text-line">die <em class="typed-text"></em></span></h1>
     <p class="hero-sub">Ihre Mitbewerber haben eine Website. Sie bekommen eine, die verkauft. Mit klarer Botschaft, starkem Design und einer Struktur, die Nutzer gezielt führt – und aus Besuchern Anfragen macht.</p>
     <div class="hero-actions">
       <a href="javascript:void(0)" onclick="openTermin()" class="btn-primary">Termin buchen</a>

@@ -424,7 +424,7 @@ footer a:hover { color: white; }
   background: var(--navy);
   color: white;
   padding: 1.25rem 5%;
-  display: flex;
+  display: var(--cookie-display, flex);
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
@@ -517,14 +517,14 @@ footer a:hover { color: white; }
 }
 
 /* ─── TYPED TEXT ─── */
-h1 {
+#hero-heading {
   min-height: 260px;
 }
-@media (min-width: 600px) { h1 { min-height: 260px; } }
-@media (min-width: 700px) { h1 { min-height: 260px; } }
-@media (min-width: 900px) { h1 { min-height: 260px; } }
-@media (min-width: 1100px) { h1 { min-height: 260px; } }
-@media (min-width: 1400px) { h1 { min-height: 260px; } }
+@media (min-width: 600px) { #hero-heading { min-height: 260px; } }
+@media (min-width: 700px) { #hero-heading { min-height: 260px; } }
+@media (min-width: 900px) { #hero-heading { min-height: 260px; } }
+@media (min-width: 1100px) { #hero-heading { min-height: 260px; } }
+@media (min-width: 1400px) { #hero-heading { min-height: 260px; } }
 .typed-text-line {
   display: block;
   min-height: 1.2em;
