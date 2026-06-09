@@ -409,10 +409,95 @@
       </div>
     </div>
     <div class="contact-form-box reveal">
-      <script src="https://js-eu1.hsforms.net/forms/embed/148643626.js" defer></script>
-      <div class="hs-form-frame" data-region="eu1" data-form-id="7b0a4ee5-95a9-4f7b-8103-ec589e9b52ed" data-portal-id="148643626"></div>
+
+      <!-- Schritt-Indikator -->
+      <div class="msf-steps">
+        <div class="msf-step active" data-step="1"><span class="msf-step-num">1</span><span class="msf-step-label">Website</span></div>
+        <div class="msf-step-line"></div>
+        <div class="msf-step" data-step="2"><span class="msf-step-num">2</span><span class="msf-step-label">Server</span></div>
+        <div class="msf-step-line"></div>
+        <div class="msf-step" data-step="3"><span class="msf-step-num">3</span><span class="msf-step-label">Pflege</span></div>
+        <div class="msf-step-line"></div>
+        <div class="msf-step" data-step="4"><span class="msf-step-num">4</span><span class="msf-step-label">Kontakt</span></div>
+      </div>
+
+      <!-- Schritt 1: Website vorhanden -->
+      <div class="msf-page active" data-page="1">
+        <div class="msf-question">Besteht bereits eine Website?</div>
+        <div class="msf-options">
+          <label class="msf-radio"><input type="radio" name="website_vorhanden" value="Nein, noch keine Website"><span>Nein, noch keine Website</span></label>
+          <label class="msf-radio"><input type="radio" name="website_vorhanden" value="Ja, selbst gebastelt (Baukasten)"><span>Ja, selbst gebastelt (Baukasten)</span></label>
+          <label class="msf-radio"><input type="radio" name="website_vorhanden" value="Ja, aber sie ist veraltet"><span>Ja, aber sie ist veraltet</span></label>
+          <label class="msf-radio"><input type="radio" name="website_vorhanden" value="Ja, professionell erstellt"><span>Ja, professionell erstellt</span></label>
+          <label class="msf-radio"><input type="radio" name="website_vorhanden" value="Weiß nicht"><span>Weiß nicht</span></label>
+        </div>
+        <div class="msf-hint">Wählen Sie eine Option – es geht automatisch weiter.</div>
+      </div>
+
+      <!-- Schritt 2: Server vorhanden -->
+      <div class="msf-page" data-page="2">
+        <div class="msf-question">Gibt es bereits einen Server für die Website?</div>
+        <div class="msf-options">
+          <label class="msf-check"><input type="checkbox" name="server_vorhanden" value="Ja"><span>Ja</span></label>
+          <label class="msf-check"><input type="checkbox" name="server_vorhanden" value="Nein"><span>Nein</span></label>
+        </div>
+        <div class="msf-nav">
+          <button class="msf-btn-back" onclick="msfBack(2)">← Zurück</button>
+          <button class="msf-btn-next" onclick="msfNext(2)">Weiter →</button>
+        </div>
+      </div>
+
+      <!-- Schritt 3: Website Pflege -->
+      <div class="msf-page" data-page="3">
+        <div class="msf-question">Wer soll die Website pflegen?</div>
+        <div class="msf-options">
+          <label class="msf-check"><input type="checkbox" name="website_pflege" value="Agentur"><span>Agentur</span></label>
+          <label class="msf-check"><input type="checkbox" name="website_pflege" value="Eigenständig"><span>Eigenständig</span></label>
+        </div>
+        <div class="msf-nav">
+          <button class="msf-btn-back" onclick="msfBack(3)">← Zurück</button>
+          <button class="msf-btn-next" onclick="msfNext(3)">Weiter →</button>
+        </div>
+      </div>
+
+      <!-- Schritt 4: Kontaktdaten -->
+      <div class="msf-page" data-page="4">
+        <div class="msf-question">Wie können wir Sie erreichen?</div>
+        <div class="msf-contact-fields">
+          <div class="msf-field-row">
+            <div class="msf-field">
+              <label>Vorname *</label>
+              <input type="text" id="msf-firstname" placeholder="Max" required>
+            </div>
+            <div class="msf-field">
+              <label>Nachname *</label>
+              <input type="text" id="msf-lastname" placeholder="Mustermann" required>
+            </div>
+          </div>
+          <div class="msf-field">
+            <label>E-Mail *</label>
+            <input type="email" id="msf-email" placeholder="max@beispiel.de" required>
+          </div>
+        </div>
+        <div id="msf-error" class="msf-error" style="display:none;">Bitte füllen Sie alle Pflichtfelder aus.</div>
+        <div class="msf-nav">
+          <button class="msf-btn-back" onclick="msfBack(4)">← Zurück</button>
+          <button class="msf-btn-submit" onclick="msfSubmit()">Absenden →</button>
+        </div>
+      </div>
+
+      <!-- Erfolgsmeldung -->
+      <div class="msf-page" data-page="5">
+        <div class="msf-success">
+          <div class="msf-success-icon">✅</div>
+          <div class="msf-success-title">Vielen Dank!</div>
+          <p>Ihre Anfrage ist eingegangen. Ich melde mich in Kürze bei Ihnen.</p>
+        </div>
+      </div>
+
       <p style="font-size:0.7rem;color:#94a3b8;text-align:center;margin-top:1rem;">🔒 Ihre Daten werden sicher übermittelt und nicht an Dritte weitergegeben.</p>
     </div>
+
   </div>
 </section>
 
@@ -435,8 +520,60 @@
     <div class="overlay-label">Kostenloses Erstgespräch</div>
     <div class="overlay-title">Termin buchen</div>
     <div class="overlay-sub">In 30 Minuten – unverbindlich &amp; kostenlos.</div>
-    <script src="https://js-eu1.hsforms.net/forms/embed/148643626.js" defer></script>
-    <div class="hs-form-frame" data-region="eu1" data-form-id="7b0a4ee5-95a9-4f7b-8103-ec589e9b52ed" data-portal-id="148643626"></div>
+    <div id="hs-overlay-form">
+      <!-- Schritt-Indikator -->
+      <div class="msf-steps">
+        <div class="msf-step active" data-step="1"><span class="msf-step-num">1</span><span class="msf-step-label">Website</span></div>
+        <div class="msf-step-line"></div>
+        <div class="msf-step" data-step="2"><span class="msf-step-num">2</span><span class="msf-step-label">Server</span></div>
+        <div class="msf-step-line"></div>
+        <div class="msf-step" data-step="3"><span class="msf-step-num">3</span><span class="msf-step-label">Pflege</span></div>
+        <div class="msf-step-line"></div>
+        <div class="msf-step" data-step="4"><span class="msf-step-num">4</span><span class="msf-step-label">Kontakt</span></div>
+      </div>
+      <div class="msf-page active" data-page="1">
+        <div class="msf-question">Besteht bereits eine Website?</div>
+        <div class="msf-options">
+          <label class="msf-radio"><input type="radio" name="ov_website_vorhanden" value="Nein, noch keine Website"><span>Nein, noch keine Website</span></label>
+          <label class="msf-radio"><input type="radio" name="ov_website_vorhanden" value="Ja, selbst gebastelt (Baukasten)"><span>Ja, selbst gebastelt (Baukasten)</span></label>
+          <label class="msf-radio"><input type="radio" name="ov_website_vorhanden" value="Ja, aber sie ist veraltet"><span>Ja, aber sie ist veraltet</span></label>
+          <label class="msf-radio"><input type="radio" name="ov_website_vorhanden" value="Ja, professionell erstellt"><span>Ja, professionell erstellt</span></label>
+          <label class="msf-radio"><input type="radio" name="ov_website_vorhanden" value="Weiß nicht"><span>Weiß nicht</span></label>
+        </div>
+        <div class="msf-hint">Wählen Sie eine Option – es geht automatisch weiter.</div>
+      </div>
+      <div class="msf-page" data-page="2">
+        <div class="msf-question">Gibt es bereits einen Server für die Website?</div>
+        <div class="msf-options">
+          <label class="msf-check"><input type="checkbox" name="ov_server_vorhanden" value="Ja"><span>Ja</span></label>
+          <label class="msf-check"><input type="checkbox" name="ov_server_vorhanden" value="Nein"><span>Nein</span></label>
+        </div>
+        <div class="msf-nav"><button class="msf-btn-back" onclick="msfBackOv(2)">← Zurück</button><button class="msf-btn-next" onclick="msfNextOv(2)">Weiter →</button></div>
+      </div>
+      <div class="msf-page" data-page="3">
+        <div class="msf-question">Wer soll die Website pflegen?</div>
+        <div class="msf-options">
+          <label class="msf-check"><input type="checkbox" name="ov_website_pflege" value="Agentur"><span>Agentur</span></label>
+          <label class="msf-check"><input type="checkbox" name="ov_website_pflege" value="Eigenständig"><span>Eigenständig</span></label>
+        </div>
+        <div class="msf-nav"><button class="msf-btn-back" onclick="msfBackOv(3)">← Zurück</button><button class="msf-btn-next" onclick="msfNextOv(3)">Weiter →</button></div>
+      </div>
+      <div class="msf-page" data-page="4">
+        <div class="msf-question">Wie können wir Sie erreichen?</div>
+        <div class="msf-contact-fields">
+          <div class="msf-field-row">
+            <div class="msf-field"><label>Vorname *</label><input type="text" id="ov-firstname" placeholder="Max"></div>
+            <div class="msf-field"><label>Nachname *</label><input type="text" id="ov-lastname" placeholder="Mustermann"></div>
+          </div>
+          <div class="msf-field"><label>E-Mail *</label><input type="email" id="ov-email" placeholder="max@beispiel.de"></div>
+        </div>
+        <div id="ov-error" class="msf-error" style="display:none;">Bitte füllen Sie alle Pflichtfelder aus.</div>
+        <div class="msf-nav"><button class="msf-btn-back" onclick="msfBackOv(4)">← Zurück</button><button class="msf-btn-submit" onclick="msfSubmitOv()">Absenden →</button></div>
+      </div>
+      <div class="msf-page" data-page="5">
+        <div class="msf-success"><div class="msf-success-icon">✅</div><div class="msf-success-title">Vielen Dank!</div><p>Ihre Anfrage ist eingegangen. Ich melde mich in Kürze bei Ihnen.</p></div>
+      </div>
+    </div>
     <div class="hs-fallback" style="display:none;">
       <div class="form-row">
         <div class="form-group"><label>Vorname</label><input type="text" placeholder="Max"></div>
@@ -466,7 +603,7 @@
 <!-- ─── n8n CHAT ─── -->
 <div id="n8n-chat"></div>
 
-<script src="js/main.js" type="module"></script>
+<script src="js/main.js" defer></script>
 
 </body>
 </html>
