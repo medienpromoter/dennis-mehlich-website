@@ -410,16 +410,44 @@
     </div>
     <div class="contact-form-box reveal">
 
-      <!-- Schritt-Indikator -->
-      <div class="msf-steps">
-        <div class="msf-step active" data-step="1"><span class="msf-step-num">1</span><span class="msf-step-label">Website</span></div>
-        <div class="msf-step-line"></div>
-        <div class="msf-step" data-step="2"><span class="msf-step-num">2</span><span class="msf-step-label">Server</span></div>
-        <div class="msf-step-line"></div>
-        <div class="msf-step" data-step="3"><span class="msf-step-num">3</span><span class="msf-step-label">Pflege</span></div>
-        <div class="msf-step-line"></div>
-        <div class="msf-step" data-step="4"><span class="msf-step-num">4</span><span class="msf-step-label">Kontakt</span></div>
+      <!-- Fortschrittsbalken -->
+      <div class="msf-progress-wrap" id="msf-progress-wrap">
+        <div class="msf-progress-fill" id="msf-progress-fill"></div>
+        <div class="msf-progress-step" id="msf-step-1">
+          <div class="msf-dot"><span class="msf-dot-num">1</span></div>
+          <div class="msf-dot-label">Website</div>
+        </div>
+        <div class="msf-progress-step" id="msf-step-2">
+          <div class="msf-dot"><span class="msf-dot-num">2</span></div>
+          <div class="msf-dot-label">Design</div>
+        </div>
+        <div class="msf-progress-step" id="msf-step-3">
+          <div class="msf-dot"><span class="msf-dot-num">3</span></div>
+          <div class="msf-dot-label">Hosting</div>
+        </div>
+        <div class="msf-progress-step" id="msf-step-4">
+          <div class="msf-dot"><span class="msf-dot-num">4</span></div>
+          <div class="msf-dot-label">Gründung</div>
+        </div>
+        <div class="msf-progress-step" id="msf-step-5">
+          <div class="msf-dot"><span class="msf-dot-num">5</span></div>
+          <div class="msf-dot-label">Termin</div>
+        </div>
+        <div class="msf-progress-step" id="msf-step-6">
+          <div class="msf-dot"><span class="msf-dot-num">6</span></div>
+          <div class="msf-dot-label">Untern.</div>
+        </div>
+        <div class="msf-progress-step" id="msf-step-7">
+          <div class="msf-dot"><span class="msf-dot-num">7</span></div>
+          <div class="msf-dot-label">Pflege</div>
+        </div>
+        <div class="msf-progress-step" id="msf-step-8">
+          <div class="msf-dot"><span class="msf-dot-num">8</span></div>
+          <div class="msf-dot-label">Kontakt</div>
+        </div>
       </div>
+      <div class="msf-progress-label"><span id="msf-progress-pct">12%</span> abgeschlossen</div>
+
 
       <!-- Schritt 1: Website vorhanden -->
       <div class="msf-page active" data-page="1">
@@ -434,20 +462,73 @@
         <div class="msf-hint">Wählen Sie eine Option – es geht automatisch weiter.</div>
       </div>
 
-      <!-- Schritt 2: Server vorhanden -->
+      <!-- Schritt 2: Designvorlage -->
       <div class="msf-page" data-page="2">
-        <div class="msf-question">Gibt es bereits einen Server für die Website?</div>
+        <div class="msf-question">Besteht eine Designvorlage?</div>
         <div class="msf-options">
-          <label class="msf-radio"><input type="radio" name="server_vorhanden" value="Ja"><span>Ja</span></label>
-          <label class="msf-radio"><input type="radio" name="server_vorhanden" value="Nein"><span>Nein</span></label>
-          <label class="msf-radio"><input type="radio" name="server_vorhanden" value="Weiß ich nicht"><span>Weiß ich nicht</span></label>
+          <label class="msf-radio"><input type="radio" name="designvorlage" value="Ja"><span>Ja</span></label>
+          <label class="msf-radio"><input type="radio" name="designvorlage" value="Nein"><span>Nein</span></label>
+          <label class="msf-radio"><input type="radio" name="designvorlage" value="Weiß nicht"><span>Weiß nicht</span></label>
         </div>
         <div class="msf-hint">Wählen Sie eine Option – es geht automatisch weiter.</div>
         <div class="msf-nav"><button class="msf-btn-back" onclick="msfBack(2)">← Zurück</button></div>
       </div>
 
-      <!-- Schritt 3: Website Pflege -->
+      <!-- Schritt 3: Domain & Hosting -->
       <div class="msf-page" data-page="3">
+        <div class="msf-question">Ist ein Domain- und Hosting-Paket vorhanden?</div>
+        <div class="msf-options">
+          <label class="msf-radio"><input type="radio" name="domain_und_hosting" value="Ja"><span>Ja</span></label>
+          <label class="msf-radio"><input type="radio" name="domain_und_hosting" value="Nein"><span>Nein</span></label>
+          <label class="msf-radio"><input type="radio" name="domain_und_hosting" value="Weiß nicht"><span>Weiß nicht</span></label>
+        </div>
+        <div class="msf-hint">Wählen Sie eine Option – es geht automatisch weiter.</div>
+        <div class="msf-nav"><button class="msf-btn-back" onclick="msfBack(3)">← Zurück</button></div>
+      </div>
+
+      <!-- Schritt 4: Unternehmensgründung -->
+      <div class="msf-page" data-page="4">
+        <div class="msf-question">Wann wurde das Unternehmen gegründet?</div>
+        <div class="msf-options">
+          <label class="msf-radio"><input type="radio" name="unternehmensgrundung" value="Geplante Gründung in der Zukunft"><span>Geplante Gründung in der Zukunft</span></label>
+          <label class="msf-radio"><input type="radio" name="unternehmensgrundung" value="Unternehmen in jünger als 6 Monate"><span>Jünger als 6 Monate</span></label>
+          <label class="msf-radio"><input type="radio" name="unternehmensgrundung" value="Unternehmen ist älter als 6 Monate"><span>Älter als 6 Monate</span></label>
+          <label class="msf-radio"><input type="radio" name="unternehmensgrundung" value="Sonstige"><span>Sonstige</span></label>
+        </div>
+        <div class="msf-hint">Wählen Sie eine Option – es geht automatisch weiter.</div>
+        <div class="msf-nav"><button class="msf-btn-back" onclick="msfBack(4)">← Zurück</button></div>
+      </div>
+
+      <!-- Schritt 5: Fertigstellung -->
+      <div class="msf-page" data-page="5">
+        <div class="msf-question">Wann soll die Website fertiggestellt werden?</div>
+        <div class="msf-options">
+          <label class="msf-radio"><input type="radio" name="fertigstellung" value="So schnell wie möglich"><span>So schnell wie möglich</span></label>
+          <label class="msf-radio"><input type="radio" name="fertigstellung" value="In 4–6 Wochen"><span>In 4–6 Wochen</span></label>
+          <label class="msf-radio"><input type="radio" name="fertigstellung" value="In 2–3 Monaten"><span>In 2–3 Monaten</span></label>
+          <label class="msf-radio"><input type="radio" name="fertigstellung" value="Egal"><span>Egal</span></label>
+        </div>
+        <div class="msf-hint">Wählen Sie eine Option – es geht automatisch weiter.</div>
+        <div class="msf-nav"><button class="msf-btn-back" onclick="msfBack(5)">← Zurück</button></div>
+      </div>
+
+      <!-- Schritt 6: Unternehmensart -->
+      <div class="msf-page" data-page="6">
+        <div class="msf-question">Was beschreibt Ihr Unternehmen am besten?</div>
+        <div class="msf-contact-fields">
+          <div class="msf-field">
+            <label>Unternehmensart *</label>
+            <input type="text" id="msf-unternehmensart" placeholder="z. B. Handwerk, Beratung, Online-Shop …">
+          </div>
+        </div>
+        <div class="msf-nav">
+          <button class="msf-btn-back" onclick="msfBack(6)">← Zurück</button>
+          <button class="msf-btn-next" onclick="msfNextText(6, 'msf-unternehmensart')">Weiter →</button>
+        </div>
+      </div>
+
+      <!-- Schritt 7: Website Pflege -->
+      <div class="msf-page" data-page="7">
         <div class="msf-question">Wer soll die Website pflegen?</div>
         <div class="msf-options">
           <label class="msf-radio"><input type="radio" name="website_pflege" value="Agentur"><span>Agentur</span></label>
@@ -455,37 +536,29 @@
           <label class="msf-radio"><input type="radio" name="website_pflege" value="Weiß ich noch nicht"><span>Weiß ich noch nicht</span></label>
         </div>
         <div class="msf-hint">Wählen Sie eine Option – es geht automatisch weiter.</div>
-        <div class="msf-nav"><button class="msf-btn-back" onclick="msfBack(3)">← Zurück</button></div>
+        <div class="msf-nav"><button class="msf-btn-back" onclick="msfBack(7)">← Zurück</button></div>
       </div>
 
-      <!-- Schritt 4: Kontaktdaten -->
-      <div class="msf-page" data-page="4">
+      <!-- Schritt 8: Kontaktdaten -->
+      <div class="msf-page" data-page="8">
         <div class="msf-question">Wie können wir Sie erreichen?</div>
         <div class="msf-contact-fields">
           <div class="msf-field-row">
-            <div class="msf-field">
-              <label>Vorname *</label>
-              <input type="text" id="msf-firstname" placeholder="Max" required>
-            </div>
-            <div class="msf-field">
-              <label>Nachname *</label>
-              <input type="text" id="msf-lastname" placeholder="Mustermann" required>
-            </div>
+            <div class="msf-field"><label>Vorname *</label><input type="text" id="msf-firstname" placeholder="Max"></div>
+            <div class="msf-field"><label>Nachname *</label><input type="text" id="msf-lastname" placeholder="Mustermann"></div>
           </div>
-          <div class="msf-field">
-            <label>E-Mail *</label>
-            <input type="email" id="msf-email" placeholder="max@beispiel.de" required>
-          </div>
+          <div class="msf-field"><label>E-Mail *</label><input type="email" id="msf-email" placeholder="max@beispiel.de"></div>
+          <div class="msf-field"><label>Telefon</label><input type="tel" id="msf-phone" placeholder="+49 176 …"></div>
         </div>
         <div id="msf-error" class="msf-error" style="display:none;">Bitte füllen Sie alle Pflichtfelder aus.</div>
         <div class="msf-nav">
-          <button class="msf-btn-back" onclick="msfBack(4)">← Zurück</button>
+          <button class="msf-btn-back" onclick="msfBack(8)">← Zurück</button>
           <button class="msf-btn-submit" onclick="msfSubmit()">Absenden →</button>
         </div>
       </div>
 
       <!-- Erfolgsmeldung -->
-      <div class="msf-page" data-page="5">
+      <div class="msf-page" data-page="9">
         <div class="msf-success">
           <div class="msf-success-icon">✅</div>
           <div class="msf-success-title">Vielen Dank!</div>
@@ -517,18 +590,46 @@
     <button class="overlay-close" onclick="closeTermin()">✕</button>
     <div class="overlay-label">Kostenloses Erstgespräch</div>
     <div class="overlay-title">Termin buchen</div>
-    <div class="overlay-sub">In 30 Minuten – unverbindlich &amp; kostenlos.</div>
     <div id="hs-overlay-form">
-      <!-- Schritt-Indikator -->
-      <div class="msf-steps">
-        <div class="msf-step active" data-step="1"><span class="msf-step-num">1</span><span class="msf-step-label">Website</span></div>
-        <div class="msf-step-line"></div>
-        <div class="msf-step" data-step="2"><span class="msf-step-num">2</span><span class="msf-step-label">Server</span></div>
-        <div class="msf-step-line"></div>
-        <div class="msf-step" data-step="3"><span class="msf-step-num">3</span><span class="msf-step-label">Pflege</span></div>
-        <div class="msf-step-line"></div>
-        <div class="msf-step" data-step="4"><span class="msf-step-num">4</span><span class="msf-step-label">Kontakt</span></div>
+      <!-- Fortschrittsbalken -->
+      <div class="msf-progress-wrap" id="ov-progress-wrap">
+        <div class="msf-progress-fill" id="ov-progress-fill"></div>
+        <div class="msf-progress-step" id="ov-step-1">
+          <div class="msf-dot"><span class="msf-dot-num">1</span></div>
+          <div class="msf-dot-label">Website</div>
+        </div>
+        <div class="msf-progress-step" id="ov-step-2">
+          <div class="msf-dot"><span class="msf-dot-num">2</span></div>
+          <div class="msf-dot-label">Design</div>
+        </div>
+        <div class="msf-progress-step" id="ov-step-3">
+          <div class="msf-dot"><span class="msf-dot-num">3</span></div>
+          <div class="msf-dot-label">Hosting</div>
+        </div>
+        <div class="msf-progress-step" id="ov-step-4">
+          <div class="msf-dot"><span class="msf-dot-num">4</span></div>
+          <div class="msf-dot-label">Gründung</div>
+        </div>
+        <div class="msf-progress-step" id="ov-step-5">
+          <div class="msf-dot"><span class="msf-dot-num">5</span></div>
+          <div class="msf-dot-label">Termin</div>
+        </div>
+        <div class="msf-progress-step" id="ov-step-6">
+          <div class="msf-dot"><span class="msf-dot-num">6</span></div>
+          <div class="msf-dot-label">Untern.</div>
+        </div>
+        <div class="msf-progress-step" id="ov-step-7">
+          <div class="msf-dot"><span class="msf-dot-num">7</span></div>
+          <div class="msf-dot-label">Pflege</div>
+        </div>
+        <div class="msf-progress-step" id="ov-step-8">
+          <div class="msf-dot"><span class="msf-dot-num">8</span></div>
+          <div class="msf-dot-label">Kontakt</div>
+        </div>
       </div>
+      <div class="msf-progress-label"><span id="ov-progress-pct">12%</span> abgeschlossen</div>
+
+
       <div class="msf-page active" data-page="1">
         <div class="msf-question">Besteht bereits eine Website?</div>
         <div class="msf-options">
@@ -541,16 +642,61 @@
         <div class="msf-hint">Wählen Sie eine Option – es geht automatisch weiter.</div>
       </div>
       <div class="msf-page" data-page="2">
-        <div class="msf-question">Gibt es bereits einen Server für die Website?</div>
+        <div class="msf-question">Besteht eine Designvorlage?</div>
         <div class="msf-options">
-          <label class="msf-radio"><input type="radio" name="ov_server_vorhanden" value="Ja"><span>Ja</span></label>
-          <label class="msf-radio"><input type="radio" name="ov_server_vorhanden" value="Nein"><span>Nein</span></label>
-          <label class="msf-radio"><input type="radio" name="ov_server_vorhanden" value="Weiß ich nicht"><span>Weiß ich nicht</span></label>
+          <label class="msf-radio"><input type="radio" name="ov_designvorlage" value="Ja"><span>Ja</span></label>
+          <label class="msf-radio"><input type="radio" name="ov_designvorlage" value="Nein"><span>Nein</span></label>
+          <label class="msf-radio"><input type="radio" name="ov_designvorlage" value="Weiß nicht"><span>Weiß nicht</span></label>
         </div>
         <div class="msf-hint">Wählen Sie eine Option – es geht automatisch weiter.</div>
         <div class="msf-nav"><button class="msf-btn-back" onclick="msfBackOv(2)">← Zurück</button></div>
       </div>
       <div class="msf-page" data-page="3">
+        <div class="msf-question">Ist ein Domain- und Hosting-Paket vorhanden?</div>
+        <div class="msf-options">
+          <label class="msf-radio"><input type="radio" name="ov_domain_und_hosting" value="Ja"><span>Ja</span></label>
+          <label class="msf-radio"><input type="radio" name="ov_domain_und_hosting" value="Nein"><span>Nein</span></label>
+          <label class="msf-radio"><input type="radio" name="ov_domain_und_hosting" value="Weiß nicht"><span>Weiß nicht</span></label>
+        </div>
+        <div class="msf-hint">Wählen Sie eine Option – es geht automatisch weiter.</div>
+        <div class="msf-nav"><button class="msf-btn-back" onclick="msfBackOv(3)">← Zurück</button></div>
+      </div>
+      <div class="msf-page" data-page="4">
+        <div class="msf-question">Wann wurde das Unternehmen gegründet?</div>
+        <div class="msf-options">
+          <label class="msf-radio"><input type="radio" name="ov_unternehmensgrundung" value="Geplante Gründung in der Zukunft"><span>Geplante Gründung in der Zukunft</span></label>
+          <label class="msf-radio"><input type="radio" name="ov_unternehmensgrundung" value="Unternehmen in jünger als 6 Monate"><span>Jünger als 6 Monate</span></label>
+          <label class="msf-radio"><input type="radio" name="ov_unternehmensgrundung" value="Unternehmen ist älter als 6 Monate"><span>Älter als 6 Monate</span></label>
+          <label class="msf-radio"><input type="radio" name="ov_unternehmensgrundung" value="Sonstige"><span>Sonstige</span></label>
+        </div>
+        <div class="msf-hint">Wählen Sie eine Option – es geht automatisch weiter.</div>
+        <div class="msf-nav"><button class="msf-btn-back" onclick="msfBackOv(4)">← Zurück</button></div>
+      </div>
+      <div class="msf-page" data-page="5">
+        <div class="msf-question">Wann soll die Website fertiggestellt werden?</div>
+        <div class="msf-options">
+          <label class="msf-radio"><input type="radio" name="ov_fertigstellung" value="So schnell wie möglich"><span>So schnell wie möglich</span></label>
+          <label class="msf-radio"><input type="radio" name="ov_fertigstellung" value="In 4–6 Wochen"><span>In 4–6 Wochen</span></label>
+          <label class="msf-radio"><input type="radio" name="ov_fertigstellung" value="In 2–3 Monaten"><span>In 2–3 Monaten</span></label>
+          <label class="msf-radio"><input type="radio" name="ov_fertigstellung" value="Egal"><span>Egal</span></label>
+        </div>
+        <div class="msf-hint">Wählen Sie eine Option – es geht automatisch weiter.</div>
+        <div class="msf-nav"><button class="msf-btn-back" onclick="msfBackOv(5)">← Zurück</button></div>
+      </div>
+      <div class="msf-page" data-page="6">
+        <div class="msf-question">Was beschreibt Ihr Unternehmen am besten?</div>
+        <div class="msf-contact-fields">
+          <div class="msf-field">
+            <label>Unternehmensart *</label>
+            <input type="text" id="ov-unternehmensart" placeholder="z. B. Handwerk, Beratung, Online-Shop …">
+          </div>
+        </div>
+        <div class="msf-nav">
+          <button class="msf-btn-back" onclick="msfBackOv(6)">← Zurück</button>
+          <button class="msf-btn-next" onclick="msfNextText(6, 'ov-unternehmensart', true)">Weiter →</button>
+        </div>
+      </div>
+      <div class="msf-page" data-page="7">
         <div class="msf-question">Wer soll die Website pflegen?</div>
         <div class="msf-options">
           <label class="msf-radio"><input type="radio" name="ov_website_pflege" value="Agentur"><span>Agentur</span></label>
@@ -558,9 +704,9 @@
           <label class="msf-radio"><input type="radio" name="ov_website_pflege" value="Weiß ich noch nicht"><span>Weiß ich noch nicht</span></label>
         </div>
         <div class="msf-hint">Wählen Sie eine Option – es geht automatisch weiter.</div>
-        <div class="msf-nav"><button class="msf-btn-back" onclick="msfBackOv(3)">← Zurück</button></div>
+        <div class="msf-nav"><button class="msf-btn-back" onclick="msfBackOv(7)">← Zurück</button></div>
       </div>
-      <div class="msf-page" data-page="4">
+      <div class="msf-page" data-page="8">
         <div class="msf-question">Wie können wir Sie erreichen?</div>
         <div class="msf-contact-fields">
           <div class="msf-field-row">
@@ -568,11 +714,15 @@
             <div class="msf-field"><label>Nachname *</label><input type="text" id="ov-lastname" placeholder="Mustermann"></div>
           </div>
           <div class="msf-field"><label>E-Mail *</label><input type="email" id="ov-email" placeholder="max@beispiel.de"></div>
+          <div class="msf-field"><label>Telefon</label><input type="tel" id="ov-phone" placeholder="+49 176 …"></div>
         </div>
         <div id="ov-error" class="msf-error" style="display:none;">Bitte füllen Sie alle Pflichtfelder aus.</div>
-        <div class="msf-nav"><button class="msf-btn-back" onclick="msfBackOv(4)">← Zurück</button><button class="msf-btn-submit" onclick="msfSubmitOv()">Absenden →</button></div>
+        <div class="msf-nav">
+          <button class="msf-btn-back" onclick="msfBackOv(8)">← Zurück</button>
+          <button class="msf-btn-submit" onclick="msfSubmitOv()">Absenden →</button>
+        </div>
       </div>
-      <div class="msf-page" data-page="5">
+      <div class="msf-page" data-page="9">
         <div class="msf-success"><div class="msf-success-icon">✅</div><div class="msf-success-title">Vielen Dank!</div><p>Ihre Anfrage ist eingegangen. Ich melde mich in Kürze bei Ihnen.</p></div>
       </div>
     </div>

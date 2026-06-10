@@ -261,49 +261,73 @@ function loadN8nChat() {
 }
 
 /* ─── MULTI-STEP FORM ─── */
+
+/* ─── MULTI-STEP FORM ─── */
+const MSF_TOTAL = 8;
+
+function msfUpdateProgress(page, prefix) {
+  const total = MSF_TOTAL;
+  const pct = Math.round((page / total) * 100);
+
+  // Prozent-Label
+  const lbl = document.getElementById(prefix + '-progress-pct');
+  if (lbl) lbl.textContent = pct + '%';
+
+  // Fülllinie: von Dot 1 bis zum aktuellen Dot
+  // Breite = (page-1)/(total-1) * 100% (von erstem bis letztem Dot)
+  const fill = document.getElementById(prefix + '-progress-fill');
+  if (fill) {
+    const fillPct = total > 1 ? ((page - 1) / (total - 1)) * 100 : 0;
+    fill.style.width = fillPct + '%';
+  }
+
+  // Dots updaten
+  for (let i = 1; i <= total; i++) {
+    const step = document.getElementById(prefix + '-step-' + i);
+    if (!step) continue;
+    step.classList.remove('active', 'done');
+    if (i < page) step.classList.add('done');
+    else if (i === page) step.classList.add('active');
+  }
+}
+
 function msfGoTo(page) {
-  // Pages
-  document.querySelectorAll('.msf-page').forEach(p => p.classList.remove('active'));
-  const target = document.querySelector(`.msf-page[data-page="${page}"]`);
+  document.querySelectorAll('.contact-form-box .msf-page').forEach(p => p.classList.remove('active'));
+  const target = document.querySelector(`.contact-form-box .msf-page[data-page="${page}"]`);
   if (target) target.classList.add('active');
-
-  // Steps
-  document.querySelectorAll('.msf-step').forEach(s => {
-    const n = parseInt(s.dataset.step);
-    s.classList.remove('active', 'done');
-    if (n < page) s.classList.add('done');
-    else if (n === page) s.classList.add('active');
-  });
-
-  // Lines
-  document.querySelectorAll('.msf-step-line').forEach((line, i) => {
-    line.classList.toggle('done', i + 1 < page);
-  });
+  msfUpdateProgress(page, 'msf');
 }
 
 function msfNext(currentPage) {
-  // Schritt 1: mind. eine Radio ausgewählt
   if (currentPage === 1) {
-    const selected = document.querySelector('input[name="website_vorhanden"]:checked');
-    if (!selected) { alert('Bitte wählen Sie eine Option aus.'); return; }
+    const sel = document.querySelector('input[name="website_vorhanden"]:checked');
+    if (!sel) { alert('Bitte wählen Sie eine Option aus.'); return; }
   }
   msfGoTo(currentPage + 1);
+}
+
+function msfNextText(currentPage, fieldId, isOverlay) {
+  const val = document.getElementById(fieldId)?.value.trim();
+  if (!val) { alert('Bitte füllen Sie dieses Feld aus.'); return; }
+  if (isOverlay) msfGoToOv(currentPage + 1);
+  else msfGoTo(currentPage + 1);
 }
 
 function msfBack(currentPage) {
   msfGoTo(currentPage - 1);
 }
 
-
 // Karten-Interaktion: Radio → sofort weiter, Checkbox → toggle
 document.addEventListener('DOMContentLoaded', function() {
+  // Initialen Zustand setzen
+  msfUpdateProgress(1, 'msf');
+  msfUpdateProgress(1, 'ov');
   document.querySelectorAll('.msf-radio, .msf-check').forEach(label => {
     label.addEventListener('click', function() {
       const input = this.querySelector('input');
       if (!input) return;
 
       if (input.type === 'radio') {
-        // Alle Radio-Karten derselben Gruppe deselektieren
         document.querySelectorAll(`input[name="${input.name}"]`).forEach(s => {
           s.checked = false;
           s.closest('label').classList.remove('selected');
@@ -311,7 +335,6 @@ document.addEventListener('DOMContentLoaded', function() {
         input.checked = true;
         this.classList.add('selected');
 
-        // Automatisch weiter – kurze Verzögerung für visuelles Feedback
         const page = parseInt(this.closest('.msf-page').dataset.page);
         const isOverlay = !!this.closest('#hs-overlay-form');
         setTimeout(() => {
@@ -320,7 +343,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300);
 
       } else {
-        // Checkbox: togglen, kein Auto-Advance
         input.checked = !input.checked;
         this.classList.toggle('selected', input.checked);
       }
@@ -329,77 +351,60 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 async function msfSubmit() {
-  const firstname = document.getElementById('msf-firstname').value.trim();
-  const lastname  = document.getElementById('msf-lastname').value.trim();
-  const email     = document.getElementById('msf-email').value.trim();
-  const errorEl   = document.getElementById('msf-error');
+  const firstname       = document.getElementById('msf-firstname')?.value.trim();
+  const lastname        = document.getElementById('msf-lastname')?.value.trim();
+  const email           = document.getElementById('msf-email')?.value.trim();
+  const phone           = document.getElementById('msf-phone')?.value.trim();
+  const errorEl         = document.getElementById('msf-error');
 
-  if (!firstname || !lastname || !email) {
-    errorEl.style.display = 'block';
-    return;
-  }
+  if (!firstname || !lastname || !email) { errorEl.style.display = 'block'; return; }
   errorEl.style.display = 'none';
 
-  // Werte sammeln
-  const websiteVorhanden = document.querySelector('input[name="website_vorhanden"]:checked')?.value || '';
-  const serverVorhanden  = [...document.querySelectorAll('input[name="server_vorhanden"]:checked')].map(i => i.value).join(';');
-  const websitePflege    = [...document.querySelectorAll('input[name="website_pflege"]:checked')].map(i => i.value).join(';');
+  const websiteVorhanden    = document.querySelector('input[name="website_vorhanden"]:checked')?.value || '';
+  const designvorlage       = document.querySelector('input[name="designvorlage"]:checked')?.value || '';
+  const domainUndHosting    = document.querySelector('input[name="domain_und_hosting"]:checked')?.value || '';
+  const unternehmensgrundung = document.querySelector('input[name="unternehmensgrundung"]:checked')?.value || '';
+  const fertigstellung      = document.querySelector('input[name="fertigstellung"]:checked')?.value || '';
+  const unternehmensart     = document.getElementById('msf-unternehmensart')?.value.trim() || '';
+  const websitePflege       = document.querySelector('input[name="website_pflege"]:checked')?.value || '';
 
-  const submitBtn = document.querySelector('.msf-btn-submit');
-  submitBtn.textContent = 'Wird gesendet…';
-  submitBtn.disabled = true;
+  const btn = document.querySelector('.contact-form-box .msf-btn-submit');
+  btn.textContent = 'Wird gesendet…'; btn.disabled = true;
 
   try {
     const res = await fetch(
-      `https://api.hsforms.com/submissions/v3/integration/submit/148643626/7b0a4ee5-95a9-4f7b-8103-ec589e9b52ed`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          fields: [
-            { objectTypeId: '0-1', name: 'firstname',         value: firstname },
-            { objectTypeId: '0-1', name: 'lastname',          value: lastname },
-            { objectTypeId: '0-1', name: 'email',             value: email },
-            { objectTypeId: '0-1', name: 'website_vorhanden', value: websiteVorhanden },
-            { objectTypeId: '0-1', name: 'server_vorhanden',  value: serverVorhanden },
-            { objectTypeId: '0-1', name: 'website_pflege',    value: websitePflege },
-          ],
-          context: { pageUri: window.location.href, pageName: document.title }
-        })
+      'https://api.hsforms.com/submissions/v3/integration/submit/148643626/7b0a4ee5-95a9-4f7b-8103-ec589e9b52ed',
+      { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fields: [
+          { objectTypeId: '0-1', name: 'firstname',            value: firstname },
+          { objectTypeId: '0-1', name: 'lastname',             value: lastname },
+          { objectTypeId: '0-1', name: 'email',                value: email },
+          { objectTypeId: '0-1', name: 'phone',                value: phone },
+          { objectTypeId: '0-1', name: 'website_vorhanden',    value: websiteVorhanden },
+          { objectTypeId: '0-1', name: 'designvorlage',        value: designvorlage },
+          { objectTypeId: '0-1', name: 'domain_und_hosting',   value: domainUndHosting },
+          { objectTypeId: '0-1', name: 'unternehmensgrundung', value: unternehmensgrundung },
+          { objectTypeId: '0-1', name: 'fertigstellung',       value: fertigstellung },
+          { objectTypeId: '0-1', name: 'unternehmensart',      value: unternehmensart },
+          { objectTypeId: '0-1', name: 'website_pflege',       value: websitePflege },
+        ], context: { pageUri: window.location.href, pageName: document.title } })
       }
     );
-
-    if (res.ok) {
-      msfGoTo(5); // Erfolgsseite
-    } else {
-      const data = await res.json();
-      console.error('HubSpot error:', data);
-      submitBtn.textContent = 'Fehler – nochmal versuchen';
-      submitBtn.disabled = false;
-    }
-  } catch(e) {
-    console.error(e);
-    submitBtn.textContent = 'Fehler – nochmal versuchen';
-    submitBtn.disabled = false;
-  }
+    if (res.ok) { msfGoTo(9); }
+    else { btn.textContent = 'Fehler – nochmal versuchen'; btn.disabled = false; }
+  } catch(e) { btn.textContent = 'Fehler – nochmal versuchen'; btn.disabled = false; }
 }
 
 /* ─── OVERLAY MULTI-STEP FORM ─── */
 function msfGoToOv(page) {
   const container = document.getElementById('hs-overlay-form');
+  if (!container) return;
   container.querySelectorAll('.msf-page').forEach(p => p.classList.remove('active'));
   const target = container.querySelector(`.msf-page[data-page="${page}"]`);
   if (target) target.classList.add('active');
-  container.querySelectorAll('.msf-step').forEach(s => {
-    const n = parseInt(s.dataset.step);
-    s.classList.remove('active', 'done');
-    if (n < page) s.classList.add('done');
-    else if (n === page) s.classList.add('active');
-  });
-  container.querySelectorAll('.msf-step-line').forEach((line, i) => {
-    line.classList.toggle('done', i + 1 < page);
-  });
+  msfUpdateProgress(page, 'ov');
 }
+
 function msfNextOv(p) {
   if (p === 1) {
     const sel = document.querySelector('input[name="ov_website_vorhanden"]:checked');
@@ -407,35 +412,49 @@ function msfNextOv(p) {
   }
   msfGoToOv(p + 1);
 }
+
 function msfBackOv(p) { msfGoToOv(p - 1); }
 
 async function msfSubmitOv() {
-  const firstname = document.getElementById('ov-firstname').value.trim();
-  const lastname  = document.getElementById('ov-lastname').value.trim();
-  const email     = document.getElementById('ov-email').value.trim();
-  const errorEl   = document.getElementById('ov-error');
+  const firstname        = document.getElementById('ov-firstname')?.value.trim();
+  const lastname         = document.getElementById('ov-lastname')?.value.trim();
+  const email            = document.getElementById('ov-email')?.value.trim();
+  const phone            = document.getElementById('ov-phone')?.value.trim();
+  const errorEl          = document.getElementById('ov-error');
   if (!firstname || !lastname || !email) { errorEl.style.display = 'block'; return; }
   errorEl.style.display = 'none';
-  const websiteVorhanden = document.querySelector('input[name="ov_website_vorhanden"]:checked')?.value || '';
-  const serverVorhanden  = [...document.querySelectorAll('input[name="ov_server_vorhanden"]:checked')].map(i => i.value).join(';');
-  const websitePflege    = [...document.querySelectorAll('input[name="ov_website_pflege"]:checked')].map(i => i.value).join(';');
+
+  const websiteVorhanden    = document.querySelector('input[name="ov_website_vorhanden"]:checked')?.value || '';
+  const designvorlage       = document.querySelector('input[name="ov_designvorlage"]:checked')?.value || '';
+  const domainUndHosting    = document.querySelector('input[name="ov_domain_und_hosting"]:checked')?.value || '';
+  const unternehmensgrundung = document.querySelector('input[name="ov_unternehmensgrundung"]:checked')?.value || '';
+  const fertigstellung      = document.querySelector('input[name="ov_fertigstellung"]:checked')?.value || '';
+  const unternehmensart     = document.getElementById('ov-unternehmensart')?.value.trim() || '';
+  const websitePflege       = document.querySelector('input[name="ov_website_pflege"]:checked')?.value || '';
+
   const btn = document.querySelector('#hs-overlay-form .msf-btn-submit');
   btn.textContent = 'Wird gesendet…'; btn.disabled = true;
+
   try {
     const res = await fetch(
       'https://api.hsforms.com/submissions/v3/integration/submit/148643626/7b0a4ee5-95a9-4f7b-8103-ec589e9b52ed',
       { method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ fields: [
-          { objectTypeId: '0-1', name: 'firstname',         value: firstname },
-          { objectTypeId: '0-1', name: 'lastname',          value: lastname },
-          { objectTypeId: '0-1', name: 'email',             value: email },
-          { objectTypeId: '0-1', name: 'website_vorhanden', value: websiteVorhanden },
-          { objectTypeId: '0-1', name: 'server_vorhanden',  value: serverVorhanden },
-          { objectTypeId: '0-1', name: 'website_pflege',    value: websitePflege },
+          { objectTypeId: '0-1', name: 'firstname',            value: firstname },
+          { objectTypeId: '0-1', name: 'lastname',             value: lastname },
+          { objectTypeId: '0-1', name: 'email',                value: email },
+          { objectTypeId: '0-1', name: 'phone',                value: phone },
+          { objectTypeId: '0-1', name: 'website_vorhanden',    value: websiteVorhanden },
+          { objectTypeId: '0-1', name: 'designvorlage',        value: designvorlage },
+          { objectTypeId: '0-1', name: 'domain_und_hosting',   value: domainUndHosting },
+          { objectTypeId: '0-1', name: 'unternehmensgrundung', value: unternehmensgrundung },
+          { objectTypeId: '0-1', name: 'fertigstellung',       value: fertigstellung },
+          { objectTypeId: '0-1', name: 'unternehmensart',      value: unternehmensart },
+          { objectTypeId: '0-1', name: 'website_pflege',       value: websitePflege },
         ], context: { pageUri: window.location.href, pageName: document.title } })
       }
     );
-    if (res.ok) { msfGoToOv(5); }
+    if (res.ok) { msfGoToOv(9); }
     else { btn.textContent = 'Fehler – nochmal versuchen'; btn.disabled = false; }
   } catch(e) { btn.textContent = 'Fehler – nochmal versuchen'; btn.disabled = false; }
 }
