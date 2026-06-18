@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.12, rootMargin: '0px 0px -18% 0px' });
   reveals.forEach(el => revealObserver.observe(el));
 
   /* ── Typed Text ── */

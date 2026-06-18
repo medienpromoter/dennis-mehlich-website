@@ -864,7 +864,7 @@ function calcGetPrice() {
   document.querySelectorAll('input[name="c_funktionen"]:checked').forEach(el => {
     if (el.value === 'Kontaktformular')   total += 200;
     else if (el.value === 'Mehrsprachigkeit') total += 500;
-    else if (el.value === 'KI-Chatbot')       total += 300;
+    // KI-Chatbot ist kostenlos (kein Aufschlag)
   });
 
   // Design / Logo
