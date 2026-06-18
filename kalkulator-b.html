@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Website-Preiskalkulator – Dennis Mehlich</title>
-<meta name="description" content="In 2 Minuten zum individuellen Website-Angebot. Beantworten Sie 6 Fragen – wir schicken Ihnen einen Fixpreis direkt per E-Mail.">
+<meta name="description" content="In 2 Minuten zum individuellen Website-Angebot. Beantworten Sie 7 Fragen – wir schicken Ihnen einen Fixpreis direkt per E-Mail.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
@@ -546,7 +546,7 @@ body {
 <section class="lp-hero">
   <div class="lp-badge">Kostenlos &amp; unverbindlich</div>
   <h1>Was kostet Ihre<br><em>neue Website?</em></h1>
-  <p>In 2 Minuten zum individuellen Angebot. Beantworten Sie 6 kurze Fragen – Sie erhalten Ihren Fixpreis direkt per E-Mail.</p>
+  <p>In 2 Minuten zum individuellen Angebot. Beantworten Sie 7 kurze Fragen – Sie erhalten Ihren Fixpreis direkt per E-Mail.</p>
   <div class="lp-trust-row">
     <div class="lp-trust-item"><span>⚡</span> Kein Telefonat nötig</div>
     <div class="lp-trust-item"><span>✅</span> Transparente Fixpreise</div>
@@ -1100,6 +1100,74 @@ async function kkSubmit() {
   } catch(e) { btn.textContent = 'Fehler – nochmal versuchen'; btn.disabled = false; }
 }
 
+</script>
+
+<!-- ─── n8n CHAT (KI-Assistent) ─── -->
+<div id="n8n-chat"></div>
+<script type="module">
+  // Self-contained Einbindung des n8n-Chats (identisch zur Hauptseite).
+  // Respektiert den Cookie-Consent: bei zuvor abgelehntem Banner wird nicht geladen.
+  (function () {
+    if (localStorage.getItem('cookie-consent') === 'declined') return;
+
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css';
+    document.head.appendChild(link);
+
+    import('https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js').then(({ createChat }) => {
+      createChat({
+        webhookUrl: 'https://dennismehlich.app.n8n.cloud/webhook/e2793739-a4ed-4327-80f5-e27cd5fa7588/chat',
+        target: '#n8n-chat',
+        mode: 'window',
+        showWelcomeScreen: true,
+        defaultLanguage: 'de',
+        initialMessages: [
+          'Hallo! 👋 Ich bin Dennis\'s KI-Assistent.',
+          'Ich beantworte Ihre Fragen rund um Webdesign, KI-Websites und digitale Kundenverwaltung. Wie kann ich helfen?'
+        ],
+        i18n: {
+          de: {
+            title: 'KI-Assistent',
+            subtitle: 'Fragen zu Webdesign & KI',
+            footer: '',
+            getStarted: 'Gespräch starten',
+            inputPlaceholder: 'Nachricht schreiben…',
+            closeButtonTooltip: 'Schließen',
+          }
+        },
+        theme: {
+          '--chat--color-primary': '#0f1631',
+          '--chat--color-primary-shade-50': '#1e3a8a',
+          '--chat--color-primary-shade-100': '#1e3a8a',
+          '--chat--color-secondary': '#3b82f6',
+          '--chat--color-secondary-shade-50': '#60a5fa',
+          '--chat--color-white': '#ffffff',
+          '--chat--color-light': '#f0f4ff',
+          '--chat--color-light-shade-50': '#e8f0fe',
+          '--chat--color-light-shade-100': '#dbeafe',
+          '--chat--color-medium': '#64748b',
+          '--chat--color-dark': '#0f1631',
+          '--chat--color-disabled': '#94a3b8',
+          '--chat--color-typing': '#1e3a8a',
+          '--chat--border-radius': '16px',
+          '--chat--window--width': '380px',
+          '--chat--window--height': '520px',
+          '--chat--header--background': '#0f1631',
+          '--chat--header--color': '#ffffff',
+          '--chat--message--bot--background': '#f0f4ff',
+          '--chat--message--bot--color': '#0f1631',
+          '--chat--message--user--background': '#1e3a8a',
+          '--chat--message--user--color': '#ffffff',
+          '--chat--toggle--background': '#0f1631',
+          '--chat--toggle--hover--background': '#1e3a8a',
+          '--chat--toggle--active--background': '#1e3a8a',
+          '--chat--toggle--color': '#ffffff',
+          '--chat--toggle--size': '60px',
+        }
+      });
+    }).catch(err => console.warn('n8n chat failed to load', err));
+  })();
 </script>
 </body>
 </html>
