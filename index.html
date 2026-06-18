@@ -17,19 +17,9 @@
 </head>
 <body>
 
-<!-- ─── NAV ─── -->
-<nav id="navbar">
-  <a href="#hero" class="nav-logo">
-    <img src="images/logo.png" alt="Dennis Mehlich" style="height:72px;width:auto;display:block;mix-blend-mode:multiply;">
-  </a>
-  <ul class="nav-links">
-    <li><a href="#hero">Home</a></li>
-    <li><a href="#leistungen">Leistungen</a></li>
-    <li><a href="#ueber-mich">Über uns</a></li>
-    <li><a href="#kontakt">Kontakt</a></li>
-  </ul>
-  <a href="javascript:void(0)" onclick="openTermin()" class="nav-cta">Termin buchen</a>
-</nav>
+<!-- ─── NAV (shared, injected by js/nav.js) ─── -->
+<div id="site-nav"></div>
+<script src="js/nav.js"></script>
 
 <!-- ─── HERO ─── -->
 <section id="hero">
@@ -38,8 +28,8 @@
     <h1 id="hero-heading">Professionelle Websites,<br><span class="typed-text-line">die <em class="typed-text"></em></span></h1>
     <p class="hero-sub">Ihre Mitbewerber haben eine Website. Sie bekommen eine, die verkauft. Mit klarer Botschaft, starkem Design und einer Struktur, die Nutzer gezielt führt – und aus Besuchern Anfragen macht.</p>
     <div class="hero-actions">
-      <a href="javascript:void(0)" onclick="openTermin()" class="btn-primary">Termin buchen</a>
-      <a href="#leistungen" class="btn-ghost">Leistungen ansehen</a>
+      <a href="kalkulator.html" class="btn-primary">Was kostet meine Website? →</a>
+      <a href="javascript:void(0)" onclick="openTermin()" class="btn-ghost">Termin buchen</a>
     </div>
     <div class="hero-stats">
       <div class="stat"><div class="stat-num" data-count="100" data-suffix="%">0%</div><div class="stat-label">HTML · KI-gebaut</div></div>
@@ -162,7 +152,7 @@
     <div class="service-card reveal"><div class="service-icon">⚡</div><h3>Performance & Speed</h3><p>Schnelle Ladezeiten sind kein Luxus – sie sind Pflicht. Optimierte Bilder, sauberer Code und effiziente Hosting-Setups.</p></div>
     <div class="service-card reveal"><div class="service-icon">🔒</div><h3>Sicherheit by Default</h3><p>Keine Datenbank, kein Login, keine Plugins – statische HTML-Seiten bieten schlicht keine Angriffsfläche. Sicherheit ist hier kein Zusatz, sondern Architektur. Updates? Nur wenn Sie Inhalte ändern möchten.</p></div>
     <div class="service-card reveal"><div class="service-icon">🔗</div><h3>Digitale Kundenverwaltung</h3><p>Jede Anfrage über Ihre Website landet automatisch in Ihrem Kundenmanagement-System – mit allen relevanten Daten. Kein manuelles Nachpflegen, keine verlorenen Anfragen.</p></div>
-    <div class="service-card dark reveal"><div class="service-icon">🎁</div><h3>Mystery Box</h3><p>KI-gestützte Features, die Ihre Website von anderen abheben – was genau? Das erfahren Sie im Erstgespräch. Spoiler: Es lohnt sich.</p><div style="margin-top:1rem;"><a href="javascript:void(0)" onclick="openTermin()" style="font-size:0.8rem;font-weight:700;color:#60a5fa;text-decoration:none;">Neugierig? Termin buchen →</a></div></div>
+    <div class="service-card dark reveal"><div class="service-icon">🎁</div><h3>Mystery Box <span style="font-size:0.7rem;font-weight:700;background:#f59e0b;color:#1a1a2e;border-radius:6px;padding:2px 8px;vertical-align:middle;">Gratis dazu</span></h3><p>KI-gestützte Features, die Ihre Website von anderen abheben – was genau? Das erfahren Sie im Erstgespräch. Spoiler: Es lohnt sich.</p><div style="margin-top:1rem;"><a href="javascript:void(0)" onclick="openTermin()" style="font-size:0.8rem;font-weight:700;color:#60a5fa;text-decoration:none;">Neugierig? Termin buchen →</a></div></div>
   </div>
 </section>
 
@@ -268,7 +258,7 @@
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem;">
       <div class="reveal" style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:16px;padding:2rem;">
         <div style="font-size:1.5rem;margin-bottom:1rem;">⚠️</div>
-        <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:white;margin-bottom:0.75rem;">CMS-Websites: Täglich im Visier</div>
+        <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:white;margin-bottom:0.75rem;">WordPress & Co.: Täglich im Visier</div>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:0.6rem;">
           <li style="font-size:0.82rem;color:rgba(255,255,255,0.55);display:flex;gap:0.5rem;"><span style="color:rgba(239,68,68,0.7);flex-shrink:0;">✗</span>KI-Bots scannen automatisch nach Plugin-Lücken</li>
           <li style="font-size:0.82rem;color:rgba(255,255,255,0.55);display:flex;gap:0.5rem;"><span style="color:rgba(239,68,68,0.7);flex-shrink:0;">✗</span>Veraltete WordPress-Versionen in Minuten gehackt</li>
@@ -384,7 +374,10 @@
   <div class="section-label" style="color:rgba(255,255,255,0.5);">Jetzt starten</div>
   <h2>Bereit für eine Website,<br>die Kunden gewinnt?</h2>
   <p class="section-lead">Buchen Sie ein kostenloses Erstgespräch. In 30 Minuten analysieren wir Ihre aktuelle Online-Präsenz und zeigen Ihnen konkret, was möglich ist.</p>
-  <a href="javascript:void(0)" onclick="openTermin()" class="btn-white">Termin buchen →</a>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <a href="kalkulator.html" class="btn-white">In 2 Min. zum Fixpreis →</a>
+    <a href="javascript:void(0)" onclick="openTermin()" class="btn-ghost" style="border-color:rgba(255,255,255,0.4);color:#fff;">Termin buchen</a>
+  </div>
   <div class="calendar-placeholder">
     <div class="cal-icon">📅</div>
     <p class="cal-text"><strong>Kostenloses Erstgespräch buchen</strong>In 30 Minuten analysieren wir Ihre Online-Präsenz und zeigen, was möglich ist.</p>

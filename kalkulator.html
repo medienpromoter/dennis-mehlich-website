@@ -507,7 +507,7 @@ body {
 
 <!-- ─── HEADER ─── -->
 <header class="lp-header">
-  <img src="images/logo_footer.png" alt="Dennis Mehlich Webdesign">
+  <a href="index.html"><img src="images/logo_footer.png" alt="Dennis Mehlich Webdesign"></a>
   <div class="lp-header-trust">🔒 SSL-verschlüsselt &amp; DSGVO-konform</div>
 </header>
 
@@ -538,7 +538,9 @@ body {
         <div class="calc-step-dot" id="cs-3"><div class="calc-dot"><span class="calc-dot-num">3</span></div><div class="calc-dot-label">Funktionen</div></div>
         <div class="calc-step-dot" id="cs-4"><div class="calc-dot"><span class="calc-dot-num">4</span></div><div class="calc-dot-label">Design</div></div>
         <div class="calc-step-dot" id="cs-5"><div class="calc-dot"><span class="calc-dot-num">5</span></div><div class="calc-dot-label">Termin</div></div>
-        <div class="calc-step-dot" id="cs-6"><div class="calc-dot"><span class="calc-dot-num">6</span></div><div class="calc-dot-label">Kontakt</div></div>
+        <div class="calc-step-dot" id="cs-6"><div class="calc-dot"><span class="calc-dot-num">6</span></div><div class="calc-dot-label">Gründung</div></div>
+        <div class="calc-step-dot" id="cs-7"><div class="calc-dot"><span class="calc-dot-num">7</span></div><div class="calc-dot-label">Branche</div></div>
+        <div class="calc-step-dot" id="cs-8"><div class="calc-dot"><span class="calc-dot-num">8</span></div><div class="calc-dot-label">Kontakt</div></div>
       </div>
       <div class="calc-progress-label">Schritt <strong id="calc-step-label">1</strong> von 8</div>
     </div>
@@ -620,8 +622,35 @@ body {
         <div class="calc-nav"><button class="calc-btn-back" onclick="calcBack(5)">← Zurück</button></div>
       </div>
 
-      <!-- Schritt 6: Kontakt -->
+      <!-- Schritt 6: Unternehmensgründung -->
       <div class="calc-page" data-page="6">
+        <div class="calc-question">Wann wurde Ihr Unternehmen gegründet?</div>
+        <div class="calc-sub">Das hilft uns, das passende Paket für Ihre Phase zu finden.</div>
+        <div class="calc-options">
+          <label class="calc-option"><input type="radio" name="c_gruendung" value="Geplante Gründung in der Zukunft"><span>Geplante Gründung in der Zukunft</span></label>
+          <label class="calc-option"><input type="radio" name="c_gruendung" value="Unternehmen jünger als 6 Monate"><span>Jünger als 6 Monate</span></label>
+          <label class="calc-option"><input type="radio" name="c_gruendung" value="Unternehmen ist älter als 6 Monate"><span>Älter als 6 Monate</span></label>
+          <label class="calc-option"><input type="radio" name="c_gruendung" value="Sonstige"><span>Sonstige</span></label>
+        </div>
+        <div class="calc-hint">Auswahl → automatisch weiter</div>
+        <div class="calc-nav"><button class="calc-btn-back" onclick="calcBack(6)">← Zurück</button></div>
+      </div>
+
+      <!-- Schritt 7: Unternehmensart -->
+      <div class="calc-page" data-page="7">
+        <div class="calc-question">Was beschreibt Ihr Unternehmen am besten?</div>
+        <div class="calc-sub">Damit wir Ihr Angebot passend auf Ihre Branche zuschneiden.</div>
+        <div class="calc-fields">
+          <div class="calc-field"><label>Unternehmensart / Branche *</label><input type="text" id="c-unternehmensart" placeholder="z. B. Handwerk, Beratung, Online-Shop …"></div>
+        </div>
+        <div class="calc-nav">
+          <button class="calc-btn-back" onclick="calcBack(7)">← Zurück</button>
+          <button class="calc-btn-next" onclick="calcNextText(7, 'c-unternehmensart')">Weiter →</button>
+        </div>
+      </div>
+
+      <!-- Schritt 8: Kontakt -->
+      <div class="calc-page" data-page="8">
         <div class="calc-question">Wohin sollen wir Ihr Angebot schicken?</div>
         <div class="calc-sub">Sie erhalten Ihr individuelles Angebot innerhalb von 24 Stunden.</div>
         <div class="calc-fields">
@@ -633,12 +662,12 @@ body {
           <div class="calc-field" style="margin-top:1rem;"><label>Telefon (optional)</label><input type="tel" id="c-phone" placeholder="+49 …"></div>
         </div>
         <div class="calc-error" id="c-error">Bitte füllen Sie alle Pflichtfelder aus.</div>
-        <div class="calc-nav"><button class="calc-btn-back" onclick="calcBack(6)">← Zurück</button></div>
+        <div class="calc-nav"><button class="calc-btn-back" onclick="calcBack(8)">← Zurück</button></div>
         <button class="calc-btn-submit" onclick="calcSubmit()">Angebot per E-Mail anfordern →</button>
       </div>
 
       <!-- Erfolg -->
-      <div class="calc-page" data-page="7">
+      <div class="calc-page" data-page="9">
         <div class="calc-success">
           <div class="calc-success-icon">🎉</div>
           <div class="calc-success-title">Ihre Anfrage ist eingegangen!</div>
@@ -794,25 +823,34 @@ function calcNextText(currentPage, fieldId) {
 }
 
 async function calcSubmit() {
-  const firstname = document.getElementById('kk-firstname')?.value.trim();
-  const lastname  = document.getElementById('kk-lastname')?.value.trim();
-  const email     = document.getElementById('kk-email')?.value.trim();
-  const phone     = document.getElementById('kk-phone')?.value.trim();
-  const errorEl   = document.getElementById('kk-error');
+  const firstname = document.getElementById('c-firstname')?.value.trim();
+  const lastname  = document.getElementById('c-lastname')?.value.trim();
+  const email     = document.getElementById('c-email')?.value.trim();
+  const phone     = document.getElementById('c-phone')?.value.trim() || '';
+  const errorEl   = document.getElementById('c-error');
 
   if (!firstname || !lastname || !email) {
-    errorEl.style.display = 'block';
+    if (errorEl) errorEl.style.display = 'block';
     return;
   }
-  errorEl.style.display = 'none';
+  if (errorEl) errorEl.style.display = 'none';
 
-  const websiteVorhanden    = document.querySelector('input[name="kk_website_vorhanden"]:checked')?.value || '';
-  const designvorlage       = document.querySelector('input[name="kk_designvorlage"]:checked')?.value || '';
-  const domainUndHosting    = document.querySelector('input[name="kk_domain_und_hosting"]:checked')?.value || '';
-  const unternehmensgrundung = document.querySelector('input[name="kk_unternehmensgrundung"]:checked')?.value || '';
-  const fertigstellung      = document.querySelector('input[name="kk_fertigstellung"]:checked')?.value || '';
-  const unternehmensart     = document.getElementById('kk-unternehmensart')?.value.trim() || '';
-  const websitePflege       = document.querySelector('input[name="kk_website_pflege"]:checked')?.value || '';
+  // Antworten aus den tatsächlich sichtbaren Formularfeldern (c_*) auslesen
+  const art           = document.querySelector('input[name="c_art"]:checked')?.value || '';
+  const seiten        = document.querySelector('input[name="c_seiten"]:checked')?.value || '';
+  const funktionen    = Array.from(document.querySelectorAll('input[name="c_funktionen"]:checked'))
+                             .map(el => el.value).join(', ');
+  const design        = document.querySelector('input[name="c_design"]:checked')?.value || '';
+  const termin        = document.querySelector('input[name="c_termin"]:checked')?.value || '';
+  const gruendung     = document.querySelector('input[name="c_gruendung"]:checked')?.value || '';
+  const unternehmensart = document.getElementById('c-unternehmensart')?.value.trim() || '';
+
+  // Kalkulator-spezifische Angaben (Art/Seiten/Funktionen) gebündelt als Freitext,
+  // damit sie in HubSpot verlustfrei ankommen.
+  const projektDetails =
+    'Art der Website: ' + (art || '–') +
+    ' | Unterseiten: ' + (seiten || '–') +
+    ' | Funktionen: ' + (funktionen || '–');
 
   const btn = document.querySelector('.calc-btn-submit');
   btn.textContent = 'Wird gesendet…';
@@ -830,13 +868,11 @@ async function calcSubmit() {
             { objectTypeId: '0-1', name: 'lastname',             value: lastname },
             { objectTypeId: '0-1', name: 'email',                value: email },
             { objectTypeId: '0-1', name: 'phone',                value: phone },
-            { objectTypeId: '0-1', name: 'website_vorhanden',    value: websiteVorhanden },
-            { objectTypeId: '0-1', name: 'designvorlage',        value: designvorlage },
-            { objectTypeId: '0-1', name: 'domain_und_hosting',   value: domainUndHosting },
-            { objectTypeId: '0-1', name: 'unternehmensgrundung', value: unternehmensgrundung },
-            { objectTypeId: '0-1', name: 'fertigstellung',       value: fertigstellung },
+            { objectTypeId: '0-1', name: 'designvorlage',        value: design },
+            { objectTypeId: '0-1', name: 'fertigstellung',       value: termin },
+            { objectTypeId: '0-1', name: 'unternehmensgrundung', value: gruendung },
             { objectTypeId: '0-1', name: 'unternehmensart',      value: unternehmensart },
-            { objectTypeId: '0-1', name: 'website_pflege',       value: websitePflege },
+            { objectTypeId: '0-1', name: 'message',              value: projektDetails },
           ],
           context: { pageUri: window.location.href, pageName: 'Preiskalkulator' }
         })

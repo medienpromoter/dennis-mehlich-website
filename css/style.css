@@ -181,8 +181,7 @@ h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem,3vw,2.6rem); font-
 #inklusive { background: var(--navy); padding: 4rem 5%; }
 .inkl-label { text-align: center; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 2.5rem; }
 .inkl-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
-.inkl-item { display: flex; align-items: flex-start; gap: 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 1.25rem 1.5rem; transition: background 0.2s, transform 0.2s; }
-.inkl-item:hover { background: rgba(255,255,255,0.09); transform: translateY(-2px); }
+.inkl-item { display: flex; align-items: flex-start; gap: 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 1.25rem 1.5rem; }
 .inkl-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
 .inkl-title { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; color: white; margin-bottom: 0.25rem; }
 .inkl-desc { font-size: 0.78rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
@@ -192,10 +191,7 @@ h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem,3vw,2.6rem); font-
 .services-header { text-align: center; margin-bottom: 4rem; }
 .services-header .section-lead { margin: 0 auto; }
 .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
-.service-card { background: white; border-radius: var(--radius); padding: 2rem; border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; }
-.service-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg,var(--accent),#818cf8); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
-.service-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(15,22,49,0.1); }
-.service-card:hover::after { transform: scaleX(1); }
+.service-card { background: white; border-radius: var(--radius); padding: 2rem; border: 1px solid var(--border); position: relative; overflow: hidden; }
 .service-icon { width: 52px; height: 52px; border-radius: 12px; background: var(--light); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.2rem; }
 .service-card h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.6rem; }
 .service-card p { font-size: 0.9rem; color: var(--gray); line-height: 1.6; }
