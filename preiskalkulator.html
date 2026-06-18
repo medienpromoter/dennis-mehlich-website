@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preiskalkulator – Dennis Mehlich</title>
+<meta name="description" content="Berechnen Sie in 2 Minuten den Richtpreis Ihrer neuen Website. Beantworten Sie 7 kurze Fragen – Sie erhalten Ihren Fixpreis direkt per E-Mail.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<script>
+  if (localStorage.getItem('cookie-consent')) {
+    document.documentElement.style.setProperty('--cookie-display', 'none');
+  }
+</script>
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* ─── SEITEN-LAYOUT (Preiskalkulator innerhalb der Website) ─── */
+.pk-wrap {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 7rem 5% 5rem;
+}
+.pk-intro { text-align: center; margin-bottom: 2rem; }
+.pk-intro .section-label { display: block; }
+.pk-intro h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin: 0.4rem 0 0.8rem;
+}
+.pk-intro p {
+  font-size: 1rem;
+  color: var(--gray);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ─── KALKULATOR CARD ─── */
+.calc-card {
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(15,22,49,0.15);
+  overflow: hidden;
+}
+.calc-card-top {
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  padding: 1.5rem 2rem 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+.calc-card-top::before {
+  content: '';
+  position: absolute;
+  top: -40%; right: -10%;
+  width: 50%; padding-bottom: 50%;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+}
+.calc-progress-wrap {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+.calc-progress-wrap::before {
+  content: '';
+  position: absolute;
+  top: 13px; left: 2px; right: 2px;
+  height: 2px;
+  background: rgba(255,255,255,0.15);
+  z-index: 0;
+}
+.calc-progress-fill {
+  position: absolute;
+  top: 13px; left: 2px;
+  height: 2px;
+  background: var(--electric);
+  z-index: 1;
+  transition: width 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  width: 0%;
+}
+.calc-step-dot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  z-index: 2;
+  flex: 1;
+}
+.calc-dot {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: rgba(255,255,255,0.5);
+  transition: all 0.3s;
+}
+.calc-step-dot.active .calc-dot {
+  background: var(--electric);
+  border-color: var(--electric);
+  color: white;
+  box-shadow: 0 0 0 4px rgba(96,165,250,0.25);
+  transform: scale(1.15);
+}
+.calc-step-dot.done .calc-dot {
+  background: rgba(96,165,250,0.3);
+  border-color: var(--electric);
+  color: var(--electric);
+}
+.calc-dot-label {
+  font-size: 0.58rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.3);
+  text-align: center;
+  white-space: nowrap;
+}
+.calc-step-dot.active .calc-dot-label { color: rgba(255,255,255,0.85); }
+.calc-step-dot.done .calc-dot-label { color: rgba(96,165,250,0.7); }
+.calc-progress-label {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.45);
+  text-align: right;
+  margin-top: 0.5rem;
+}
+.calc-progress-label strong { color: rgba(255,255,255,0.8); }
+
+/* ─── LIVE-PREIS (oben rechts) ─── */
+.calc-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 1.1rem;
+}
+.calc-price-caption {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+.calc-price-amount {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--electric);
+  background: rgba(96,165,250,0.12);
+  border: 1px solid rgba(96,165,250,0.35);
+  padding: 0.3rem 1rem;
+  border-radius: 100px;
+  white-space: nowrap;
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+}
+.calc-price-amount.bump { transform: scale(1.12); }
+
+/* ─── FORM BODY ─── */
+.calc-body {
+  padding: 2rem 2rem 1.5rem;
+}
+
+/* Pages */
+.calc-page { display: none; }
+.calc-page.active { display: block; }
+
+.calc-question {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.35rem;
+  line-height: 1.3;
+}
+.calc-sub {
+  font-size: 0.82rem;
+  color: var(--gray);
+  margin-bottom: 1.25rem;
+}
+
+/* Options */
+.calc-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+}
+.calc-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.1rem;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.18s;
+  font-size: 0.9rem;
+  color: var(--navy);
+  font-weight: 500;
+  user-select: none;
+  background: white;
+}
+.calc-option:hover {
+  border-color: var(--accent);
+  background: rgba(59,130,246,0.04);
+  transform: translateX(3px);
+}
+.calc-option.selected {
+  border-color: var(--accent);
+  background: rgba(59,130,246,0.08);
+  color: var(--navy);
+}
+.calc-option.selected::after {
+  content: '✓';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+.calc-option input {
+  position: absolute;
+  opacity: 0;
+  width: 0; height: 0;
+  pointer-events: none;
+}
+.calc-hint {
+  font-size: 0.72rem;
+  color: var(--gray);
+  text-align: center;
+  opacity: 0.7;
+  margin-top: 0.25rem;
+}
+
+/* Contact fields */
+.calc-fields { margin-bottom: 1.25rem; }
+.calc-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.calc-field { display: flex; flex-direction: column; gap: 0.35rem; }
+.calc-field label { font-size: 0.78rem; font-weight: 600; color: var(--navy); }
+.calc-field input {
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: var(--navy);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: white;
+}
+.calc-field input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+}
+
+/* Nav */
+.calc-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.25rem;
+}
+.calc-btn-next,
+.calc-btn-submit {
+  background: var(--navy);
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  box-shadow: 0 4px 16px rgba(15,22,49,0.2);
+}
+.calc-btn-submit {
+  background: var(--accent);
+  box-shadow: 0 4px 16px rgba(59,130,246,0.35);
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+.calc-btn-next:hover { background: var(--blue); transform: translateY(-1px); }
+.calc-btn-submit:hover { background: var(--electric); transform: translateY(-1px); }
+.calc-btn-back {
+  background: transparent;
+  color: var(--gray);
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 0.5rem 0;
+}
+.calc-btn-back:hover { color: var(--navy); }
+
+/* Error */
+.calc-error {
+  color: #ef4444;
+  font-size: 0.8rem;
+  margin-bottom: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: #fef2f2;
+  border-radius: 8px;
+  border: 1px solid #fecaca;
+  display: none;
+}
+
+/* Success */
+.calc-success {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+}
+.calc-success-icon { font-size: 3rem; margin-bottom: 1rem; }
+.calc-success-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+}
+.calc-success p { color: var(--gray); font-size: 0.9rem; line-height: 1.6; }
+.calc-success-email {
+  display: inline-block;
+  margin-top: 1.25rem;
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.85rem;
+  color: var(--navy);
+  font-weight: 500;
+}
+
+/* Privacy */
+.calc-privacy {
+  font-size: 0.68rem;
+  color: #94a3b8;
+  text-align: center;
+  padding: 1rem 2rem;
+  border-top: 1px solid var(--border);
+}
+.calc-privacy a { color: var(--accent); text-decoration: none; }
+
+/* ─── SOCIAL PROOF ─── */
+.pk-proof {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.proof-item {
+  background: white;
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.proof-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1;
+}
+.proof-label {
+  font-size: 0.75rem;
+  color: var(--gray);
+  margin-top: 0.25rem;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 520px) {
+  .pk-wrap { padding: 6rem 5% 4rem; }
+  .calc-body { padding: 1.5rem 1.25rem 1.25rem; }
+  .calc-field-row { grid-template-columns: 1fr; }
+  .calc-dot-label { display: none; }
+  .calc-dot { width: 22px; height: 22px; font-size: 0.55rem; }
+  .calc-progress-wrap::before { top: 10px; }
+  .calc-progress-fill { top: 10px; }
+  .pk-proof { grid-template-columns: 1fr; }
+  .calc-card-top { padding: 1.25rem 1.25rem 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV (shared, injected by js/nav.js) ─── -->
+<div id="site-nav"></div>
+<script src="js/nav.js"></script>
+
+<!-- ─── PREISKALKULATOR ─── -->
+<main class="pk-wrap">
+
+  <div class="pk-intro">
+    <div class="section-label">Preiskalkulator</div>
+    <h1>Was kostet Ihre neue Website?</h1>
+    <p>In 2 Minuten zum individuellen Angebot. Beantworten Sie 7 kurze Fragen – Sie erhalten Ihren Fixpreis direkt per E-Mail.</p>
+  </div>
+
+  <!-- KALKULATOR -->
+  <div class="calc-card">
+
+    <!-- Top: Fortschritt -->
+    <div class="calc-card-top">
+      <div class="calc-price-row">
+        <span class="calc-price-caption">Ihr Richtpreis</span>
+        <span class="calc-price-amount" id="calc-price-value">ab 800 €</span>
+      </div>
+      <div class="calc-progress-wrap" id="calc-progress-wrap">
+        <div class="calc-progress-fill" id="calc-fill"></div>
+        <div class="calc-step-dot" id="cs-1"><div class="calc-dot"><span class="calc-dot-num">1</span></div><div class="calc-dot-label">Website</div></div>
+        <div class="calc-step-dot" id="cs-2"><div class="calc-dot"><span class="calc-dot-num">2</span></div><div class="calc-dot-label">Seiten</div></div>
+        <div class="calc-step-dot" id="cs-3"><div class="calc-dot"><span class="calc-dot-num">3</span></div><div class="calc-dot-label">Funktionen</div></div>
+        <div class="calc-step-dot" id="cs-4"><div class="calc-dot"><span class="calc-dot-num">4</span></div><div class="calc-dot-label">Design</div></div>
+        <div class="calc-step-dot" id="cs-5"><div class="calc-dot"><span class="calc-dot-num">5</span></div><div class="calc-dot-label">Termin</div></div>
+        <div class="calc-step-dot" id="cs-6"><div class="calc-dot"><span class="calc-dot-num">6</span></div><div class="calc-dot-label">Gründung</div></div>
+        <div class="calc-step-dot" id="cs-7"><div class="calc-dot"><span class="calc-dot-num">7</span></div><div class="calc-dot-label">Branche</div></div>
+        <div class="calc-step-dot" id="cs-8"><div class="calc-dot"><span class="calc-dot-num">8</span></div><div class="calc-dot-label">Kontakt</div></div>
+      </div>
+      <div class="calc-progress-label">Schritt <strong id="calc-step-label">1</strong> von 8</div>
+    </div>
+
+    <!-- Body: Fragen -->
+    <div class="calc-body">
+
+      <!-- Schritt 1: Welche Art Website -->
+      <div class="calc-page active" data-page="1">
+        <div class="calc-question">Welche Art von Website brauchen Sie?</div>
+        <div class="calc-sub">Wählen Sie die Option, die am besten passt.</div>
+        <div class="calc-options">
+          <label class="calc-option"><input type="radio" name="c_art" value="Visitenkarte / One-Pager"><span>Visitenkarte / One-Pager</span></label>
+          <label class="calc-option"><input type="radio" name="c_art" value="Mehrseitige Unternehmenswebsite"><span>Mehrseitige Unternehmenswebsite</span></label>
+          <label class="calc-option"><input type="radio" name="c_art" value="Ich weiß es noch nicht"><span>Ich weiß es noch nicht</span></label>
+        </div>
+        <div class="calc-hint">Auswahl → automatisch weiter</div>
+      </div>
+
+      <!-- Schritt 2: Anzahl Seiten -->
+      <div class="calc-page" data-page="2">
+        <div class="calc-question">Wie viele Unterseiten benötigen Sie?</div>
+        <div class="calc-sub">Jede Unterseite (z. B. Über uns, Leistungen, Kontakt) zählt.</div>
+        <div class="calc-options">
+          <label class="calc-option"><input type="radio" name="c_seiten" value="1 Seite"><span>1 Seite</span></label>
+          <label class="calc-option"><input type="radio" name="c_seiten" value="2–3 Seiten"><span>2–3 Seiten</span></label>
+          <label class="calc-option"><input type="radio" name="c_seiten" value="4–5 Seiten"><span>4–5 Seiten</span></label>
+          <label class="calc-option"><input type="radio" name="c_seiten" value="6–7 Seiten"><span>6–7 Seiten</span></label>
+          <label class="calc-option"><input type="radio" name="c_seiten" value="Mehr als 7 Seiten"><span>Mehr als 7 Seiten</span></label>
+        </div>
+        <div class="calc-hint">Auswahl → automatisch weiter</div>
+        <div class="calc-nav"><button class="calc-btn-back" onclick="calcBack(2)">← Zurück</button></div>
+      </div>
+
+      <!-- Schritt 3: Funktionen -->
+      <div class="calc-page" data-page="3">
+        <div class="calc-question">Welche Funktionen soll die Website haben?</div>
+        <div class="calc-sub">Mehrfachauswahl möglich – klicken Sie alles an, was passt.</div>
+        <div class="calc-options">
+          <label class="calc-option"><input type="checkbox" name="c_funktionen" value="Kontaktformular"><span>Kontaktformular</span></label>
+          <label class="calc-option"><input type="checkbox" name="c_funktionen" value="Mehrsprachigkeit"><span>Mehrsprachigkeit</span></label>
+          <label class="calc-option"><input type="checkbox" name="c_funktionen" value="KI-Chatbot"><span>KI-Chatbot</span></label>
+          <label class="calc-option"><input type="checkbox" name="c_funktionen" value="Keine besonderen Funktionen"><span>Keine besonderen Funktionen</span></label>
+        </div>
+        <div class="calc-nav">
+          <button class="calc-btn-back" onclick="calcBack(3)">← Zurück</button>
+          <button class="calc-btn-next" onclick="calcNext(3)">Weiter →</button>
+        </div>
+      </div>
+
+      <!-- Schritt 4: Design -->
+      <div class="calc-page" data-page="4">
+        <div class="calc-question">Haben Sie bereits ein Design oder Logo?</div>
+        <div class="calc-sub">Das beeinflusst den Aufwand beim Design.</div>
+        <div class="calc-options">
+          <label class="calc-option"><input type="radio" name="c_design" value="Ja, beides vorhanden"><span>Ja, beides vorhanden</span></label>
+          <label class="calc-option"><input type="radio" name="c_design" value="Nur Logo vorhanden"><span>Nur Logo vorhanden</span></label>
+          <label class="calc-option"><input type="radio" name="c_design" value="Nichts vorhanden – Komplettpaket"><span>Nichts vorhanden – Komplettpaket gewünscht</span></label>
+          <label class="calc-option"><input type="radio" name="c_design" value="Weiß nicht"><span>Weiß nicht</span></label>
+        </div>
+        <div class="calc-hint">Auswahl → automatisch weiter</div>
+        <div class="calc-nav"><button class="calc-btn-back" onclick="calcBack(4)">← Zurück</button></div>
+      </div>
+
+      <!-- Schritt 5: Wann -->
+      <div class="calc-page" data-page="5">
+        <div class="calc-question">Bis wann soll die Website fertig sein?</div>
+        <div class="calc-sub">Dringende Projekte erfordern mehr Ressourcen.</div>
+        <div class="calc-options">
+          <label class="calc-option"><input type="radio" name="c_termin" value="So schnell wie möglich"><span>So schnell wie möglich</span></label>
+          <label class="calc-option"><input type="radio" name="c_termin" value="In 2–4 Wochen"><span>In 2–4 Wochen</span></label>
+          <label class="calc-option"><input type="radio" name="c_termin" value="In 2–3 Monaten"><span>In 2–3 Monaten</span></label>
+          <label class="calc-option"><input type="radio" name="c_termin" value="Kein fester Termin"><span>Kein fester Termin</span></label>
+        </div>
+        <div class="calc-hint">Auswahl → automatisch weiter</div>
+        <div class="calc-nav"><button class="calc-btn-back" onclick="calcBack(5)">← Zurück</button></div>
+      </div>
+
+      <!-- Schritt 6: Unternehmensgründung -->
+      <div class="calc-page" data-page="6">
+        <div class="calc-question">Wann wurde Ihr Unternehmen gegründet?</div>
+        <div class="calc-sub">Das hilft uns, das passende Paket für Ihre Phase zu finden.</div>
+        <div class="calc-options">
+          <label class="calc-option"><input type="radio" name="c_gruendung" value="Geplante Gründung in der Zukunft"><span>Geplante Gründung in der Zukunft</span></label>
+          <label class="calc-option"><input type="radio" name="c_gruendung" value="Unternehmen jünger als 6 Monate"><span>Jünger als 6 Monate</span></label>
+          <label class="calc-option"><input type="radio" name="c_gruendung" value="Unternehmen ist älter als 6 Monate"><span>Älter als 6 Monate</span></label>
+          <label class="calc-option"><input type="radio" name="c_gruendung" value="Sonstige"><span>Sonstige</span></label>
+        </div>
+        <div class="calc-hint">Auswahl → automatisch weiter</div>
+        <div class="calc-nav"><button class="calc-btn-back" onclick="calcBack(6)">← Zurück</button></div>
+      </div>
+
+      <!-- Schritt 7: Unternehmensart -->
+      <div class="calc-page" data-page="7">
+        <div class="calc-question">Was beschreibt Ihr Unternehmen am besten?</div>
+        <div class="calc-sub">Damit wir Ihr Angebot passend auf Ihre Branche zuschneiden.</div>
+        <div class="calc-fields">
+          <div class="calc-field"><label>Unternehmensart / Branche *</label><input type="text" id="c-unternehmensart" placeholder="z. B. Handwerk, Beratung, Online-Shop …"></div>
+        </div>
+        <div class="calc-nav">
+          <button class="calc-btn-back" onclick="calcBack(7)">← Zurück</button>
+          <button class="calc-btn-next" onclick="calcNextText(7, 'c-unternehmensart')">Weiter →</button>
+        </div>
+      </div>
+
+      <!-- Schritt 8: Kontakt -->
+      <div class="calc-page" data-page="8">
+        <div class="calc-question">Wohin sollen wir Ihr Angebot schicken?</div>
+        <div class="calc-sub">Sie erhalten Ihr individuelles Angebot innerhalb von 24 Stunden.</div>
+        <div class="calc-fields">
+          <div class="calc-field-row">
+            <div class="calc-field"><label>Vorname *</label><input type="text" id="c-firstname" placeholder="Max"></div>
+            <div class="calc-field"><label>Nachname *</label><input type="text" id="c-lastname" placeholder="Mustermann"></div>
+          </div>
+          <div class="calc-field"><label>E-Mail *</label><input type="email" id="c-email" placeholder="max@beispiel.de"></div>
+          <div class="calc-field" style="margin-top:1rem;"><label>Telefon (optional)</label><input type="tel" id="c-phone" placeholder="+49 …"></div>
+        </div>
+        <div class="calc-error" id="c-error">Bitte füllen Sie alle Pflichtfelder aus.</div>
+        <div class="calc-nav"><button class="calc-btn-back" onclick="calcBack(8)">← Zurück</button></div>
+        <button class="calc-btn-submit" onclick="calcSubmit()">Angebot per E-Mail anfordern →</button>
+      </div>
+
+      <!-- Erfolg -->
+      <div class="calc-page" data-page="9">
+        <div class="calc-success">
+          <div class="calc-success-icon">🎉</div>
+          <div class="calc-success-title">Ihre Anfrage ist eingegangen!</div>
+          <p>Ich habe alle Angaben erhalten und melde mich innerhalb von <strong>24 Stunden</strong> mit Ihrem individuellen Angebot per E-Mail.</p>
+          <div class="calc-success-email">📬 Schauen Sie auch in Ihren Spam-Ordner.</div>
+          <p style="margin-top:1.5rem;"><a href="index.html" style="color:var(--accent);font-size:0.85rem;text-decoration:none;">← Zurück zur Startseite</a></p>
+        </div>
+      </div>
+
+    </div><!-- /calc-body -->
+
+    <div class="calc-privacy">🔒 Ihre Daten werden vertraulich behandelt und nicht an Dritte weitergegeben. <a href="datenschutz.html">Datenschutz</a> · <a href="impressum.html">Impressum</a></div>
+  </div><!-- /calc-card -->
+
+  <!-- SOCIAL PROOF -->
+  <div class="pk-proof">
+    <div class="proof-item">
+      <div class="proof-num">100%</div>
+      <div class="proof-label">Fixpreise – keine Überraschungen</div>
+    </div>
+    <div class="proof-item">
+      <div class="proof-num">24h</div>
+      <div class="proof-label">Antwortzeit garantiert</div>
+    </div>
+    <div class="proof-item">
+      <div class="proof-num">0€</div>
+      <div class="proof-label">Kosten für dieses Angebot</div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-logo">
+    <img src="images/logo_footer.png" alt="Dennis Mehlich">
+  </div>
+  <div>© 2025 Dennis Mehlich · Webdesign · HTML &amp; KI · Chemnitz</div>
+  <div style="display:flex;gap:1.5rem;">
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutz</a>
+  </div>
+</footer>
+
+<script>
+const CALC_TOTAL = 8;
+
+function calcUpdateProgress(page) {
+  const label = document.getElementById('calc-step-label');
+  if (label) label.textContent = Math.min(page, CALC_TOTAL);
+
+  // Fill line
+  const fill = document.getElementById('calc-fill');
+  if (fill) {
+    const pct = CALC_TOTAL > 1 ? ((page - 1) / (CALC_TOTAL - 1)) * 100 : 0;
+    fill.style.width = pct + '%';
+  }
+
+  // Dots
+  for (let i = 1; i <= CALC_TOTAL; i++) {
+    const dot = document.getElementById('cs-' + i);
+    if (!dot) continue;
+    dot.classList.remove('active', 'done');
+    if (i < page) dot.classList.add('done');
+    else if (i === page) dot.classList.add('active');
+  }
+}
+
+function calcGoTo(page) {
+  document.querySelectorAll('.calc-page').forEach(p => p.classList.remove('active'));
+  const target = document.querySelector(`.calc-page[data-page="${page}"]`);
+  if (target) target.classList.add('active');
+  calcUpdateProgress(page);
+}
+
+function calcNext(currentPage) {
+  calcGoTo(currentPage + 1);
+}
+
+function calcBack(currentPage) {
+  // Bei Visitenkarte wurde Schritt 2 (Unterseiten) übersprungen → direkt zu Schritt 1 zurück
+  if (currentPage === 3) {
+    const art = document.querySelector('input[name="c_art"]:checked')?.value;
+    if (art === 'Visitenkarte / One-Pager') { calcGoTo(1); return; }
+  }
+  calcGoTo(currentPage - 1);
+}
+
+/* ─── PREIS-BERECHNUNG ─── */
+function calcFormatPrice(n) {
+  return n.toLocaleString('de-DE') + ' €';
+}
+
+// Liefert den aktuellen Richtpreis als Zahl – oder null, wenn noch keine Website-Art gewählt wurde
+function calcGetPrice() {
+  const art = document.querySelector('input[name="c_art"]:checked')?.value || '';
+  let base;
+  if (art === 'Visitenkarte / One-Pager') base = 800;
+  else if (art === 'Mehrseitige Unternehmenswebsite') base = 900;
+  else if (art === 'Ich weiß es noch nicht') base = 900;
+  else return null;
+
+  let total = base;
+
+  // Unterseiten – jeder Sprung +200 € (entfällt bei Visitenkarte)
+  if (art !== 'Visitenkarte / One-Pager') {
+    const seitenAddon = {
+      '1 Seite': 0,
+      '2–3 Seiten': 200,
+      '4–5 Seiten': 400,
+      '6–7 Seiten': 600,
+      'Mehr als 7 Seiten': 800
+    };
+    const seiten = document.querySelector('input[name="c_seiten"]:checked')?.value;
+    if (seiten && seitenAddon[seiten] != null) total += seitenAddon[seiten];
+  }
+
+  // Funktionen
+  document.querySelectorAll('input[name="c_funktionen"]:checked').forEach(el => {
+    if (el.value === 'Kontaktformular')   total += 200;
+    else if (el.value === 'Mehrsprachigkeit') total += 500;
+    // KI-Chatbot ist kostenlos (kein Aufschlag)
+  });
+
+  // Design / Logo
+  const design = document.querySelector('input[name="c_design"]:checked')?.value;
+  if (design === 'Nur Logo vorhanden') total += 200;
+  else if (design === 'Nichts vorhanden – Komplettpaket') total += 300;
+
+  // Termin
+  const termin = document.querySelector('input[name="c_termin"]:checked')?.value;
+  if (termin === 'So schnell wie möglich') total += 200;
+
+  return total;
+}
+
+function calcRecalc() {
+  const el = document.getElementById('calc-price-value');
+  if (!el) return;
+  const price = calcGetPrice();
+  el.textContent = (price === null) ? 'ab 800 €' : calcFormatPrice(price);
+  // kleine Puls-Animation
+  el.classList.remove('bump');
+  void el.offsetWidth;
+  el.classList.add('bump');
+}
+
+// Radio → automatisch weiter, Checkbox → toggle
+document.querySelectorAll('.calc-option').forEach(label => {
+  label.addEventListener('click', function() {
+    const input = this.querySelector('input');
+    if (!input) return;
+
+    if (input.type === 'radio') {
+      document.querySelectorAll(`input[name="${input.name}"]`).forEach(s => {
+        s.checked = false;
+        s.closest('label').classList.remove('selected');
+      });
+      input.checked = true;
+      this.classList.add('selected');
+
+      const page = parseInt(this.closest('.calc-page').dataset.page);
+      let nextPage = page + 1;
+
+      // Sonderlogik Website-Art (Schritt 1)
+      if (input.name === 'c_art') {
+        if (input.value === 'Visitenkarte / One-Pager') {
+          // Unterseiten-Auswahl zurücksetzen (One-Pager hat keine) und Schritt 2 überspringen
+          document.querySelectorAll('input[name="c_seiten"]').forEach(s => {
+            s.checked = false;
+            s.closest('label').classList.remove('selected');
+          });
+          nextPage = 3;
+        } else {
+          nextPage = 2;
+        }
+      }
+
+      calcRecalc();
+      setTimeout(() => calcGoTo(nextPage), 300);
+    } else {
+      input.checked = !input.checked;
+      this.classList.toggle('selected', input.checked);
+      calcRecalc();
+    }
+  });
+});
+
+function calcNextText(currentPage, fieldId) {
+  const val = document.getElementById(fieldId)?.value.trim();
+  if (!val) { alert('Bitte füllen Sie dieses Feld aus.'); return; }
+  calcGoTo(currentPage + 1);
+}
+
+async function calcSubmit() {
+  const firstname = document.getElementById('c-firstname')?.value.trim();
+  const lastname  = document.getElementById('c-lastname')?.value.trim();
+  const email     = document.getElementById('c-email')?.value.trim();
+  const phone     = document.getElementById('c-phone')?.value.trim() || '';
+  const errorEl   = document.getElementById('c-error');
+
+  if (!firstname || !lastname || !email) {
+    if (errorEl) errorEl.style.display = 'block';
+    return;
+  }
+  if (errorEl) errorEl.style.display = 'none';
+
+  // Antworten aus den tatsächlich sichtbaren Formularfeldern (c_*) auslesen
+  const art           = document.querySelector('input[name="c_art"]:checked')?.value || '';
+  const seiten        = document.querySelector('input[name="c_seiten"]:checked')?.value || '';
+  const funktionen    = Array.from(document.querySelectorAll('input[name="c_funktionen"]:checked'))
+                             .map(el => el.value).join(', ');
+  const design        = document.querySelector('input[name="c_design"]:checked')?.value || '';
+  const termin        = document.querySelector('input[name="c_termin"]:checked')?.value || '';
+  const gruendung     = document.querySelector('input[name="c_gruendung"]:checked')?.value || '';
+  const unternehmensart = document.getElementById('c-unternehmensart')?.value.trim() || '';
+
+  // Kalkulator-spezifische Angaben (Art/Seiten/Funktionen) gebündelt als Freitext,
+  // damit sie in HubSpot verlustfrei ankommen.
+  const richtpreis = calcGetPrice();
+  const projektDetails =
+    'Art der Website: ' + (art || '–') +
+    ' | Unterseiten: ' + (seiten || '–') +
+    ' | Funktionen: ' + (funktionen || '–') +
+    ' | Richtpreis: ' + (richtpreis !== null ? calcFormatPrice(richtpreis) : '–');
+
+  const btn = document.querySelector('.calc-btn-submit');
+  btn.textContent = 'Wird gesendet…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(
+      'https://api.hsforms.com/submissions/v3/integration/submit/148643626/7b0a4ee5-95a9-4f7b-8103-ec589e9b52ed',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fields: [
+            { objectTypeId: '0-1', name: 'firstname',            value: firstname },
+            { objectTypeId: '0-1', name: 'lastname',             value: lastname },
+            { objectTypeId: '0-1', name: 'email',                value: email },
+            { objectTypeId: '0-1', name: 'phone',                value: phone },
+            { objectTypeId: '0-1', name: 'designvorlage',        value: design },
+            { objectTypeId: '0-1', name: 'fertigstellung',       value: termin },
+            { objectTypeId: '0-1', name: 'unternehmensgrundung', value: gruendung },
+            { objectTypeId: '0-1', name: 'unternehmensart',      value: unternehmensart },
+            { objectTypeId: '0-1', name: 'message',              value: projektDetails },
+          ],
+          context: { pageUri: window.location.href, pageName: 'Preiskalkulator (Website)' }
+        })
+      }
+    );
+
+    if (res.ok) {
+      calcGoTo(9);
+    } else {
+      btn.textContent = 'Fehler – nochmal versuchen';
+      btn.disabled = false;
+    }
+  } catch(e) {
+    btn.textContent = 'Fehler – nochmal versuchen';
+    btn.disabled = false;
+  }
+}
+
+// Init
+calcUpdateProgress(1);
+calcRecalc();
+</script>
+</body>
+</html>

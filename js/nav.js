@@ -16,7 +16,7 @@
     { href: p + '#leistungen', label: 'Leistungen' },
     { href: p + '#ueber-mich', label: 'Über mich' },
     { href: p + '#kontakt',    label: 'Kontakt' },
-    { href: 'kalkulator.html', label: 'Preiskalkulator' }
+    { href: 'preiskalkulator.html', label: 'Preiskalkulator' }
   ];
 
   // "Termin buchen" opens the modal on the homepage, otherwise links there
