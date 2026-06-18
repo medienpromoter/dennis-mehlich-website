@@ -28,9 +28,13 @@
     '<nav id="navbar">' +
       '<a href="index.html" class="nav-logo">' +
         '<img src="images/logo.png" alt="Dennis Mehlich" ' +
-        'style="height:72px;width:auto;display:block;mix-blend-mode:multiply;">' +
+        'style="width:auto;display:block;mix-blend-mode:multiply;">' +
       '</a>' +
-      '<ul class="nav-links">' +
+      '<button class="nav-toggle" id="nav-toggle" type="button" ' +
+        'aria-label="Menü öffnen" aria-expanded="false" aria-controls="nav-links">' +
+        '<span></span><span></span><span></span>' +
+      '</button>' +
+      '<ul class="nav-links" id="nav-links">' +
         links.map(function (l) {
           return '<li><a href="' + l.href + '">' + l.label + '</a></li>';
         }).join('') +
@@ -51,6 +55,25 @@
       };
       onScroll();
       window.addEventListener('scroll', onScroll);
+
+      // Mobile-Menü (Hamburger) auf-/zuklappen
+      var toggle = document.getElementById('nav-toggle');
+      var navLinks = document.getElementById('nav-links');
+      if (toggle && navLinks) {
+        toggle.addEventListener('click', function () {
+          var open = navbar.classList.toggle('nav-open');
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+          toggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+        });
+        // Beim Klick auf einen Link das Menü wieder schließen
+        navLinks.addEventListener('click', function (e) {
+          if (e.target.closest('a')) {
+            navbar.classList.remove('nav-open');
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.setAttribute('aria-label', 'Menü öffnen');
+          }
+        });
+      }
     }
   }
 
