@@ -71,9 +71,12 @@ nav.scrolled { box-shadow: 0 4px 32px rgba(15,22,49,0.08); }
   background: var(--navy); color: var(--white);
   padding: 0.65rem 1.6rem; border-radius: 100px;
   font-size: 0.9rem; font-weight: 600; text-decoration: none;
+  white-space: nowrap;
   transition: background 0.2s, transform 0.15s;
 }
 .nav-cta:hover { background: var(--blue); transform: translateY(-1px); }
+/* CTA als Menü-Eintrag: nur auf schmalen Screens sichtbar (siehe Media Query) */
+.nav-cta-li { display: none; }
 
 /* ─── HERO ─── */
 #hero {
@@ -89,7 +92,7 @@ nav.scrolled { box-shadow: 0 4px 32px rgba(15,22,49,0.08); }
               radial-gradient(ellipse 40% 40% at 10% 80%, #eff6ff 0%, transparent 60%);
   z-index: 0;
 }
-.hero-content { position: relative; z-index: 1; }
+.hero-content { position: relative; z-index: 1; min-width: 0; }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 0.5rem;
   background: var(--light); color: var(--blue);
@@ -448,6 +451,19 @@ footer a:hover { color: white; }
 }
 
 @media (max-width: 480px) {
+  /* Zu wenig Platz für den Inline-CTA → ins Klappmenü, zentriert */
+  #navbar > .nav-cta { display: none; }
+  .nav-cta-li { display: block; }
+  .nav-cta-li a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: var(--white);
+    border-bottom: none;
+    margin-top: 0.75rem;
+    padding: 0.85rem 1.6rem;
+  }
+
   h1 { font-size: 2rem; }
   h2 { font-size: 1.5rem; }
   .hero-sub { font-size: 0.95rem; }
@@ -695,6 +711,15 @@ footer a:hover { color: white; }
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+
+/* Slider im Hero (an Stelle der früheren Statistik) */
+.hero-ticker {
+  margin-top: 2.5rem;
+  padding: 1.1rem 0 0;
+  border-top: 1px solid var(--border);
+}
+.hero-ticker::before { background: linear-gradient(to right, var(--white), transparent); }
+.hero-ticker::after  { background: linear-gradient(to left,  var(--white), transparent); }
 
 
 

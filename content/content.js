@@ -105,7 +105,6 @@ const SITE_CONTENT = {
       { num: "04", title: "Review & Launch",          desc: "Gemeinsame Abnahme, letzte Feinabstimmungen – dann geht Ihre neue Website live." }
     ],
     deliverables: [
-      "Saubere HTML/CSS/JS Website ohne CMS-Overhead",
       "Responsive Design für alle Geräte",
       "SEO-Grundoptimierung inklusive",
       "DSGVO-konformes Setup",

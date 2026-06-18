@@ -20,9 +20,13 @@
   ];
 
   // "Termin buchen" opens the modal on the homepage, otherwise links there
-  var cta = isHome
-    ? '<a href="javascript:void(0)" onclick="typeof openTermin===\'function\' && openTermin()" class="nav-cta">Termin buchen</a>'
-    : '<a href="index.html#kontakt" class="nav-cta">Termin buchen</a>';
+  var ctaHref  = isHome ? 'javascript:void(0)' : 'index.html#kontakt';
+  var ctaExtra = isHome ? ' onclick="typeof openTermin===\'function\' && openTermin()"' : '';
+  // CTA in der Leiste (Desktop / breitere Screens)
+  var cta = '<a href="' + ctaHref + '"' + ctaExtra + ' class="nav-cta">Termin buchen</a>';
+  // Gleicher CTA als zentrierter Eintrag im Klappmenü (nur auf schmalen Screens sichtbar)
+  var ctaMenuItem = '<li class="nav-cta-li"><a href="' + ctaHref + '"' + ctaExtra +
+    ' class="nav-cta nav-cta-menu">Termin buchen</a></li>';
 
   var html =
     '<nav id="navbar">' +
@@ -38,6 +42,7 @@
         links.map(function (l) {
           return '<li><a href="' + l.href + '">' + l.label + '</a></li>';
         }).join('') +
+        ctaMenuItem +
       '</ul>' +
       cta +
     '</nav>';
