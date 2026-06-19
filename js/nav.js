@@ -19,9 +19,9 @@
     { href: 'preiskalkulator.html', label: 'Preiskalkulator' }
   ];
 
-  // "Termin buchen" opens the modal on the homepage, otherwise links there
-  var ctaHref  = isHome ? 'javascript:void(0)' : 'index.html#kontakt';
-  var ctaExtra = isHome ? ' onclick="typeof openTermin===\'function\' && openTermin()"' : '';
+  // "Termin buchen" scrollt zum Buchungskalender in der CTA-Sektion (#termin)
+  var ctaHref  = isHome ? '#termin' : 'index.html#termin';
+  var ctaExtra = '';
   // CTA in der Leiste (Desktop / breitere Screens)
   var cta = '<a href="' + ctaHref + '"' + ctaExtra + ' class="nav-cta">Termin buchen</a>';
   // Gleicher CTA als zentrierter Eintrag im Klappmenü (nur auf schmalen Screens sichtbar)

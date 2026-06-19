@@ -6,9 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ── Nav scroll effect ── */
   const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 40);
-  });
+  if (navbar) {
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+  }
 
   /* ── Termin Overlay ── */
   const overlay = document.getElementById('termin-overlay');
