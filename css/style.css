@@ -946,6 +946,17 @@ footer a:hover { color: white; }
 }
 
 /* ─── MSF PROGRESS / STEP TRACKER ─── */
+.msf-form-head { margin-bottom: 1.75rem; }
+.msf-form-head h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.2;
+  margin-bottom: 0.4rem;
+}
+.msf-form-head p { font-size: 0.9rem; color: var(--gray); line-height: 1.6; }
+
 .msf-progress-wrap {
   display: flex;
   align-items: flex-start;
