@@ -691,11 +691,11 @@ body {
             <div class="calc-field"><label>Nachname *</label><input type="text" id="c-lastname" placeholder="Mustermann"></div>
           </div>
           <div class="calc-field"><label>E-Mail *</label><input type="email" id="c-email" placeholder="max@beispiel.de"></div>
-          <div class="calc-field" style="margin-top:1rem;"><label>Telefon (optional)</label><input type="tel" id="c-phone" placeholder="+49 …"></div>
+          <div class="calc-field" style="margin-top:1rem;"><label>Telefon *</label><input type="tel" id="c-phone" placeholder="+49 …"></div>
         </div>
         <div class="calc-error" id="c-error">Bitte füllen Sie alle Pflichtfelder aus.</div>
         <div class="calc-nav"><button class="calc-btn-back" onclick="calcBack(8)">← Zurück</button></div>
-        <button class="calc-btn-submit" onclick="calcSubmit()">Angebot per E-Mail anfordern →</button>
+        <button class="calc-btn-submit" onclick="calcSubmit()">Kostenloses Erstgespräch sichern →</button>
       </div>
 
       <!-- Erfolg -->
@@ -944,7 +944,7 @@ async function calcSubmit() {
   const phone     = document.getElementById('c-phone')?.value.trim() || '';
   const errorEl   = document.getElementById('c-error');
 
-  if (!firstname || !lastname || !email) {
+  if (!firstname || !lastname || !email || !phone) {
     if (errorEl) errorEl.style.display = 'block';
     return;
   }
@@ -1072,7 +1072,7 @@ async function kkSubmit() {
   const email            = document.getElementById('kk-email')?.value.trim();
   const phone            = document.getElementById('kk-phone')?.value.trim();
   const errorEl          = document.getElementById('kk-error');
-  if (!firstname || !lastname || !email) { errorEl.style.display = 'block'; return; }
+  if (!firstname || !lastname || !email || !phone) { errorEl.style.display = 'block'; return; }
   errorEl.style.display = 'none';
   const btn = document.querySelector('.calc-card-inner .msf-btn-submit');
   btn.textContent = 'Wird gesendet…'; btn.disabled = true;

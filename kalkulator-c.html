@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Website-Preiskalkulator – Dennis Mehlich</title>
-<meta name="description" content="In 2 Minuten zum individuellen Website-Angebot. Beantworten Sie 7 Fragen – schnell, transparent und unverbindlich.">
+<meta name="description" content="In 2 Minuten zum individuellen Website-Angebot. Beantworten Sie 7 Fragen – Ihren Fixpreis sehen Sie sofort, ganz ohne Wartezeit.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
@@ -33,17 +33,19 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ─── HEADER ─── */
 .lp-header {
   background: var(--navy);
-  padding: 1rem 5%;
+  padding: 0.45rem 5%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
-.lp-header img { height: 52px; width: auto; }
+.lp-header img { height: 40px; width: auto; }
 .lp-header-trust {
   font-size: 0.78rem;
   color: rgba(255,255,255,0.55);
@@ -128,19 +130,26 @@ body {
 
 /* ─── MAIN LAYOUT ─── */
 .lp-main {
+  width: 100%;
   max-width: 680px;
-  margin: -2.5rem auto 4rem;
-  padding: 0 5%;
+  margin: 0 auto;
+  padding: 0;
   position: relative;
   z-index: 2;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
-/* ─── KALKULATOR CARD ─── */
+/* ─── KALKULATOR CARD (randlos, bündig zur Nav & zu den Seiten, füllt die Höhe) ─── */
 .calc-card {
   background: white;
-  border-radius: 24px;
-  box-shadow: 0 20px 60px rgba(15,22,49,0.15);
+  border-radius: 0;
+  box-shadow: none;
   overflow: hidden;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 .calc-card-top {
   background: linear-gradient(135deg, var(--navy), var(--blue));
@@ -231,9 +240,40 @@ body {
 }
 .calc-progress-label strong { color: rgba(255,255,255,0.8); }
 
+/* ─── LIVE-PREIS (oben rechts) ─── */
+.calc-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 1.1rem;
+}
+.calc-price-caption {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+.calc-price-amount {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--electric);
+  background: rgba(96,165,250,0.12);
+  border: 1px solid rgba(96,165,250,0.35);
+  padding: 0.3rem 1rem;
+  border-radius: 100px;
+  white-space: nowrap;
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+}
+.calc-price-amount.bump { transform: scale(1.12); }
+
 /* ─── FORM BODY ─── */
 .calc-body {
   padding: 2rem 2rem 1.5rem;
+  flex: 1 0 auto;
 }
 
 /* Pages */
@@ -440,6 +480,7 @@ body {
 .calc-card-inner .msf-page { display: none; }
 .calc-card-inner .msf-page.active { display: block; }
 
+.calc-privacy {
   font-size: 0.68rem;
   color: #94a3b8;
   text-align: center;
@@ -508,22 +549,9 @@ body {
 <!-- ─── HEADER ─── -->
 <header class="lp-header">
   <a href="index.html"><img src="images/logo_footer.png" alt="Dennis Mehlich Webdesign"></a>
-  <div class="lp-header-trust">🔒 SSL-verschlüsselt &amp; DSGVO-konform</div>
 </header>
 
-<!-- ─── HERO ─── -->
-<section class="lp-hero">
-  <div class="lp-badge">Kostenlos &amp; unverbindlich</div>
-  <h1>Was kostet Ihre<br><em>neue Website?</em></h1>
-  <p>In 2 Minuten zum individuellen Angebot. Beantworten Sie 7 kurze Fragen – schnell, transparent und unverbindlich.</p>
-  <div class="lp-trust-row">
-    <div class="lp-trust-item"><span>⚡</span> Kein Telefonat nötig</div>
-    <div class="lp-trust-item"><span>✅</span> Transparente Fixpreise</div>
-    <div class="lp-trust-item"><span>🔒</span> Keine versteckten Kosten</div>
-  </div>
-</section>
-
-<!-- ─── MAIN ─── -->
+<!-- ─── MAIN (Formular direkt sichtbar, ohne Hero) ─── -->
 <main class="lp-main">
 
   <!-- KALKULATOR -->
@@ -531,6 +559,10 @@ body {
 
     <!-- Top: Fortschritt -->
     <div class="calc-card-top">
+      <div class="calc-price-row">
+        <span class="calc-price-caption">Ihr Richtpreis</span>
+        <span class="calc-price-amount" id="calc-price-value">ab 800 €</span>
+      </div>
       <div class="calc-progress-wrap" id="calc-progress-wrap">
         <div class="calc-progress-fill" id="calc-fill"></div>
         <div class="calc-step-dot" id="cs-1"><div class="calc-dot"><span class="calc-dot-num">1</span></div><div class="calc-dot-label">Website</div></div>
@@ -555,8 +587,6 @@ body {
         <div class="calc-options">
           <label class="calc-option"><input type="radio" name="c_art" value="Visitenkarte / One-Pager"><span>Visitenkarte / One-Pager</span></label>
           <label class="calc-option"><input type="radio" name="c_art" value="Mehrseitige Unternehmenswebsite"><span>Mehrseitige Unternehmenswebsite</span></label>
-          <label class="calc-option"><input type="radio" name="c_art" value="Online-Shop"><span>Online-Shop</span></label>
-          <label class="calc-option"><input type="radio" name="c_art" value="Blog / Magazin"><span>Blog / Magazin</span></label>
           <label class="calc-option"><input type="radio" name="c_art" value="Ich weiß es noch nicht"><span>Ich weiß es noch nicht</span></label>
         </div>
         <div class="calc-hint">Auswahl → automatisch weiter</div>
@@ -567,10 +597,11 @@ body {
         <div class="calc-question">Wie viele Unterseiten benötigen Sie?</div>
         <div class="calc-sub">Jede Unterseite (z. B. Über uns, Leistungen, Kontakt) zählt.</div>
         <div class="calc-options">
-          <label class="calc-option"><input type="radio" name="c_seiten" value="1 Seite (One-Pager)"><span>1 Seite (One-Pager)</span></label>
-          <label class="calc-option"><input type="radio" name="c_seiten" value="2–5 Seiten"><span>2–5 Seiten</span></label>
-          <label class="calc-option"><input type="radio" name="c_seiten" value="6–10 Seiten"><span>6–10 Seiten</span></label>
-          <label class="calc-option"><input type="radio" name="c_seiten" value="Mehr als 10 Seiten"><span>Mehr als 10 Seiten</span></label>
+          <label class="calc-option"><input type="radio" name="c_seiten" value="1 Seite"><span>1 Seite</span></label>
+          <label class="calc-option"><input type="radio" name="c_seiten" value="2–3 Seiten"><span>2–3 Seiten</span></label>
+          <label class="calc-option"><input type="radio" name="c_seiten" value="4–5 Seiten"><span>4–5 Seiten</span></label>
+          <label class="calc-option"><input type="radio" name="c_seiten" value="6–7 Seiten"><span>6–7 Seiten</span></label>
+          <label class="calc-option"><input type="radio" name="c_seiten" value="Mehr als 7 Seiten"><span>Mehr als 7 Seiten</span></label>
         </div>
         <div class="calc-hint">Auswahl → automatisch weiter</div>
         <div class="calc-nav"><button class="calc-btn-back" onclick="calcBack(2)">← Zurück</button></div>
@@ -582,8 +613,6 @@ body {
         <div class="calc-sub">Mehrfachauswahl möglich – klicken Sie alles an, was passt.</div>
         <div class="calc-options">
           <label class="calc-option"><input type="checkbox" name="c_funktionen" value="Kontaktformular"><span>Kontaktformular</span></label>
-          <label class="calc-option"><input type="checkbox" name="c_funktionen" value="Online-Terminbuchung"><span>Online-Terminbuchung</span></label>
-          <label class="calc-option"><input type="checkbox" name="c_funktionen" value="Blog / News-Bereich"><span>Blog / News-Bereich</span></label>
           <label class="calc-option"><input type="checkbox" name="c_funktionen" value="Mehrsprachigkeit"><span>Mehrsprachigkeit</span></label>
           <label class="calc-option"><input type="checkbox" name="c_funktionen" value="KI-Chatbot"><span>KI-Chatbot</span></label>
           <label class="calc-option"><input type="checkbox" name="c_funktionen" value="Keine besonderen Funktionen"><span>Keine besonderen Funktionen</span></label>
@@ -614,7 +643,7 @@ body {
         <div class="calc-sub">Dringende Projekte erfordern mehr Ressourcen.</div>
         <div class="calc-options">
           <label class="calc-option"><input type="radio" name="c_termin" value="So schnell wie möglich"><span>So schnell wie möglich</span></label>
-          <label class="calc-option"><input type="radio" name="c_termin" value="In 4–6 Wochen"><span>In 4–6 Wochen</span></label>
+          <label class="calc-option"><input type="radio" name="c_termin" value="In 2–4 Wochen"><span>In 2–4 Wochen</span></label>
           <label class="calc-option"><input type="radio" name="c_termin" value="In 2–3 Monaten"><span>In 2–3 Monaten</span></label>
           <label class="calc-option"><input type="radio" name="c_termin" value="Kein fester Termin"><span>Kein fester Termin</span></label>
         </div>
@@ -682,78 +711,7 @@ body {
     <div class="calc-privacy">🔒 Ihre Daten werden vertraulich behandelt und nicht an Dritte weitergegeben. <a href="datenschutz.html">Datenschutz</a> · <a href="impressum.html">Impressum</a></div>
   </div><!-- /calc-card -->
 
-  <!-- SOCIAL PROOF -->
-  <div class="lp-proof">
-    <div class="proof-item">
-      <div class="proof-num">100%</div>
-      <div class="proof-label">Fixpreise – keine Überraschungen</div>
-    </div>
-    <div class="proof-item">
-      <div class="proof-num">24h</div>
-      <div class="proof-label">Antwortzeit garantiert</div>
-    </div>
-    <div class="proof-item">
-      <div class="proof-num">0€</div>
-      <div class="proof-label">Kosten für dieses Angebot</div>
-    </div>
-  </div>
-
 </main>
-
-<!-- ─── VERTRAUEN ─── -->
-<section style="background:white;padding:4rem 5%;text-align:center;">
-  <p style="font-family:'DM Sans',sans-serif;font-size:1.1rem;color:#64748b;max-width:680px;margin:0 auto;line-height:1.75;">Ihre Mitbewerber haben eine Website. Sie bekommen eine, die verkauft. Mit klarer Botschaft, starkem Design und einer Struktur, die Nutzer gezielt führt – und aus Besuchern Anfragen macht.</p>
-</section>
-
-<!-- ─── SECURITY ─── -->
-<section style="background:#0f1631;padding:6rem 5%;position:relative;overflow:hidden;">
-  <div style="position:absolute;top:-40%;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(239,68,68,0.08) 0%,transparent 70%);pointer-events:none;"></div>
-  <div style="position:absolute;bottom:-30%;left:-5%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.1) 0%,transparent 70%);pointer-events:none;"></div>
-  <div style="max-width:1100px;margin:0 auto;position:relative;z-index:1;">
-    <div style="text-align:center;margin-bottom:3.5rem;">
-      <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(239,68,68,0.8);margin-bottom:0.8rem;">IT-Sicherheit 2025</div>
-      <h2 style="font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;color:white;max-width:750px;margin:0 auto 1.2rem;letter-spacing:-0.03em;line-height:1.15;">KI macht Cyberangriffe schneller,<br>billiger und gefährlicher – als je zuvor.</h2>
-      <p style="font-size:1.05rem;color:rgba(255,255,255,0.6);max-width:640px;margin:0 auto;line-height:1.7;">WordPress, Wix & Co. sind täglich Ziel automatisierter KI-Angriffe. Tausende Websites werden stündlich kompromittiert – durch bekannte Plugin-Lücken, schwache Passwörter und veraltete Datenbanken. Ihre Kunden vertrauen Ihnen ihre Daten an. Das ist eine Verantwortung.</p>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem;">
-      <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:16px;padding:2rem;">
-        <div style="font-size:1.5rem;margin-bottom:1rem;">⚠️</div>
-        <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:white;margin-bottom:0.75rem;">CMS-Websites: Täglich im Visier</div>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.6rem;">
-          <li style="font-size:0.82rem;color:rgba(255,255,255,0.55);display:flex;gap:0.5rem;"><span style="color:rgba(239,68,68,0.7);flex-shrink:0;">✗</span>KI-Bots scannen automatisch nach Plugin-Lücken</li>
-          <li style="font-size:0.82rem;color:rgba(255,255,255,0.55);display:flex;gap:0.5rem;"><span style="color:rgba(239,68,68,0.7);flex-shrink:0;">✗</span>Veraltete WordPress-Versionen in Minuten gehackt</li>
-          <li style="font-size:0.82rem;color:rgba(255,255,255,0.55);display:flex;gap:0.5rem;"><span style="color:rgba(239,68,68,0.7);flex-shrink:0;">✗</span>Kundendaten, Passwörter, E-Mails gefährdet</li>
-          <li style="font-size:0.82rem;color:rgba(255,255,255,0.55);display:flex;gap:0.5rem;"><span style="color:rgba(239,68,68,0.7);flex-shrink:0;">✗</span>Datenschutzverstöße kosten bis zu 20 Mio. € Strafe</li>
-          <li style="font-size:0.82rem;color:rgba(255,255,255,0.55);display:flex;gap:0.5rem;"><span style="color:rgba(239,68,68,0.7);flex-shrink:0;">✗</span>Reputationsschaden oft nicht wiedergutzumachen</li>
-        </ul>
-      </div>
-      <div style="background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.25);border-radius:16px;padding:2rem;">
-        <div style="font-size:1.5rem;margin-bottom:1rem;">🛡️</div>
-        <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:white;margin-bottom:0.75rem;">Statisches HTML: Keine Angriffsfläche</div>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.6rem;">
-          <li style="font-size:0.82rem;color:rgba(255,255,255,0.75);display:flex;gap:0.5rem;"><span style="color:#22c55e;flex-shrink:0;">✓</span>Keine Datenbank – nichts zu stehlen</li>
-          <li style="font-size:0.82rem;color:rgba(255,255,255,0.75);display:flex;gap:0.5rem;"><span style="color:#22c55e;flex-shrink:0;">✓</span>Kein Login – kein Angriffspunkt</li>
-          <li style="font-size:0.82rem;color:rgba(255,255,255,0.75);display:flex;gap:0.5rem;"><span style="color:#22c55e;flex-shrink:0;">✓</span>Keine Plugins – keine bekannten Lücken</li>
-          <li style="font-size:0.82rem;color:rgba(255,255,255,0.75);display:flex;gap:0.5rem;"><span style="color:#22c55e;flex-shrink:0;">✓</span>KI-Bots finden schlicht nichts zu exploiten</li>
-          <li style="font-size:0.82rem;color:rgba(255,255,255,0.75);display:flex;gap:0.5rem;"><span style="color:#22c55e;flex-shrink:0;">✓</span>Sicherheit ist Architektur – kein Plugin nötig</li>
-        </ul>
-      </div>
-    </div>
-    <div style="background:linear-gradient(135deg,rgba(59,130,246,0.15),rgba(30,58,138,0.3));border:1px solid rgba(59,130,246,0.3);border-radius:16px;padding:2rem;text-align:center;">
-      <div style="font-size:2rem;margin-bottom:0.75rem;">🔒</div>
-      <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:white;margin-bottom:0.5rem;">Die sicherste Website-Architektur, die es gibt.</div>
-      <div style="font-size:0.85rem;color:rgba(255,255,255,0.6);max-width:600px;margin:0 auto 1.5rem;">Nicht weil wir viel absichern – sondern weil es schlicht nichts zu angreifen gibt. Keine Datenbank, kein Login, keine Plugins. KI-Bots finden hier keine Angriffsfläche.</div>
-      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" style="display:inline-block;background:white;color:#0f1631;padding:0.75rem 2rem;border-radius:100px;font-size:0.9rem;font-weight:700;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,0.2);">Jetzt Angebot anfordern →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ─── FOOTER ─── -->
-<footer class="lp-footer">
-  <span>© 2025 Dennis Mehlich · Webdesign · Chemnitz</span>
-  <a href="impressum.html">Impressum</a>
-  <a href="datenschutz.html">Datenschutz</a>
-</footer>
 
 <script>
 const CALC_TOTAL = 8;
@@ -791,7 +749,71 @@ function calcNext(currentPage) {
 }
 
 function calcBack(currentPage) {
+  // Bei Visitenkarte wurde Schritt 2 (Unterseiten) übersprungen → direkt zu Schritt 1 zurück
+  if (currentPage === 3) {
+    const art = document.querySelector('input[name="c_art"]:checked')?.value;
+    if (art === 'Visitenkarte / One-Pager') { calcGoTo(1); return; }
+  }
   calcGoTo(currentPage - 1);
+}
+
+/* ─── PREIS-BERECHNUNG ─── */
+function calcFormatPrice(n) {
+  return n.toLocaleString('de-DE') + ' €';
+}
+
+// Liefert den aktuellen Richtpreis als Zahl – oder null, wenn noch keine Website-Art gewählt wurde
+function calcGetPrice() {
+  const art = document.querySelector('input[name="c_art"]:checked')?.value || '';
+  let base;
+  if (art === 'Visitenkarte / One-Pager') base = 800;
+  else if (art === 'Mehrseitige Unternehmenswebsite') base = 900;
+  else if (art === 'Ich weiß es noch nicht') base = 900;
+  else return null;
+
+  let total = base;
+
+  // Unterseiten – jeder Sprung +200 € (entfällt bei Visitenkarte)
+  if (art !== 'Visitenkarte / One-Pager') {
+    const seitenAddon = {
+      '1 Seite': 0,
+      '2–3 Seiten': 200,
+      '4–5 Seiten': 400,
+      '6–7 Seiten': 600,
+      'Mehr als 7 Seiten': 800
+    };
+    const seiten = document.querySelector('input[name="c_seiten"]:checked')?.value;
+    if (seiten && seitenAddon[seiten] != null) total += seitenAddon[seiten];
+  }
+
+  // Funktionen
+  document.querySelectorAll('input[name="c_funktionen"]:checked').forEach(el => {
+    if (el.value === 'Kontaktformular')   total += 200;
+    else if (el.value === 'Mehrsprachigkeit') total += 500;
+    // KI-Chatbot ist kostenlos (kein Aufschlag)
+  });
+
+  // Design / Logo
+  const design = document.querySelector('input[name="c_design"]:checked')?.value;
+  if (design === 'Nur Logo vorhanden') total += 200;
+  else if (design === 'Nichts vorhanden – Komplettpaket') total += 300;
+
+  // Termin
+  const termin = document.querySelector('input[name="c_termin"]:checked')?.value;
+  if (termin === 'So schnell wie möglich') total += 200;
+
+  return total;
+}
+
+function calcRecalc() {
+  const el = document.getElementById('calc-price-value');
+  if (!el) return;
+  const price = calcGetPrice();
+  el.textContent = (price === null) ? 'ab 800 €' : calcFormatPrice(price);
+  // kleine Puls-Animation
+  el.classList.remove('bump');
+  void el.offsetWidth;
+  el.classList.add('bump');
 }
 
 // Radio → automatisch weiter, Checkbox → toggle
@@ -807,11 +829,30 @@ document.querySelectorAll('.calc-option').forEach(label => {
       });
       input.checked = true;
       this.classList.add('selected');
+
       const page = parseInt(this.closest('.calc-page').dataset.page);
-      setTimeout(() => calcGoTo(page + 1), 300);
+      let nextPage = page + 1;
+
+      // Sonderlogik Website-Art (Schritt 1)
+      if (input.name === 'c_art') {
+        if (input.value === 'Visitenkarte / One-Pager') {
+          // Unterseiten-Auswahl zurücksetzen (One-Pager hat keine) und Schritt 2 überspringen
+          document.querySelectorAll('input[name="c_seiten"]').forEach(s => {
+            s.checked = false;
+            s.closest('label').classList.remove('selected');
+          });
+          nextPage = 3;
+        } else {
+          nextPage = 2;
+        }
+      }
+
+      calcRecalc();
+      setTimeout(() => calcGoTo(nextPage), 300);
     } else {
       input.checked = !input.checked;
       this.classList.toggle('selected', input.checked);
+      calcRecalc();
     }
   });
 });
@@ -847,10 +888,12 @@ async function calcSubmit() {
 
   // Kalkulator-spezifische Angaben (Art/Seiten/Funktionen) gebündelt als Freitext,
   // damit sie in HubSpot verlustfrei ankommen.
+  const richtpreis = calcGetPrice();
   const projektDetails =
     'Art der Website: ' + (art || '–') +
     ' | Unterseiten: ' + (seiten || '–') +
-    ' | Funktionen: ' + (funktionen || '–');
+    ' | Funktionen: ' + (funktionen || '–') +
+    ' | Richtpreis: ' + (richtpreis !== null ? calcFormatPrice(richtpreis) : '–');
 
   const btn = document.querySelector('.calc-btn-submit');
   btn.textContent = 'Wird gesendet…';
@@ -893,6 +936,7 @@ async function calcSubmit() {
 
 // Init
 calcUpdateProgress(1);
+calcRecalc();
 
 /* ─── KK HUBSPOT FORM (8 Schritte) ─── */
 const KK_TOTAL = 8;

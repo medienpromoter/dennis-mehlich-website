@@ -359,7 +359,7 @@ async function msfSubmit() {
   const phone           = document.getElementById('msf-phone')?.value.trim();
   const errorEl         = document.getElementById('msf-error');
 
-  if (!firstname || !lastname || !email) { errorEl.style.display = 'block'; return; }
+  if (!firstname || !lastname || !email || !phone) { errorEl.style.display = 'block'; return; }
   errorEl.style.display = 'none';
 
   const websiteVorhanden    = document.querySelector('input[name="website_vorhanden"]:checked')?.value || '';
@@ -423,7 +423,7 @@ async function msfSubmitOv() {
   const email            = document.getElementById('ov-email')?.value.trim();
   const phone            = document.getElementById('ov-phone')?.value.trim();
   const errorEl          = document.getElementById('ov-error');
-  if (!firstname || !lastname || !email) { errorEl.style.display = 'block'; return; }
+  if (!firstname || !lastname || !email || !phone) { errorEl.style.display = 'block'; return; }
   errorEl.style.display = 'none';
 
   const websiteVorhanden    = document.querySelector('input[name="ov_website_vorhanden"]:checked')?.value || '';
