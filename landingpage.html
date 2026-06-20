@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kostenloser Website-Entwurf – Dennis Mehlich</title>
+<meta name="description" content="Erhalten Sie einen kostenlosen, individuellen Design-Entwurf für Ihre Website – unverbindlich und passgenau für Ihre Branche.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─── */
+:root {
+  --navy:    #0f1631;
+  --blue:    #1e3a8a;
+  --accent:  #3b82f6;
+  --electric:#60a5fa;
+  --light:   #f0f4ff;
+  --white:   #ffffff;
+  --gray:    #64748b;
+  --border:  rgba(30,58,138,0.15);
+  --radius:  16px;
+}
+
+/* ─── RESET ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--navy);
+  color: var(--navy);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ─── HEADER ─── */
+.lp-header {
+  background: var(--navy);
+  padding: 0.7rem 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lp-header img { height: 44px; width: auto; display: block; }
+
+/* ─── HERO / LAYOUT ─── */
+.lp-hero {
+  background: var(--navy);
+  position: relative;
+  overflow: hidden;
+  padding: 2.5rem 5% 4rem;
+}
+.lp-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 50% 50% at 80% 20%, rgba(59,130,246,0.18) 0%, transparent 70%),
+              radial-gradient(ellipse 50% 50% at 10% 90%, rgba(96,165,250,0.10) 0%, transparent 70%);
+  pointer-events: none;
+}
+.lp-grid {
+  max-width: 1080px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+/* ─── COPY (links) ─── */
+.lp-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(59,130,246,0.15);
+  border: 1px solid rgba(59,130,246,0.3);
+  color: var(--electric);
+  padding: 0.4rem 1rem; border-radius: 100px;
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+.lp-badge::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--electric); animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.5)} }
+.lp-copy h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  font-weight: 800; color: white;
+  line-height: 1.1; letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+.lp-copy h1 em { font-style: normal; color: var(--electric); }
+.lp-copy .lp-sub {
+  font-size: 1.05rem; color: rgba(255,255,255,0.7);
+  max-width: 480px; line-height: 1.7; margin-bottom: 1.75rem;
+}
+.lp-benefits { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.75rem; }
+.lp-benefits li {
+  display: flex; align-items: flex-start; gap: 0.7rem;
+  font-size: 0.95rem; color: rgba(255,255,255,0.85);
+}
+.lp-benefits .b-ico {
+  flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
+  background: rgba(96,165,250,0.18); color: var(--electric);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 800; margin-top: 1px;
+}
+.lp-trust-row { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.lp-trust-item { display: flex; align-items: center; gap: 0.45rem; font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+
+/* ─── FORM CARD (rechts) ─── */
+.lp-form-card {
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.35);
+  padding: 2.25rem 2rem;
+}
+.lp-form-head { margin-bottom: 1.5rem; }
+.lp-form-head h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.4rem; font-weight: 800;
+  color: var(--navy); line-height: 1.2; margin-bottom: 0.35rem;
+}
+.lp-form-head p { font-size: 0.88rem; color: var(--gray); line-height: 1.55; }
+
+.lp-field { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+.lp-field label { font-size: 0.78rem; font-weight: 600; color: var(--navy); }
+.lp-field input {
+  padding: 0.8rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem; color: var(--navy);
+  outline: none; background: white;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.lp-field input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+}
+
+.lp-btn {
+  width: 100%;
+  background: var(--accent);
+  color: white; border: none;
+  padding: 1rem; border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.02rem; font-weight: 700;
+  cursor: pointer; margin-top: 0.5rem;
+  box-shadow: 0 8px 24px rgba(59,130,246,0.35);
+  transition: background 0.2s, transform 0.15s;
+}
+.lp-btn:hover { background: var(--electric); transform: translateY(-2px); }
+.lp-btn:disabled { opacity: 0.7; cursor: default; transform: none; }
+
+.lp-error {
+  display: none;
+  color: #ef4444; font-size: 0.8rem;
+  margin-bottom: 0.85rem; padding: 0.55rem 0.8rem;
+  background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px;
+}
+.lp-privacy {
+  font-size: 0.7rem; color: #94a3b8;
+  text-align: center; margin-top: 1rem; line-height: 1.5;
+}
+.lp-privacy a { color: var(--accent); text-decoration: none; }
+
+/* ─── SUCCESS ─── */
+.lp-success { display: none; text-align: center; padding: 1.5rem 0.5rem; }
+.lp-success.show { display: block; }
+.lp-success-icon { font-size: 3rem; margin-bottom: 0.75rem; }
+.lp-success h2 {
+  font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800;
+  color: var(--navy); margin-bottom: 0.5rem;
+}
+.lp-success p { color: var(--gray); font-size: 0.92rem; line-height: 1.6; }
+
+/* ─── FOOTER ─── */
+.lp-footer {
+  background: var(--navy);
+  color: rgba(255,255,255,0.4);
+  padding: 1.5rem 5%;
+  text-align: center; font-size: 0.78rem;
+  display: flex; justify-content: center; gap: 1.75rem; flex-wrap: wrap;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.lp-footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+.lp-footer a:hover { color: white; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 860px) {
+  .lp-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .lp-copy { text-align: center; }
+  .lp-copy .lp-sub { margin-left: auto; margin-right: auto; }
+  .lp-benefits { max-width: 420px; margin-left: auto; margin-right: auto; text-align: left; }
+  .lp-trust-row { justify-content: center; }
+}
+@media (max-width: 480px) {
+  .lp-hero { padding: 2rem 4% 3rem; }
+  .lp-form-card { padding: 1.75rem 1.25rem; }
+  .lp-copy h1 { font-size: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── HEADER ─── -->
+<header class="lp-header">
+  <a href="index.html"><img src="images/logo_footer.png" alt="Dennis Mehlich Webdesign"></a>
+</header>
+
+<!-- ─── HERO ─── -->
+<section class="lp-hero">
+  <div class="lp-grid">
+
+    <!-- Copy -->
+    <div class="lp-copy">
+      <div class="lp-badge">Kostenlos &amp; unverbindlich</div>
+      <h1>Ihr kostenloser <em>Website-Entwurf</em> – passgenau für Ihre Branche.</h1>
+      <p class="lp-sub">Sie sehen, wie Ihre neue Website aussehen könnte – <strong>bevor</strong> Sie sich entscheiden. Wir gestalten Ihnen einen individuellen Design-Entwurf. Komplett kostenlos und ohne Verpflichtung.</p>
+      <ul class="lp-benefits">
+        <li><span class="b-ico">✓</span><span>Individueller Entwurf, abgestimmt auf Ihre Branche</span></li>
+        <li><span class="b-ico">✓</span><span>100&nbsp;% kostenlos &amp; unverbindlich – kein Risiko</span></li>
+        <li><span class="b-ico">✓</span><span>Sie entscheiden erst, wenn der Entwurf Ihnen gefällt</span></li>
+      </ul>
+      <div class="lp-trust-row">
+        <div class="lp-trust-item"><span>⚡</span> Antwort innerhalb von 24&nbsp;h</div>
+        <div class="lp-trust-item"><span>🔒</span> DSGVO-konform</div>
+        <div class="lp-trust-item"><span>✅</span> Keine versteckten Kosten</div>
+      </div>
+    </div>
+
+    <!-- Formular -->
+    <div class="lp-form-card">
+      <div id="lp-form">
+        <div class="lp-form-head">
+          <h2>Kostenlosen Entwurf anfordern</h2>
+          <p>Wir melden uns innerhalb von 24&nbsp;Stunden bei Ihnen.</p>
+        </div>
+
+        <div class="lp-error" id="lp-error">Bitte füllen Sie alle Felder aus.</div>
+
+        <div class="lp-field">
+          <label for="lp-name">Name *</label>
+          <input type="text" id="lp-name" placeholder="Max Mustermann" autocomplete="name">
+        </div>
+        <div class="lp-field">
+          <label for="lp-branche">Branche *</label>
+          <input type="text" id="lp-branche" placeholder="z. B. Handwerk, Gastronomie, Kanzlei …">
+        </div>
+        <div class="lp-field">
+          <label for="lp-email">E-Mail *</label>
+          <input type="email" id="lp-email" placeholder="max@beispiel.de" autocomplete="email">
+        </div>
+        <div class="lp-field">
+          <label for="lp-phone">Telefon *</label>
+          <input type="tel" id="lp-phone" placeholder="+49 …" autocomplete="tel">
+        </div>
+
+        <button type="button" class="lp-btn" id="lp-btn" onclick="lpSubmit()">Kostenlosen Entwurf anfordern →</button>
+
+        <p class="lp-privacy">🔒 Ihre Daten werden vertraulich behandelt und nicht an Dritte weitergegeben.<br><a href="datenschutz.html">Datenschutz</a> · <a href="impressum.html">Impressum</a></p>
+      </div>
+
+      <!-- Erfolg -->
+      <div class="lp-success" id="lp-success">
+        <div class="lp-success-icon">🎉</div>
+        <h2>Anfrage eingegangen!</h2>
+        <p>Vielen Dank. Ich melde mich innerhalb von <strong>24&nbsp;Stunden</strong> bei Ihnen, um Ihren kostenlosen Entwurf zu besprechen.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="lp-footer">
+  <span>© 2025 Dennis Mehlich · Webdesign · Chemnitz</span>
+  <a href="impressum.html">Impressum</a>
+  <a href="datenschutz.html">Datenschutz</a>
+</footer>
+
+<script>
+async function lpSubmit() {
+  const name    = document.getElementById('lp-name').value.trim();
+  const branche = document.getElementById('lp-branche').value.trim();
+  const email   = document.getElementById('lp-email').value.trim();
+  const phone   = document.getElementById('lp-phone').value.trim();
+  const errorEl = document.getElementById('lp-error');
+
+  // Validierung: alle Felder Pflicht + einfache E-Mail-Prüfung
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if (!name || !branche || !email || !phone || !emailOk) {
+    errorEl.textContent = (!emailOk && email)
+      ? 'Bitte geben Sie eine gültige E-Mail-Adresse ein.'
+      : 'Bitte füllen Sie alle Felder aus.';
+    errorEl.style.display = 'block';
+    return;
+  }
+  errorEl.style.display = 'none';
+
+  // Name in Vor-/Nachname aufteilen (für HubSpot)
+  const parts = name.split(/\s+/);
+  const firstname = parts.shift();
+  const lastname  = parts.join(' ') || firstname;
+
+  const btn = document.getElementById('lp-btn');
+  btn.textContent = 'Wird gesendet…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(
+      'https://api.hsforms.com/submissions/v3/integration/submit/148643626/7b0a4ee5-95a9-4f7b-8103-ec589e9b52ed',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fields: [
+            { objectTypeId: '0-1', name: 'firstname',       value: firstname },
+            { objectTypeId: '0-1', name: 'lastname',        value: lastname },
+            { objectTypeId: '0-1', name: 'email',           value: email },
+            { objectTypeId: '0-1', name: 'phone',           value: phone },
+            { objectTypeId: '0-1', name: 'unternehmensart', value: branche },
+            { objectTypeId: '0-1', name: 'message',         value: 'Kostenloser Website-Entwurf angefragt | Branche: ' + branche },
+          ],
+          context: { pageUri: window.location.href, pageName: 'Landingpage – Kostenloser Entwurf' }
+        })
+      }
+    );
+
+    if (res.ok) {
+      document.getElementById('lp-form').style.display = 'none';
+      document.getElementById('lp-success').classList.add('show');
+    } else {
+      btn.textContent = 'Fehler – nochmal versuchen';
+      btn.disabled = false;
+    }
+  } catch (e) {
+    btn.textContent = 'Fehler – nochmal versuchen';
+    btn.disabled = false;
+  }
+}
+</script>
+</body>
+</html>
