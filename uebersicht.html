@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website-Übersicht – Dennis Mehlich</title>
+<meta name="description" content="Übersicht ausgewählter Websites – klicken Sie auf eine Vorschau, um die Seite in einem neuen Tab zu öffnen.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─── */
+:root {
+  --navy:    #0f1631;
+  --blue:    #1e3a8a;
+  --accent:  #3b82f6;
+  --electric:#60a5fa;
+  --light:   #f0f4ff;
+  --white:   #ffffff;
+  --gray:    #64748b;
+  --border:  rgba(30,58,138,0.15);
+  --radius:  16px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--light);
+  color: var(--navy);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ─── HEADER ─── */
+.lp-header {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0.6rem 5%;
+  display: flex; align-items: center; justify-content: center;
+}
+.lp-header img { height: 52px; width: auto; display: block; mix-blend-mode: multiply; }
+
+/* ─── INTRO ─── */
+.ov-intro {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 5% 1.5rem;
+  text-align: center;
+}
+.ov-intro .ov-label {
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 0.7rem;
+}
+.ov-intro h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  font-weight: 800; color: var(--navy);
+  line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 0.8rem;
+}
+.ov-intro p { font-size: 1rem; color: var(--gray); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+
+/* ─── FILTER ─── */
+.ov-filters {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.5rem 5% 0;
+  display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center;
+}
+.filter-chip {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem; font-weight: 600;
+  color: var(--gray);
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  padding: 0.5rem 1.1rem; border-radius: 100px;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+}
+.filter-chip:hover { border-color: var(--accent); color: var(--navy); }
+.filter-chip.active { background: var(--navy); border-color: var(--navy); color: #fff; }
+
+/* ─── GRID ─── */
+.ov-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 5% 4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+/* ─── CARD ─── */
+.site-card {
+  display: block;
+  text-decoration: none;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(15,22,49,0.08);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.site-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(15,22,49,0.16);
+  border-color: var(--accent);
+}
+
+/* Thumbnail (skaliertes iframe) */
+.thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--light);
+  border-bottom: 1px solid var(--border);
+}
+.thumb iframe {
+  position: absolute;
+  top: 0; left: 0;
+  border: 0;
+  transform-origin: top left;
+  pointer-events: none; /* Klicks gehen an die Karte (öffnet neuen Tab) */
+}
+/* Transparente Klickfläche über dem iframe */
+.thumb::after {
+  content: '';
+  position: absolute; inset: 0;
+  z-index: 2;
+}
+/* Ladehinweis hinter dem iframe */
+.thumb .thumb-loading {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; color: var(--gray);
+  z-index: 0;
+}
+
+.card-meta {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; padding: 1rem 1.25rem;
+}
+.card-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.05rem; font-weight: 700; color: var(--navy);
+}
+.card-url { font-size: 0.78rem; color: var(--gray); }
+.card-open {
+  flex-shrink: 0;
+  font-size: 0.78rem; font-weight: 700; color: var(--accent);
+  white-space: nowrap;
+}
+
+/* ─── FOOTER ─── */
+.lp-footer {
+  background: var(--white);
+  color: var(--gray);
+  padding: 1.5rem 5%;
+  text-align: center; font-size: 0.78rem;
+  display: flex; justify-content: center; gap: 1.75rem; flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+}
+.lp-footer a { color: var(--gray); text-decoration: none; }
+.lp-footer a:hover { color: var(--navy); }
+
+@media (max-width: 480px) {
+  .ov-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── HEADER ─── -->
+<header class="lp-header">
+  <a href="index.html"><img src="images/logo.png" alt="Dennis Mehlich Webdesign"></a>
+</header>
+
+<!-- ─── INTRO ─── -->
+<section class="ov-intro">
+  <div class="ov-label">Referenzen</div>
+  <h1>Websites im Überblick</h1>
+  <p>Klicken Sie auf eine Vorschau, um die Website in einem neuen Tab zu öffnen.</p>
+</section>
+
+<!-- ─── FILTER ─── -->
+<div class="ov-filters" id="ov-filters">
+  <button type="button" class="filter-chip active" data-filter="all">Alle</button>
+  <button type="button" class="filter-chip" data-filter="dachdecker">Dachdecker</button>
+  <button type="button" class="filter-chip" data-filter="elektriker">Elektriker</button>
+  <button type="button" class="filter-chip" data-filter="shk">SHK</button>
+  <button type="button" class="filter-chip" data-filter="maler">Maler &amp; Lackierer</button>
+</div>
+
+<!-- ─── GRID ─── -->
+<main class="ov-grid" id="ov-grid">
+
+  <a class="site-card" data-branche="dachdecker" href="https://medienpromoter.github.io/dachdecker/" target="_blank" rel="noopener noreferrer">
+    <div class="thumb">
+      <span class="thumb-loading">Vorschau wird geladen …</span>
+      <iframe src="https://medienpromoter.github.io/dachdecker/" loading="lazy" scrolling="no" tabindex="-1" title="Vorschau Dachdecker"></iframe>
+    </div>
+    <div class="card-meta">
+      <div>
+        <div class="card-title">Dachdecker</div>
+        <div class="card-url">medienpromoter.github.io/dachdecker</div>
+      </div>
+      <div class="card-open">Öffnen ↗</div>
+    </div>
+  </a>
+
+  <a class="site-card" data-branche="dachdecker" href="https://medienpromoter.github.io/dachdecker2/" target="_blank" rel="noopener noreferrer">
+    <div class="thumb">
+      <span class="thumb-loading">Vorschau wird geladen …</span>
+      <iframe src="https://medienpromoter.github.io/dachdecker2/" loading="lazy" scrolling="no" tabindex="-1" title="Vorschau Dachdecker Variante 2"></iframe>
+    </div>
+    <div class="card-meta">
+      <div>
+        <div class="card-title">Dachdecker – Variante 2</div>
+        <div class="card-url">medienpromoter.github.io/dachdecker2</div>
+      </div>
+      <div class="card-open">Öffnen ↗</div>
+    </div>
+  </a>
+
+  <a class="site-card" data-branche="elektriker" href="https://medienpromoter.github.io/elektriker/" target="_blank" rel="noopener noreferrer">
+    <div class="thumb">
+      <span class="thumb-loading">Vorschau wird geladen …</span>
+      <iframe src="https://medienpromoter.github.io/elektriker/" loading="lazy" scrolling="no" tabindex="-1" title="Vorschau Elektriker"></iframe>
+    </div>
+    <div class="card-meta">
+      <div>
+        <div class="card-title">Elektriker</div>
+        <div class="card-url">medienpromoter.github.io/elektriker</div>
+      </div>
+      <div class="card-open">Öffnen ↗</div>
+    </div>
+  </a>
+
+  <a class="site-card" data-branche="elektriker" href="https://medienpromoter.github.io/elektriker2/" target="_blank" rel="noopener noreferrer">
+    <div class="thumb">
+      <span class="thumb-loading">Vorschau wird geladen …</span>
+      <iframe src="https://medienpromoter.github.io/elektriker2/" loading="lazy" scrolling="no" tabindex="-1" title="Vorschau Elektriker Variante 2"></iframe>
+    </div>
+    <div class="card-meta">
+      <div>
+        <div class="card-title">Elektriker – Variante 2</div>
+        <div class="card-url">medienpromoter.github.io/elektriker2</div>
+      </div>
+      <div class="card-open">Öffnen ↗</div>
+    </div>
+  </a>
+
+  <a class="site-card" data-branche="shk" href="https://medienpromoter.github.io/shk1/" target="_blank" rel="noopener noreferrer">
+    <div class="thumb">
+      <span class="thumb-loading">Vorschau wird geladen …</span>
+      <iframe src="https://medienpromoter.github.io/shk1/" loading="lazy" scrolling="no" tabindex="-1" title="Vorschau SHK Variante 1"></iframe>
+    </div>
+    <div class="card-meta">
+      <div>
+        <div class="card-title">SHK – Variante 1</div>
+        <div class="card-url">medienpromoter.github.io/shk1</div>
+      </div>
+      <div class="card-open">Öffnen ↗</div>
+    </div>
+  </a>
+
+  <a class="site-card" data-branche="shk" href="https://medienpromoter.github.io/shk2/" target="_blank" rel="noopener noreferrer">
+    <div class="thumb">
+      <span class="thumb-loading">Vorschau wird geladen …</span>
+      <iframe src="https://medienpromoter.github.io/shk2/" loading="lazy" scrolling="no" tabindex="-1" title="Vorschau SHK Variante 2"></iframe>
+    </div>
+    <div class="card-meta">
+      <div>
+        <div class="card-title">SHK – Variante 2</div>
+        <div class="card-url">medienpromoter.github.io/shk2</div>
+      </div>
+      <div class="card-open">Öffnen ↗</div>
+    </div>
+  </a>
+
+  <a class="site-card" data-branche="maler" href="https://medienpromoter.github.io/maler_lackierer1/" target="_blank" rel="noopener noreferrer">
+    <div class="thumb">
+      <span class="thumb-loading">Vorschau wird geladen …</span>
+      <iframe src="https://medienpromoter.github.io/maler_lackierer1/" loading="lazy" scrolling="no" tabindex="-1" title="Vorschau Maler &amp; Lackierer"></iframe>
+    </div>
+    <div class="card-meta">
+      <div>
+        <div class="card-title">Maler &amp; Lackierer</div>
+        <div class="card-url">medienpromoter.github.io/maler_lackierer1</div>
+      </div>
+      <div class="card-open">Öffnen ↗</div>
+    </div>
+  </a>
+
+</main>
+
+<!-- ─── FOOTER ─── -->
+<footer class="lp-footer">
+  <span>© 2025 Dennis Mehlich · Webdesign · Chemnitz</span>
+  <a href="impressum.html">Impressum</a>
+  <a href="datenschutz.html">Datenschutz</a>
+</footer>
+
+<script>
+  // iframe-Vorschauen responsiv skalieren: Seite wird in Desktop-Breite gerendert
+  // und passgenau in die Thumbnail-Fläche skaliert.
+  var BASE_WIDTH = 1280;
+  function fitThumbs() {
+    document.querySelectorAll('.thumb').forEach(function (thumb) {
+      var iframe = thumb.querySelector('iframe');
+      if (!iframe) return;
+      var scale = thumb.clientWidth / BASE_WIDTH;
+      iframe.style.width = BASE_WIDTH + 'px';
+      iframe.style.height = (thumb.clientHeight / scale) + 'px';
+      iframe.style.transform = 'scale(' + scale + ')';
+    });
+  }
+  window.addEventListener('resize', fitThumbs);
+  window.addEventListener('load', fitThumbs);
+
+  // ─── Branchen-Filter ───
+  var filterBar = document.getElementById('ov-filters');
+  if (filterBar) {
+    filterBar.addEventListener('click', function (e) {
+      var btn = e.target.closest('.filter-chip');
+      if (!btn) return;
+      filterBar.querySelectorAll('.filter-chip').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.getAttribute('data-filter');
+      document.querySelectorAll('.site-card').forEach(function (card) {
+        var show = (f === 'all' || card.getAttribute('data-branche') === f);
+        card.style.display = show ? '' : 'none';
+      });
+      fitThumbs(); // sichtbar gewordene Vorschauen neu skalieren
+    });
+  }
+  document.querySelectorAll('.thumb iframe').forEach(function (f) {
+    f.addEventListener('load', function () {
+      var hint = f.parentElement.querySelector('.thumb-loading');
+      if (hint) hint.style.display = 'none';
+    });
+  });
+  fitThumbs();
+</script>
+</body>
+</html>
